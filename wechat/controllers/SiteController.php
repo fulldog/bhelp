@@ -34,11 +34,10 @@ class SiteController extends WController
         // 个人信息
         // p(Yii::$app->wechat->user);
         // p(Yii::$app->params['wechatMember']);
-
         return $this->render('index', [
-
         ]);
     }
+
 
     /**
      * Login action.
@@ -71,9 +70,9 @@ class SiteController extends WController
      * @throws Yii\base\ErrorException
      * @throws \yii\base\InvalidConfigException
      */
-    private function actionDemo()
+    function actionDemo()
     {
-        $totalFee = 100;// 支付金额单位：分
+        $totalFee = 10;// 支付金额单位：分
         $orderSn = time() . StringHelper::randomNum();// 订单号
 
         $orderData = [
@@ -83,7 +82,7 @@ class SiteController extends WController
             'notify_url' => UrlHelper::toFront(['notify/wechat']), // 支付结果通知网址，如果不设置则会使用配置里的默认地址
             'out_trade_no' => PayHelper::getOutTradeNo($totalFee, $orderSn, 1, PayLog::PAY_TYPE_WECHAT, 'JSAPI'), // 支付
             'total_fee' => $totalFee,
-            'openid' => 'okFAZ0-5AbCyvn1m_ujTxmUwzlYo', // trade_type=JSAPI，此参数必传，用户在商户appid下的唯一标识，
+            'openid' => Yii::$app->wechat->user->openid, // trade_type=JSAPI，此参数必传，用户在商户appid下的唯一标识，
         ];
 
         $payment = Yii::$app->wechat->payment;
@@ -97,7 +96,7 @@ class SiteController extends WController
             p($result);die();
         }
 
-        return $this->render('wxpay', [
+        return $this->render('demo', [
             'jssdk' => $payment->jssdk, // $app通过上面的获取实例来获取
             'config' => $config
         ]);
