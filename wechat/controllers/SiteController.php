@@ -70,7 +70,7 @@ class SiteController extends WController
      * @throws Yii\base\ErrorException
      * @throws \yii\base\InvalidConfigException
      */
-    function actionDemo()
+    function actionJssdk()
     {
         $totalFee = 10;// 支付金额单位：分
         $orderSn = time() . StringHelper::randomNum();// 订单号
@@ -101,4 +101,35 @@ class SiteController extends WController
             'config' => $config
         ]);
     }
+
+    function actionInvoke(){
+        $totalFee = 10;// 支付金额单位：分
+        $orderSn = time() . StringHelper::randomNum();// 订单号
+
+        $orderData = [
+            'trade_type' => 'JSAPI', // JSAPI，NATIVE，APP...
+            'body' => '支付简单说明',
+            'detail' => '支付详情',
+            'notify_url' => UrlHelper::toFront(['notify/wechat']), // 支付结果通知网址，如果不设置则会使用配置里的默认地址
+            'out_trade_no' => PayHelper::getOutTradeNo($totalFee, $orderSn, 1, PayLog::PAY_TYPE_WECHAT, 'JSAPI'), // 支付
+            'total_fee' => $totalFee,
+            'openid' => Yii::$app->wechat->user->openid, // trade_type=JSAPI，此参数必传，用户在商户appid下的唯一标识，
+        ];
+
+        $payment = Yii::$app->wechat->payment;
+        $result = $payment->order->unify($orderData);
+        if ($result['return_code'] == 'SUCCESS')
+        {
+            $json = $payment->jssdk->bridgeConfig($result['prepay_id']);
+        }
+        else
+        {
+            p($result);die();
+        }
+
+        return $this->render('invoke', [
+            'json' => $json
+        ]);
+    }
+
 }
