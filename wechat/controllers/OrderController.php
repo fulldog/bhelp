@@ -8,6 +8,11 @@
 
 namespace wechat\controllers;
 
+use Yii;
+use common\helpers\PayHelper;
+use common\helpers\StringHelper;
+use common\models\common\PayLog;
+use common\helpers\UrlHelper;
 
 class OrderController extends WController
 {
