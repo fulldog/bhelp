@@ -79,6 +79,7 @@ class SiteController extends WController
             'trade_type' => 'JSAPI', // JSAPI，NATIVE，APP...
             'body' => '支付简单说明',
             'detail' => '支付详情',
+            'device_info'=>'WEB',
             'notify_url' => UrlHelper::toFront(['notify/wechat']), // 支付结果通知网址，如果不设置则会使用配置里的默认地址
             'out_trade_no' => PayHelper::getOutTradeNo($totalFee, $orderSn, 1, PayLog::PAY_TYPE_WECHAT, 'JSAPI'), // 支付
             'total_fee' => $totalFee,
@@ -103,7 +104,7 @@ class SiteController extends WController
     }
 
     function actionInvoke(){
-        $totalFee = 10;// 支付金额单位：分
+        $totalFee = 100;// 支付金额单位：分
         $orderSn = time() . StringHelper::randomNum();// 订单号
 
         $orderData = [
