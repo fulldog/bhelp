@@ -68,7 +68,7 @@ $this->title = 'Rageframe For Wechat';
         <a href="<?php echo Yii::$app->urlManager->createUrl(['site/jssdk']);?>">jssdk-H5支付</a>
       </div>
       <div class="links">
-        <a href="<?php echo Yii::$app->urlManager->createUrl(['site/invoke']);?>">invoke支付</a>
+        <a href="<?php echo Yii::$app->urlManager->createUrl(['order/pay']);?>">invoke支付</a>
       </div>
     </div>
 </div>
