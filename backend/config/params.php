@@ -2,7 +2,7 @@
 return [
     'adminEmail' => 'admin@example.com',
     'adminAcronym' => 'RF',
-    'adminTitle' => 'RageFrame 应用开发引擎',
+    'adminTitle' => '宝帮宝',
 
     /** ------ 日志记录 ------ **/
     'user.log' => true,

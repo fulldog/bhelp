@@ -45,7 +45,10 @@ class LogStation extends LogBase
      */
     function __construct()
     {
+
         parent::__construct();
+        $this->app_id = array_pop($this->channels)['app_id'];
+        $this->app_key = array_pop($this->channels)['app_key'];
         $this->setDefaultLogData('');
 
         $fp = fsockopen("udp://{$this->station_server}", $this->port, $error_no, $error_string, $this->timeout);
@@ -56,13 +59,15 @@ class LogStation extends LogBase
         $this->fp = $fp;
     }
 
+    /**
+     * 选择日志频道
+     * @param $db
+     * @return $this
+     */
     function set_db($db = ''){
         if ($db){
             $this->app_id = $this->channels[$db]['app_id'];
             $this->app_key = $this->channels[$db]['app_key'];
-        }else{
-            $this->app_id = array_pop($this->channels)['app_id'];
-            $this->app_key = array_pop($this->channels)['app_key'];
         }
         return $this;
     }
