@@ -55,8 +55,9 @@ class NotifyController extends Controller
         $response = Yii::$app->wechat->payment->handlePaidNotify(function($message, $fail)
         {
             // 记录写入文件日志
-            $logPath = Yii::getAlias('@wechat') . "/runtime/pay_log/" . date('Y_m_d') . "/" . $message->openid . '.txt';
-            FileHelper::writeLog($logPath, json_encode(ArrayHelper::toArray($message)));
+            $message = ArrayHelper::toArray($message);
+            $logPath = Yii::getAlias('@wechat') . "/runtime/pay_log/" . date('Y_m_d') . "/" . $message['openid'] . '.txt';
+            FileHelper::writeLog($logPath, json_encode($message));
 
             // 如果订单不存在 或者 订单已经支付过了，如果成功返回订单的编号和类型
             if (!($orderInfo = PayHelper::notify($message['out_trade_no'], $message)))

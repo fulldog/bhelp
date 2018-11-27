@@ -33,7 +33,7 @@ class OrderController extends WController
             'trade_type' => 'JSAPI', // JSAPI，NATIVE，APP...
             'body' => '支付简单说明',
             'detail' => '支付详情',
-            'notify_url' => UrlHelper::toFront(['notify/wechat']), // 支付结果通知网址，如果不设置则会使用配置里的默认地址
+            'notify_url' => UrlHelper::toFront(['notify/easy-wechat']), // 支付结果通知网址，如果不设置则会使用配置里的默认地址
             'out_trade_no' => PayHelper::getOutTradeNo($totalFee, $orderSn, 1, PayLog::PAY_TYPE_WECHAT, 'JSAPI'), // 支付
             'total_fee' => $totalFee,
             'openid' => Yii::$app->wechat->user->openid, // trade_type=JSAPI，此参数必传，用户在商户appid下的唯一标识，
