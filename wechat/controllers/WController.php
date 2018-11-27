@@ -41,4 +41,13 @@ class WController extends BaseController
             Yii::$app->params['wechatMember'] = Yii::$app->params['simulateUser']['userInfo'];
         }
     }
+
+    /**
+     * @param $logs
+     * @param string $tag
+     * @param string $id 选择日志频道
+     */
+    function Udplog($logs,$tag = '', $id=''){
+        Yii::$app->LogStation->set_db($id)->write($logs,$tag);
+    }
 }

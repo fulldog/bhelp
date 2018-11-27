@@ -78,6 +78,20 @@ return [
         /** ------ 服务 ------ **/
         'services' => [
             'class' => 'common\services\Application',
-        ]
+        ],
+        /** ------ LogStation ------ **/
+        'LogStation' => [
+            'class' => \common\helpers\LogStation::class,
+            'channels'=>[
+                'wechat'=>[
+                    'app_id'=>'a0xpx0e88f531468',
+                    'app_key'=>'GxScHLGMnCSllRkTm2hHfEKYZExIpxNE'
+                ],
+                'web'=>[
+                    'app_id'=>'a0xpx11260212440',
+                    'app_key'=>'V65HMQZ2Lh0DAI26Y0mAxluNG9ucKxRE'
+                ]
+            ]
+        ],
     ],
 ];

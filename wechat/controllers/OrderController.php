@@ -39,6 +39,8 @@ class OrderController extends WController
             'openid' => Yii::$app->wechat->user->openid, // trade_type=JSAPI，此参数必传，用户在商户appid下的唯一标识，
         ];
 
+//        $this->Udplog($orderData,'tag11','test');die;
+
         $payment = Yii::$app->wechat->payment;
         $result = $payment->order->unify($orderData);
         if ($result['return_code'] == 'SUCCESS')
