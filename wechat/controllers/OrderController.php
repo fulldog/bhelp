@@ -26,7 +26,7 @@ class OrderController extends WController
     }
 
     function actionPay(){
-        $totalFee = 100;// 支付金额单位：分
+        $totalFee = 1;// 支付金额单位：分
         $orderSn = time() . StringHelper::randomNum();// 订单号
 
         $orderData = [
