@@ -34,7 +34,9 @@ class FileHelper
      */
      public static function writeLog($path, $content)
      {
-         return file_put_contents(self::mkdirs($path), "\r\n" . $content, FILE_APPEND);
+//         $dir = pathinfo($path);
+         self::mkdirs(dirname($path));
+         return file_put_contents($path, "\r\n" . $content, FILE_APPEND);
      }
 
     /**
