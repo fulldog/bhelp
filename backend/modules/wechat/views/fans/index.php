@@ -27,8 +27,8 @@ $this->params['breadcrumbs'][] = ['label' =>  $this->title];
                             <div class="panel-body">
                                 <div class="col-sm-12">
                                     <div class="col-sm-3">
-                                        <span class="btn btn-white" id="sync"> 同步选中粉丝信息</span>
-                                        <span class="btn btn-white" onclick="getAllFans()"> 同步全部粉丝信息</span>
+                                        <span class="btn btn-white" id="sync"> 同步选中粉丝</span>
+                                        <span class="btn btn-white" onclick="getAllFans()"> 同步全部粉丝</span>
                                     </div>
                                     <div class="col-sm-5">
                                         <form action="" method="get" class="form-horizontal" role="form" id="form">
