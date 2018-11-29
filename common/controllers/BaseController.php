@@ -145,10 +145,9 @@ class BaseController extends Controller
      * @param $path
      * @return bool
      */
-    private function createLogPath($catalogue)
+    private function createLogPath($catalogue = 'other')
     {
-        $logPath = Yii::getAlias('@runtime') . '\\wechat-' . $catalogue. '\\' . date('Y-m') . '\\';
-
+        $logPath = Yii::getAlias('@runtime') .DIRECTORY_SEPARATOR . $catalogue. DIRECTORY_SEPARATOR . date('Y-m') . DIRECTORY_SEPARATOR;
         FileHelper::mkdirs($logPath);
         $logPath .= date('d') . '.log';
 
