@@ -34,7 +34,6 @@ class SiteController extends WController
         // 个人信息
         // p(Yii::$app->wechat->user);
         // p(Yii::$app->params['wechatMember']);
-        echo Yii::getAlias('@runtime');die;
         return $this->render('index', [
         ]);
     }
