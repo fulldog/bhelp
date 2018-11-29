@@ -214,6 +214,9 @@ class AttachmentController extends WController
             // 本地前缀
             $material = $this->app->material;
             $result = $material->uploadVoice(StringHelper::getLocalFilePath($model->local_url, 'voices'));
+            if (!isset($result['media_id']) && $result['media_id']){
+                return $this->message('msg:'.$result['errmsg'].'code:'.$result['errcode'], $this->redirect(['index', 'type' => 'voice']), 'error');
+            }
             Attachment::add($model->local_url, 'voice', '', $result['media_id']);
 
             return $this->redirect(['index', 'type' => 'voice']);
