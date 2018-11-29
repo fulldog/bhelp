@@ -8,7 +8,7 @@
 vendor
 # netbeans project files
 nbproject
-*error*
+*.log
 # zend studio for eclipse project files
 .buildpath
 .project
