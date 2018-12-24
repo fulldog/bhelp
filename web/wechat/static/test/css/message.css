@@ -1,0 +1,89 @@
+* {
+  margin: 0;
+  padding: 0; }
+
+html {
+  height: 100%; }
+
+body {
+  background: #fff;
+  height: 100%; }
+
+.titleBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+  width: 100%;
+  height: 0.93rem;
+  line-height: 0.93rem;
+  text-align: center;
+  background: #f5f5f5;
+  color: #000;
+  font-size: 0.32rem; }
+  .titleBar .close {
+    position: absolute;
+    left: 10px;
+    font-size: 0.4rem;
+    color: #000; }
+  .titleBar .more {
+    position: absolute;
+    right: 10px;
+    font-size: 0.4rem;
+    color: #000; }
+
+.messageList {
+  margin-top: 0.93rem;
+  margin-bottom: 53px;
+  padding: 0.1rem 0.15rem;
+  /*  height:11.2rem;
+    overflow-y: scroll;*/ }
+  .messageList li {
+    position: relative;
+    padding-top: 0.2rem; }
+    .messageList li .weui-flex .left_img {
+      width: 0.91rem;
+      height: 0.91rem;
+      margin-right: 0.15rem; }
+      .messageList li .weui-flex .left_img img {
+        width: 100%; }
+    .messageList li .weui-flex .mescon .title {
+      font-family: "Microsoft Yahei";
+      font-size: 0.31rem;
+      color: #4c5d88; }
+    .messageList li .weui-flex .mescon .noticeCon {
+      line-height: 0.48rem;
+      color: #252525;
+      font-size: 0.32rem;
+      font-family: "Microsoft Yahei";
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 4;
+      overflow: hidden; }
+    .messageList li .weui-flex .mescon .read a {
+      font-size: 0.33rem;
+      color: #448ddd;
+      line-height: 0.72rem; }
+    .messageList li .weui-flex .mescon .time span {
+      font-size: 0.2rem;
+      color: #a8a8aa;
+      line-height: 0.6rem; }
+  .messageList li:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #dedede; }
+
+.weui-tabbar {
+  position: fixed;
+  z-index: 2; }
+  .weui-tabbar .weui-tabbar__icon .iconfont {
+    font-size: 22px;
+    color: #999; }
+  .weui-tabbar .weui-bar__item--on .iconfont {
+    color: #04BE02; }
+
+/*# sourceMappingURL=message.css.map */

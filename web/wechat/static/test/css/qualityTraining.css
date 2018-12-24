@@ -1,0 +1,100 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0; }
+
+html {
+  height: 100%; }
+
+body {
+  background: #fff; }
+
+.titleBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+  width: 100%;
+  height: 0.93rem;
+  line-height: 0.93rem;
+  text-align: center;
+  background: #f5f5f5;
+  color: #000;
+  font-size: 0.32rem; }
+  .titleBar .close {
+    position: absolute;
+    left: 10px;
+    font-size: 0.4rem;
+    color: #000; }
+  .titleBar .more {
+    position: absolute;
+    right: 10px;
+    font-size: 0.4rem;
+    color: #000; }
+
+#searchBar {
+  margin-top: 0.93rem; }
+
+.banner {
+  height: 2.7rem; }
+  .banner .swiper-wrapper {
+    height: 2.7rem; }
+    .banner .swiper-wrapper img {
+      height: 2.7rem; }
+
+.banner {
+  height: 2.7rem; }
+  .banner .swiper-wrapper {
+    height: 2.7rem; }
+    .banner .swiper-wrapper img {
+      height: 2.7rem; }
+
+.noticeBox {
+  background: #fff;
+  border-bottom: 1px solid #d9d4d4; }
+  .noticeBox .title {
+    height: 0.27rem;
+    line-height: 0.27rem;
+    /*   height:27px;
+       line-height:27px;*/
+    display: block;
+    float: left;
+    width: 10%;
+    text-align: center;
+    font-family: '宋体';
+    font-weight: bold;
+    font-size: 0.18rem;
+    color: #000000; }
+  .noticeBox .notice {
+    width: 80%;
+    /*  height:0.27rem;
+      line-height:0.27rem;*/
+    height: 13.5px;
+    line-height: 13.5px;
+    /* @media screen and (min-width: 400px){
+       height:17px;
+       line-height:17px;
+     }*/ }
+    .noticeBox .notice .swiper-slide {
+      height: 13.5px;
+      line-height: 13.5px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      font-family: '黑体';
+      font-size: 0.17rem;
+      color: #4a4949; }
+
+.navList {
+  padding: 0.28rem 0.1rem 0; }
+  .navList .weui-flex__item img {
+    display: block;
+    width: 100%; }
+
+.navList2 {
+  padding: 0 0.1rem; }
+  .navList2 .weui-flex__item img {
+    display: block;
+    width: 100%; }
+
+/*# sourceMappingURL=qualityTraining.css.map */

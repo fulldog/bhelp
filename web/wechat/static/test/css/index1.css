@@ -1,0 +1,307 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0; }
+
+html {
+  height: 100%; }
+
+body {
+  background: #fff;
+  height: 100%; }
+
+.titleBar {
+  position: relative;
+  height: 0.93rem;
+  line-height: 0.93rem;
+  text-align: center;
+  background: #f5f5f5;
+  color: #000; }
+  .titleBar .close {
+    position: absolute;
+    left: 10px;
+    font-size: 20px;
+    color: #000; }
+  .titleBar .more {
+    position: absolute;
+    right: 10px;
+    font-size: 20px;
+    color: #000; }
+
+.banner {
+  height: 2.7rem; }
+  .banner .swiper-wrapper {
+    height: 2.7rem; }
+    .banner .swiper-wrapper img {
+      height: 2.7rem; }
+
+.noticeBox {
+  background: #fff;
+  border-bottom: 1px solid #d9d4d4; }
+  .noticeBox .title {
+    height: 0.27rem;
+    line-height: 0.27rem;
+    /*   height:27px;
+       line-height:27px;*/
+    display: block;
+    float: left;
+    width: 10%;
+    text-align: center;
+    font-family: '宋体';
+    font-weight: bold;
+    font-size: 0.18rem;
+    color: #000000; }
+  .noticeBox .notice {
+    width: 80%;
+    height: 0.27rem;
+    line-height: 0.27rem;
+    /*  height:27px;
+      line-height:27px;*/
+    /* @media screen and (min-width: 400px){
+       height:17px;
+       line-height:17px;
+     }*/ }
+    .noticeBox .notice .swiper-slide {
+      height: 0.27rem;
+      line-height: 0.27rem;
+      /* height:27px;
+       line-height:27px;*/
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      font-family: '黑体';
+      font-size: 0.17rem;
+      color: #4a4949; }
+
+.nav {
+  background: #fff;
+  margin-bottom: 0.18rem; }
+  .nav .nav_item {
+    display: block;
+    text-align: center; }
+    .nav .nav_item img {
+      display: block;
+      width: 50%;
+      margin: 0 auto; }
+    .nav .nav_item .name {
+      font-family: '黑体';
+      font-size: 0.16rem;
+      color: #686868; }
+
+.line {
+  height: 0.18rem;
+  background: #f5f5f5; }
+
+.nav2 {
+  padding: 0 0.46rem; }
+  .nav2 .title {
+    font-size: 0.28rem;
+    color: #181818;
+    font-weight: bold;
+    height: 0.74rem;
+    line-height: 0.74rem; }
+  .nav2 .knowledges {
+    height: 5.15rem;
+    overflow-y: scroll; }
+    .nav2 .knowledges .knowList {
+      margin-top: 0; }
+      .nav2 .knowledges .knowList .listItem {
+        padding: 3px 0 7px;
+        /*display: block;
+        padding:2px 0 17px;
+        border-bottom:2px solid #f6f6f6;*/ }
+        .nav2 .knowledges .knowList .listItem .pic {
+          width: 1.55rem;
+          height: 1.24rem; }
+        .nav2 .knowledges .knowList .listItem .titleA {
+          line-height: 0.48rem;
+          font-weight: normal;
+          font-style: normal;
+          font-size: 14px;
+          color: #181818; }
+        .nav2 .knowledges .knowList .listItem .titleB {
+          line-height: 0.46rem;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 0.25rem;
+          color: #686868; }
+        .nav2 .knowledges .knowList .listItem .zan {
+          height: 0.2rem;
+          line-height: 0.2rem; }
+          .nav2 .knowledges .knowList .listItem .zan .num1, .nav2 .knowledges .knowList .listItem .zan .num2 {
+            font-size: 0.16rem;
+            color: #4a4949; }
+            .nav2 .knowledges .knowList .listItem .zan .num1 i, .nav2 .knowledges .knowList .listItem .zan .num2 i {
+              vertical-align: middle;
+              margin: 0 0.07rem; }
+        .nav2 .knowledges .knowList .listItem .time {
+          position: absolute;
+          bottom: 0;
+          right: 0.1rem;
+          font-size: 0.2rem;
+          color: #4a4949; }
+
+.weui-tabbar .weui-tabbar__icon .iconfont {
+  font-size: 22px;
+  color: #999; }
+.weui-tabbar .weui-bar__item--on .iconfont {
+  color: #04BE02; }
+
+.messageList {
+  padding: 0.1rem 0.15rem; }
+  .messageList .list_img {
+    float: left;
+    width: 0.91rem;
+    height: 0.91rem; }
+    .messageList .list_img img {
+      width: 100%; }
+  .messageList .right_mes {
+    float: left; }
+
+#tab2 .messageList {
+  padding: 0.1rem 0.15rem;
+  height: 11.2rem;
+  overflow-y: scroll; }
+  #tab2 .messageList li {
+    position: relative;
+    padding-top: 0.2rem; }
+    #tab2 .messageList li .weui-flex .left_img {
+      width: 0.91rem;
+      height: 0.91rem;
+      margin-right: 0.15rem; }
+      #tab2 .messageList li .weui-flex .left_img img {
+        width: 100%; }
+    #tab2 .messageList li .weui-flex .mescon .title {
+      font-family: "Microsoft Yahei";
+      font-size: 0.31rem;
+      color: #4c5d88; }
+    #tab2 .messageList li .weui-flex .mescon .noticeCon {
+      line-height: 0.48rem;
+      color: #252525;
+      font-size: 0.32rem;
+      font-family: "Microsoft Yahei";
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 4;
+      overflow: hidden; }
+    #tab2 .messageList li .weui-flex .mescon .read a {
+      font-size: 0.33rem;
+      color: #448ddd;
+      line-height: 0.72rem; }
+    #tab2 .messageList li .weui-flex .mescon .time span {
+      font-size: 0.2rem;
+      color: #a8a8aa;
+      line-height: 0.6rem; }
+  #tab2 .messageList li:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #dedede; }
+
+#tab3 {
+  background: #efeff4; }
+  #tab3 .nameWrap {
+    padding: 1.07rem 0 0.52rem;
+    background: url("../images/mine_02.jpg") no-repeat;
+    background-size: 100% 100%; }
+    #tab3 .nameWrap .userImage {
+      margin: 0 auto;
+      width: 1.65rem;
+      height: 1.65rem;
+      border-radius: 50%;
+      border: 1px solid #70849d;
+      overflow: hidden; }
+      #tab3 .nameWrap .userImage img {
+        width: 100%; }
+    #tab3 .nameWrap .userName {
+      font-family: '黑体';
+      line-height: 0.5rem;
+      color: #ebf0f4;
+      text-align: center; }
+      #tab3 .nameWrap .userName span {
+        border-radius: 50%;
+        background: #fff;
+        vertical-align: middle;
+        margin-left: 0.15rem;
+        color: #456b99;
+        font-size: 0.2rem;
+        padding: 2px; }
+  #tab3 .menuList {
+    font-family: '黑体'; }
+    #tab3 .menuList .listIcon {
+      width: 0.5rem;
+      height: 0.5rem;
+      margin-right: 0.22rem; }
+      #tab3 .menuList .listIcon img {
+        width: 100%;
+        display: block; }
+    #tab3 .menuList .effective {
+      position: relative; }
+      #tab3 .menuList .effective .time {
+        position: absolute;
+        top: 0;
+        left: 2.2rem;
+        line-height: 25px;
+        font-size: 17px;
+        font-family: '黑体';
+        color: #8a8bca; }
+      #tab3 .menuList .effective .time_ready {
+        position: absolute;
+        top: 0;
+        left: 2.2rem;
+        line-height: 25px;
+        font-size: 17px;
+        font-family: '黑体';
+        color: #ff0000; }
+      #tab3 .menuList .effective .time_over {
+        position: absolute;
+        top: 0;
+        left: 2.1rem;
+        color: #f76641;
+        font-size: 0.3rem; }
+        #tab3 .menuList .effective .time_over i {
+          margin-left: 5px;
+          color: #ff3400; }
+    #tab3 .menuList .renew {
+      position: relative; }
+      #tab3 .menuList .renew .renewBtn {
+        position: absolute;
+        top: -12px;
+        right: 15px;
+        display: inline-block;
+        width: 1.4rem;
+        height: 0.6rem;
+        background: url("../images/mine_33.png") no-repeat;
+        background-size: 100%; }
+      #tab3 .menuList .renew .renewBtn2 {
+        position: absolute;
+        top: -12px;
+        right: 15px;
+        display: inline-block;
+        width: 1.4rem;
+        height: 0.6rem;
+        background: url("../images/mine_33.png") no-repeat;
+        background-size: 100%; }
+        #tab3 .menuList .renew .renewBtn2:after {
+          content: '';
+          width: 0.1rem;
+          height: 0.1rem;
+          border-radius: 50%;
+          background: #e53836;
+          position: absolute;
+          top: 3px;
+          right: -1px; }
+      #tab3 .menuList .renew .renewBtn2 {
+        position: absolute;
+        top: -12px;
+        right: 15px;
+        display: inline-block;
+        width: 1.4rem;
+        height: 0.6rem;
+        background: url("../images/mine_33.png") no-repeat;
+        background-size: 100%; }
+
+/*# sourceMappingURL=index1.css.map */

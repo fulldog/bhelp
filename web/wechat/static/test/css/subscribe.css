@@ -1,0 +1,134 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0; }
+
+html {
+  height: 100%; }
+
+body {
+  background: #fff; }
+
+.titleBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+  width: 100%;
+  height: 0.93rem;
+  line-height: 0.93rem;
+  text-align: center;
+  background: #f5f5f5;
+  color: #000;
+  font-size: 0.32rem; }
+  .titleBar .close {
+    position: absolute;
+    left: 10px;
+    font-size: 0.4rem;
+    color: #000; }
+  .titleBar .more {
+    position: absolute;
+    right: 10px;
+    font-size: 0.4rem;
+    color: #000; }
+
+.subNav {
+  z-index: 99999;
+  position: fixed;
+  left: 0;
+  top: 0.93rem;
+  width: 100%;
+  height: .84rem;
+  line-height: .84rem;
+  background: #1d1d21; }
+  .subNav .weui-flex__item {
+    padding: 0 0.22rem;
+    color: #b4b4b4;
+    font-size: .28rem; }
+    .subNav .weui-flex__item .ico {
+      margin-right: 0.08rem;
+      font-size: 0.32rem; }
+    .subNav .weui-flex__item .ico2 {
+      margin: 0 0.01rem; }
+    .subNav .weui-flex__item a {
+      color: #b4b4b4; }
+  .subNav .item2 {
+    text-align: right; }
+
+.intro {
+  position: relative;
+  margin-top: 1.77rem;
+  height: 5.58rem;
+  background: url("../images/subcrice_04.jpg") no-repeat center;
+  background-size: cover; }
+  .intro .name {
+    font-size: 0.5rem;
+    color: #000;
+    position: absolute;
+    top: 1.88rem;
+    left: 1.74rem; }
+  .intro .series {
+    font-size: 0.5rem;
+    color: #000;
+    position: absolute;
+    top: 2.58rem;
+    left: 3.24rem; }
+  .intro .con {
+    font-size: 0.26rem;
+    color: #3b3b3b;
+    position: absolute;
+    top: 4.00rem;
+    left: 4.68rem; }
+
+.list {
+  position: relative;
+  padding: 0.2rem 0.24rem;
+  border-bottom: 1px solid #f3f3f3; }
+  .list .series {
+    height: 0.58rem;
+    line-height: 0.58rem;
+    font-size: 0.34rem;
+    font-family: '黑体';
+    color: #000; }
+  .list .audios {
+    height: 0.54rem;
+    line-height: 0.54rem;
+    font-size: 0.24rem;
+    font-family: '黑体';
+    color: #9d9d9d; }
+  .list .number {
+    height: 0.45rem;
+    line-height: 0.45rem;
+    font-size: 0.22rem;
+    font-family: '黑体';
+    color: #9d9d9d; }
+  .list .give {
+    position: absolute;
+    bottom: 0.2rem;
+    right: 0.2rem;
+    width: 0.8rem;
+    font-size: 0.2rem;
+    text-align: center;
+    color: #9d9d9d; }
+    .list .give span {
+      font-size: 0.5rem;
+      color: #51b833; }
+
+.book {
+  width: 100%;
+  height: .94rem;
+  padding-top: 0.1rem;
+  background: #fff;
+  border-top: 1px solid #f3f3f2;
+  position: fixed;
+  left: 0;
+  bottom: 1rem; }
+  .book a {
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+    background: #55b837;
+    color: #fff;
+    border: 1px solid #55b837; }
+
+/*# sourceMappingURL=subscribe.css.map */

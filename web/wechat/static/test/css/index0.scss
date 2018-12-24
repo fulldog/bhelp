@@ -1,0 +1,144 @@
+@charset "utf-8";
+*{
+  margin:0;
+  padding:0;
+}
+body{
+  //background:#f5f5f5;
+  background:#fff;
+}
+.banner{
+  height:2.7rem;
+  .swiper-wrapper{
+    height:2.7rem;
+    img{
+      height:2.7rem;
+    }
+  }
+
+}
+.noticeBox{
+  //height:0.27rem;
+  background:#fff;
+  border-bottom:1px solid #d9d4d4;
+  .title{
+    /*height:0.27rem;
+    line-height:0.27rem;*/
+    height:27px;
+    line-height:27px;
+    display: block;
+    float:left;
+    width:10%;
+    text-align: center;
+    font-family:'宋体';
+    font-weight:bold;
+    font-size:0.18rem;
+    color:#000000;
+  }
+  .notice{
+    //width: calc(100% - 1rem);
+    width: 80%;
+   /* height:0.27rem;
+    line-height:0.27rem;*/
+    height:27px;
+    line-height:27px;
+    .swiper-slide{
+      /*height:0.27rem;
+      line-height:0.27rem;*/
+      height:27px;
+      line-height:27px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      font-family: '黑体';
+      font-size: 0.17rem;
+      color:#4a4949;
+    }
+   /* @media screen and (min-width: 400px){
+      height:17px;
+      line-height:17px;
+    }*/
+  }
+}
+.nav{
+  //height:1.48rem;
+  background:#fff;
+  margin-bottom:0.18rem;
+  .nav_item{
+    display: block;
+    text-align: center;
+    img{
+      display: block;
+      //width:100%;
+      width:50%;
+      margin:0 auto;
+    }
+    .name{
+      font-family: '黑体';
+      font-size:0.16rem;
+      color:#686868;
+    }
+
+  }
+}
+.line{
+  height:0.18rem;
+  background: #f5f5f5;
+}
+.nav2{
+  padding:0 0.46rem;
+  .title{
+    font-size:0.28rem;
+    color:#181818;
+    font-weight:bold;
+    height:0.74rem;
+    line-height:0.74rem;
+  }
+  .knowList{
+    margin-top:0;
+    .listItem{
+      padding:3px 0 7px;
+      /*display: block;
+      padding:2px 0 17px;
+      border-bottom:2px solid #f6f6f6;*/
+      .pic{
+        width:1.55rem;
+        height:1.24rem;
+      }
+      .titleA{
+
+        line-height:0.48rem;
+        font-weight:normal;
+        font-style:normal;
+        font-size:14px;
+        color:#181818;
+      }
+      .titleB{
+        line-height:0.46rem;
+        font-style:normal;
+        font-weight:normal;
+        font-size:0.25rem;
+        color:#686868;
+      }
+      .zan{
+        height:0.2rem;
+        line-height:0.2rem;
+        .num1,.num2{
+          font-size:0.16rem;
+          color:#4a4949;
+          i{
+            vertical-align: middle;
+            margin:0 0.07rem;
+          }
+        }
+      }
+      .time{
+        position: absolute;
+        bottom:0;
+        right:0.1rem;
+        font-size:0.2rem;
+        color:#4a4949;
+      }
+    }
+  }
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">-->
+<meta name="viewport" content="initial-scale=1,maximum-scale=1, minimum-scale=1">
+<meta name="description" content="">
+<title>提现</title>
+<script type="text/javascript">
+    window.onload = function () {
+        (function(e,t){var i=document,n=window;var l=i.documentElement;var r,a;var d,o=document.createElement("style");var s;function m(){var i=l.getBoundingClientRect().width;if(!t){t=540}if(i>t){i=t}var n=i*100/e;o.innerHTML="html{font-size:"+n+"px !important;}"}r=i.querySelector('meta[name="viewport"]');a="width=device-width,initial-scale=1,maximum-scale=1.0,user-scalable=no,viewport-fit=cover";if(r){r.setAttribute("content",a)}else{r=i.createElement("meta");r.setAttribute("name","viewport");r.setAttribute("content",a);if(l.firstElementChild){l.firstElementChild.appendChild(r)}else{var c=i.createElement("div");c.appendChild(r);i.write(c.innerHTML);c=null}}m();if(l.firstElementChild){l.firstElementChild.appendChild(o)}else{var c=i.createElement("div");c.appendChild(o);i.write(c.innerHTML);c=null}n.addEventListener("resize",function(){clearTimeout(s);s=setTimeout(m,300)},false);n.addEventListener("pageshow",function(e){if(e.persisted){clearTimeout(s);s=setTimeout(m,300)}},false);if(i.readyState==="complete"){i.body.style.fontSize="16px"}else{i.addEventListener("DOMContentLoaded",function(e){i.body.style.fontSize="16px"},false)}})(750,750);
+    }
+
+</script>
+<!--<script src="js/flexible.js"></script>-->
+
+
+<link rel="stylesheet" href="css/weui.min.css">
+<link rel="stylesheet" href="css/jquery-weui.css">
+<link rel="stylesheet" href="font/iconfont.css">
+<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="css/cashWithdrawal.css">
+<script type="text/javascript" src="font/iconfont.js"></script>
+</head>
+<body ontouchstart>
+
+    <!--顶部标题-->
+    <div class="titleBar">
+        提现
+        <span class="iconfont icon-close close"></span>
+        <span class="iconfont icon-more more"></span>
+    </div>
+    <div class="memberImg">
+        <img src="images/qbz.jpg" alt="">
+    </div>
+    <div class="cashBox">
+        <p class="title">提现金额<span>（范围：¥100.00 — ¥10000.00） </span></p>
+        <p class="amount">¥<input type="number"></p>
+        <p class="payable">可提现金额：<span>0.00</span>,<i>无手续费</i></p>
+    </div>
+
+    <div class="submitBtn">
+        <a href="javascript:;" class="weui-btn weui-btn_primary">确认提现</a>
+        <p>您的提现将会转入到微信零钱中</p>
+    </div>
+
+
+    <!--页脚-->
+    <div class="weui-footer weui-footer_fixed-bottom">
+        <p class="weui-footer__links">
+            <a href="javascript:void(0);" class="weui-footer__link">店铺主页</a>|
+            <a href="javascript:void(0);" class="weui-footer__link">个人中心</a>|
+            <a href="javascript:void(0);" class="weui-footer__link">关注我们</a>|
+            <a href="javascript:void(0);" class="weui-footer__link">问题反馈</a>
+        </p>
+        <p class="weui-footer__text">宝帮宝提供技术支持</p>
+        <p class="weui-footer__text">Copyright © 2018 bbb.com</p>
+    </div>
+
+
+
+    <script src="js/jquery-2.1.4.js"></script>
+    <script src="js/fastclick.js"></script>
+    <script src="js/swiper.min.js"></script>
+    <script src="js/common.js"></script>
+    <!--<script src="js/flexible.js"></script>-->
+
+    <script>
+        $(function() {
+            FastClick.attach(document.body);
+
+        });
+    </script>
+    <script src="js/jquery-weui.js"></script>
+</body>
+</html>

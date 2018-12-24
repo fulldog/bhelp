@@ -1,0 +1,119 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0; }
+
+body {
+  background: #fff; }
+
+.banner {
+  height: 2.7rem; }
+  .banner .swiper-wrapper {
+    height: 2.7rem; }
+    .banner .swiper-wrapper img {
+      height: 2.7rem; }
+
+.noticeBox {
+  background: #fff;
+  border-bottom: 1px solid #d9d4d4; }
+  .noticeBox .title {
+    /*height:0.27rem;
+    line-height:0.27rem;*/
+    height: 27px;
+    line-height: 27px;
+    display: block;
+    float: left;
+    width: 10%;
+    text-align: center;
+    font-family: '宋体';
+    font-weight: bold;
+    font-size: 0.18rem;
+    color: #000000; }
+  .noticeBox .notice {
+    width: 80%;
+    /* height:0.27rem;
+     line-height:0.27rem;*/
+    height: 27px;
+    line-height: 27px;
+    /* @media screen and (min-width: 400px){
+       height:17px;
+       line-height:17px;
+     }*/ }
+    .noticeBox .notice .swiper-slide {
+      /*height:0.27rem;
+      line-height:0.27rem;*/
+      height: 27px;
+      line-height: 27px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      font-family: '黑体';
+      font-size: 0.17rem;
+      color: #4a4949; }
+
+.nav {
+  background: #fff;
+  margin-bottom: 0.18rem; }
+  .nav .nav_item {
+    display: block;
+    text-align: center; }
+    .nav .nav_item img {
+      display: block;
+      width: 50%;
+      margin: 0 auto; }
+    .nav .nav_item .name {
+      font-family: '黑体';
+      font-size: 0.16rem;
+      color: #686868; }
+
+.line {
+  height: 0.18rem;
+  background: #f5f5f5; }
+
+.nav2 {
+  padding: 0 0.46rem; }
+  .nav2 .title {
+    font-size: 0.28rem;
+    color: #181818;
+    font-weight: bold;
+    height: 0.74rem;
+    line-height: 0.74rem; }
+  .nav2 .knowList {
+    margin-top: 0; }
+    .nav2 .knowList .listItem {
+      padding: 3px 0 7px;
+      /*display: block;
+      padding:2px 0 17px;
+      border-bottom:2px solid #f6f6f6;*/ }
+      .nav2 .knowList .listItem .pic {
+        width: 1.55rem;
+        height: 1.24rem; }
+      .nav2 .knowList .listItem .titleA {
+        line-height: 0.48rem;
+        font-weight: normal;
+        font-style: normal;
+        font-size: 14px;
+        color: #181818; }
+      .nav2 .knowList .listItem .titleB {
+        line-height: 0.46rem;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 0.25rem;
+        color: #686868; }
+      .nav2 .knowList .listItem .zan {
+        height: 0.2rem;
+        line-height: 0.2rem; }
+        .nav2 .knowList .listItem .zan .num1, .nav2 .knowList .listItem .zan .num2 {
+          font-size: 0.16rem;
+          color: #4a4949; }
+          .nav2 .knowList .listItem .zan .num1 i, .nav2 .knowList .listItem .zan .num2 i {
+            vertical-align: middle;
+            margin: 0 0.07rem; }
+      .nav2 .knowList .listItem .time {
+        position: absolute;
+        bottom: 0;
+        right: 0.1rem;
+        font-size: 0.2rem;
+        color: #4a4949; }
+
+/*# sourceMappingURL=index0.css.map */

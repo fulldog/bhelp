@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">-->
+<meta name="viewport" content="initial-scale=1,maximum-scale=1, minimum-scale=1">
+<meta name="description" content="">
+<title>我的</title>
+<script type="text/javascript">
+    window.onload = function () {
+        (function(e,t){var i=document,n=window;var l=i.documentElement;var r,a;var d,o=document.createElement("style");var s;function m(){var i=l.getBoundingClientRect().width;if(!t){t=540}if(i>t){i=t}var n=i*100/e;o.innerHTML="html{font-size:"+n+"px !important;}"}r=i.querySelector('meta[name="viewport"]');a="width=device-width,initial-scale=1,maximum-scale=1.0,user-scalable=no,viewport-fit=cover";if(r){r.setAttribute("content",a)}else{r=i.createElement("meta");r.setAttribute("name","viewport");r.setAttribute("content",a);if(l.firstElementChild){l.firstElementChild.appendChild(r)}else{var c=i.createElement("div");c.appendChild(r);i.write(c.innerHTML);c=null}}m();if(l.firstElementChild){l.firstElementChild.appendChild(o)}else{var c=i.createElement("div");c.appendChild(o);i.write(c.innerHTML);c=null}n.addEventListener("resize",function(){clearTimeout(s);s=setTimeout(m,300)},false);n.addEventListener("pageshow",function(e){if(e.persisted){clearTimeout(s);s=setTimeout(m,300)}},false);if(i.readyState==="complete"){i.body.style.fontSize="16px"}else{i.addEventListener("DOMContentLoaded",function(e){i.body.style.fontSize="16px"},false)}})(750,750);
+    }
+
+</script>
+<!--<script src="js/flexible.js"></script>-->
+
+
+<link rel="stylesheet" href="css/weui.min.css">
+<link rel="stylesheet" href="css/jquery-weui.css">
+<link rel="stylesheet" href="font/iconfont.css">
+<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="css/mine.css">
+<script type="text/javascript" src="font/iconfont.js"></script>
+</head>
+<body ontouchstart>
+    <!--顶部标题-->
+    <div class="titleBar">
+        我的
+        <span class="iconfont icon-close close"></span>
+        <span class="iconfont icon-more more"></span>
+    </div>
+    <div class="nameWrap">
+        <div class="userImage">
+            <img src="images/qbz.jpg" alt="">
+        </div>
+        <!--<p class="userName">乔帮主<span><i class="iconfont icon-male"></i></span></p>-->
+        <p class="userName">乔帮主<span class="iconfont icon-male"></span></p>
+    </div>
+
+    <!--会员状态-->
+    <div class="weui-cells menuList">
+        <div class="weui-cell weui-cell_access">
+            <div class="weui-cell__hd listIcon" ><img src="images/mine_08.jpg"></div>
+            <div class="weui-cell__bd">
+                <p class="effective">
+                    有效期至
+                    <span class="time">2019-10-1</span>
+                </p>
+            </div>
+            <div class="weui-cell__ft renew">
+                <a href="javascript:;" class="renewBtn"></a>
+            </div>
+        </div>
+    </div>
+    <!--会员准备到期-->
+    <div class="weui-cells menuList">
+        <div class="weui-cell weui-cell_access">
+            <div class="weui-cell__hd listIcon" ><img src="images/mine_08.jpg"></div>
+            <div class="weui-cell__bd">
+                <p class="effective">
+                    有效期至
+                    <span class="time_ready">2019-10-1</span>
+                </p>
+            </div>
+            <div class="weui-cell__ft renew">
+                <a href="javascript:;" class="renewBtn2"></a>
+            </div>
+        </div>
+    </div>
+    <!--会员已到期-->
+    <div class="weui-cells menuList">
+        <div class="weui-cell weui-cell_access">
+            <div class="weui-cell__hd listIcon" ><img src="images/mine_08.jpg"></div>
+            <div class="weui-cell__bd">
+                <p class="effective">
+                    有效期至
+                    <span class="time time_over">会员已到期<i class="iconfont icon-zhuyi"></i></span>
+                </p>
+            </div>
+            <div class="weui-cell__ft renew">
+                <a href="javascript:;" class="renewBtn"></a>
+            </div>
+        </div>
+    </div>
+
+    <!--列表-->
+    <div class="weui-cells menuList" style="margin-bottom: 53px;">
+        <a class="weui-cell weui-cell_access" href="javascript:;">
+            <div class="weui-cell__hd listIcon"><img src="images/mine_14.jpg" alt=""></div>
+            <div class="weui-cell__bd">
+                <p>个人信息</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+        </a>
+        <a class="weui-cell weui-cell_access" href="myPurchase.html">
+            <div class="weui-cell__hd listIcon"><img src="images/mine_20.jpg" alt=""></div>
+            <div class="weui-cell__bd">
+                <p>我的已购</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+        </a>
+        <a class="weui-cell weui-cell_access" href="javascript:;">
+            <div class="weui-cell__hd listIcon"><img src="images/mine_26.jpg" alt=""></div>
+            <div class="weui-cell__bd">
+                <p>我的收藏</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+        </a>
+        <a class="weui-cell weui-cell_access" href="income.html">
+            <div class="weui-cell__hd listIcon"><img src="images/mine_32.jpg" alt=""></div>
+            <div class="weui-cell__bd">
+                <p>我的收益</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+        </a>
+    </div>
+
+
+    <!--------页脚-------->
+    <div class="weui-tabbar">
+        <a href="index.html" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <span class="iconfont icon-index"></span>
+            </div>
+            <p class="weui-tabbar__label">首页</p>
+        </a>
+        <a href="message.html" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon" style="position: relative;">
+                <span class="iconfont icon-message"></span>
+                <span class="weui-badge" style="position: absolute;top: -.3em;right: -1.1em;">9</span>
+            </div>
+            <p class="weui-tabbar__label">消息</p>
+        </a>
+        <a href="#" class="weui-tabbar__item weui-bar__item--on">
+            <div class="weui-tabbar__icon">
+                <span class="iconfont icon-mine"></span>
+            </div>
+            <p class="weui-tabbar__label">我的</p>
+        </a>
+    </div>
+
+    <script src="js/jquery-2.1.4.js"></script>
+    <script src="js/fastclick.js"></script>
+    <script src="js/swiper.min.js"></script>
+    <script src="js/common.js"></script>
+    <!--<script src="js/flexible.js"></script>-->
+
+    <script>
+        $(function() {
+            FastClick.attach(document.body);
+            $(".banner").swiper(
+                {
+                    speed: 400,
+                    spaceBetween: 100,
+                    loop: true,
+                    autoplay: 3000,
+                    pagination: {
+                        el: '.swiper-pagination',
+                    },
+                }
+            );
+            $(".notice").swiper(
+                {
+                    speed: 200,
+                    spaceBetween: 100,
+                    loop: true,
+                    autoplay: 3000,
+                    direction: 'vertical',
+
+                }
+            )
+        });
+    </script>
+    <script src="js/jquery-weui.js"></script>
+</body>
+</html>

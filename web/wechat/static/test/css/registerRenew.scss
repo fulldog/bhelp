@@ -1,0 +1,170 @@
+@charset "utf-8";
+*{
+  margin:0;
+  padding:0;
+}
+html{
+  height:100%;
+}
+body{
+  //background:#f5f5f5;
+  background:#eef1f6;
+  //height:100%;
+}
+.titleBar{
+  position: fixed;
+  top:0;
+  left:0;
+  z-index: 99999;
+  width:100%;
+  height:0.93rem;
+  line-height:0.93rem;
+  text-align: center;
+  background:#f5f5f5;
+  color:#000;
+  font-size:0.32rem;
+  .close{
+    position:absolute;
+    left:10px;
+    font-size:0.4rem;
+    color:#000;
+
+  }
+  .more{
+    position: absolute;
+    right:10px;
+    font-size:0.4rem;
+    color:#000;
+  }
+
+}
+.banner{
+  margin-top:0.93rem;
+  position:relative;
+  height: 2.74rem;
+  background:#eef1f6;
+  img{
+    display: block;
+    width:1.41rem;
+    height:1.41rem;
+    //margin:0.665rem auto;
+    position:absolute;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    margin:auto;
+
+  }
+}
+.form{
+  padding:0 0.55rem;
+  .item{
+    position:relative;
+    background:#f5f5f5;
+    line-height:0.7rem;
+    height:0.7rem;
+    label{
+      font-size:0.36rem;
+      color:#000;
+      padding-left:0.2rem;
+    }
+    input{
+      border:none;
+      line-height:0.7rem;
+      height:0.7rem;
+      font-size:0.26rem;
+      background:none;
+      outline: none;
+      padding-left:1rem;
+
+    }
+    .vcode-btn{
+      position:absolute;
+      right:0.36rem;
+      top:0.1rem;
+      width:1.6rem;
+      height:0.5rem;
+      background:#55b837;
+      color:#fff;
+      font-size:0.12rem;
+      border:none;
+      outline: none;
+      border-radius:0.2rem;
+    }
+    &:first-child{
+      margin-bottom:0.46rem;
+    }
+  }
+}
+.introduce{
+  text-indent: 1.5em;
+  margin: 0.8rem 0 0.5rem;
+  padding:0 0.72rem;
+  font-size:0.3rem;
+  font-family: '黑体';
+  color:#404141;
+  line-height:0.47rem;
+}
+.payment{
+  //width:7rem;
+  width:90%;
+  height:3.8rem;
+  border-radius:5px;
+  border:1px solid #c8c8c8;
+  box-shadow:0 0 10px #c8c8c8 ;
+  margin:0 auto;
+  padding:0 10px;
+  background:#f5f5f5;
+  .item{
+    position:relative;
+    line-height:0.88rem;
+    height:0.88rem;
+    border-bottom:1px solid #ccc;
+    label{
+      font-size:0.28rem;
+      color:#a7a7a7;
+      padding-left:0.3rem;
+    }
+    input{
+      border:none;
+      line-height:0.88rem;
+      height:0.88rem;
+      font-size:0.30rem;
+      color:#5f5f5f;
+      background:none;
+      outline: none;
+      padding-left:1rem;
+
+    }
+    .effective{
+      color:#8e8e8e;
+      font-size:0.28rem;
+      padding-left:5px;
+    }
+    &:nth-child(3){
+      border-bottom:none;
+    }
+    .selectTrue{
+      img{
+        display: block;
+        width:1.27rem;
+        height:0.88rem;
+        margin-left:1rem;
+      }
+    }
+    .original_price{
+      position:absolute;
+      top:0;
+      right:0.4rem;
+      color:#444444;
+    }
+  }
+  .submit{
+    padding:0 0.2rem;
+    .weui-btn_sub{
+      background-color:#55b837;
+    }
+  }
+
+}

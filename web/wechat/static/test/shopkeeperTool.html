@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">-->
+<meta name="viewport" content="initial-scale=1,maximum-scale=1, minimum-scale=1">
+<meta name="description" content="">
+<title>店长工具</title>
+    <script type="text/javascript">
+        window.onload = function () {
+            (function(e,t){var i=document,n=window;var l=i.documentElement;var r,a;var d,o=document.createElement("style");var s;function m(){var i=l.getBoundingClientRect().width;if(!t){t=540}if(i>t){i=t}var n=i*100/e;o.innerHTML="html{font-size:"+n+"px !important;}"}r=i.querySelector('meta[name="viewport"]');a="width=device-width,initial-scale=1,maximum-scale=1.0,user-scalable=no,viewport-fit=cover";if(r){r.setAttribute("content",a)}else{r=i.createElement("meta");r.setAttribute("name","viewport");r.setAttribute("content",a);if(l.firstElementChild){l.firstElementChild.appendChild(r)}else{var c=i.createElement("div");c.appendChild(r);i.write(c.innerHTML);c=null}}m();if(l.firstElementChild){l.firstElementChild.appendChild(o)}else{var c=i.createElement("div");c.appendChild(o);i.write(c.innerHTML);c=null}n.addEventListener("resize",function(){clearTimeout(s);s=setTimeout(m,300)},false);n.addEventListener("pageshow",function(e){if(e.persisted){clearTimeout(s);s=setTimeout(m,300)}},false);if(i.readyState==="complete"){i.body.style.fontSize="16px"}else{i.addEventListener("DOMContentLoaded",function(e){i.body.style.fontSize="16px"},false)}})(750,750);
+        }
+
+    </script>
+    <!--<script src="js/flexible.js"></script>-->
+
+
+    <link rel="stylesheet" href="css/weui.min.css">
+<link rel="stylesheet" href="css/jquery-weui.css">
+<link rel="stylesheet" href="font/iconfont.css">
+<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="css/shopkeeperTool.css">
+    <script type="text/javascript" src="font/iconfont.js"></script>
+    <style>
+        .wrap{
+            width:7.5rem;
+            margin:0 auto;
+        }
+    </style>
+
+</head>
+<body ontouchstart>
+    <!--顶部标题-->
+    <div class="titleBar">
+        店长工具
+        <span class="iconfont icon-close close"></span>
+        <span class="iconfont icon-more more"></span>
+    </div>
+    <!--子标题-->
+    <div class="weui-flex subNav">
+        <div class="weui-flex__item">
+            <a href="index.html"><span><i class="iconfont icon-home ico"></i>宝帮宝</span></a>
+        </div>
+        <div class="weui-flex__item item2">
+            <i class="weui-icon-search ico"></i>
+            <a href="javascript:;">关注</a>
+            <i class="ico2">|</i>
+            <a href="javascript:;">我的</a>
+        </div>
+    </div>
+    <!--列表-->
+    <div class="toolLists">
+        <div class="listTitle">店长工具</div>
+        <div class="tools">
+            <div class="weui-panel weui-panel_access toolList">
+                <!--<div class="weui-panel__hd">图文组合列表</div>-->
+                <div class="weui-panel__bd">
+                    <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg listItem">
+                        <div class="weui-media-box__hd pic">
+                            <img class="weui-media-box__thumb" src="images/tool_01.jpg">
+                        </div>
+                        <div class="weui-media-box__bd">
+                            <h4 class="titleA">加班申请表</h4>
+                            <!--<h5 class="titleB">一件产品如何买到1000件？</h5>-->
+                            <p class="zan">
+                                <span class="num1"><i class="iconfont icon-yanjing"></i>1998</span>
+                                <span class="num2"><i class="iconfont icon-xinheart118"></i>1200</span>
+                            </p>
+                        </div>
+                        <div class="weui-cell__ft time" style="">07-9 17：00</div>
+                    </a>
+                    <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg listItem">
+                        <div class="weui-media-box__hd pic">
+                            <img class="weui-media-box__thumb" src="images/tool_01.jpg">
+                        </div>
+                        <div class="weui-media-box__bd">
+                            <h4 class="titleA">柜台相关管理制度</h4>
+                            <!--<h5 class="titleB">移动智能万物互联的门店新零售</h5>-->
+                            <p class="zan">
+                                <span class="num1"><i class="iconfont icon-yanjing"></i>1998</span>
+                                <span class="num2"><i class="iconfont icon-xinheart118"></i>1200</span>
+                            </p>
+                        </div>
+                        <div class="weui-cell__ft time" style="">07-9 17：00</div>
+                    </a>
+                    <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg listItem">
+                        <div class="weui-media-box__hd pic">
+                            <img class="weui-media-box__thumb" src="images/tool_02.jpg">
+                        </div>
+                        <div class="weui-media-box__bd">
+                            <h4 class="titleA">333售后回访</h4>
+                            <!--<h5 class="titleB">让柜台有表情，让产品会说活</h5>-->
+                            <p class="zan">
+                                <span class="num1"><i class="iconfont icon-yanjing"></i>1998</span>
+                                <span class="num2"><i class="iconfont icon-xinheart118"></i>1200</span>
+                            </p>
+                        </div>
+                        <div class="weui-cell__ft time" style="">07-9 17：00</div>
+                    </a>
+                    <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg listItem">
+                        <div class="weui-media-box__hd pic">
+                            <img class="weui-media-box__thumb" src="images/tool_02.jpg">
+                        </div>
+                        <div class="weui-media-box__bd">
+                            <h4 class="titleA">非素高销转推流程考核表</h4>
+                            <!--<h5 class="titleB">极品飞车</h5>-->
+                            <p class="zan">
+                                <span class="num1"><i class="iconfont icon-yanjing"></i>1998</span>
+                                <span class="num2"><i class="iconfont icon-xinheart118"></i>1200</span>
+                            </p>
+                        </div>
+                        <div class="weui-cell__ft time" style="">07-9 17：00</div>
+                    </a>
+                    <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg listItem">
+                        <div class="weui-media-box__hd pic">
+                            <img class="weui-media-box__thumb" src="images/tool_03.jpg">
+                        </div>
+                        <div class="weui-media-box__bd">
+                            <h4 class="titleA">XXXXXX</h4>
+                            <!--<h5 class="titleB">一件产品如何买到1000件？</h5>-->
+                            <p class="zan">
+                                <span class="num1"><i class="iconfont icon-yanjing"></i>1998</span>
+                                <span class="num2"><i class="iconfont icon-xinheart118"></i>1200</span>
+                            </p>
+                        </div>
+                        <div class="weui-cell__ft time" style="">07-9 17：00</div>
+                    </a>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jquery-2.1.4.js"></script>
+    <script src="js/fastclick.js"></script>
+    <script src="js/swiper.min.js"></script>
+    <script src="js/common.js"></script>
+    <!--<script src="js/flexible.js"></script>-->
+
+    <script>
+        $(function() {
+            FastClick.attach(document.body);
+
+        });
+    </script>
+    <script src="js/jquery-weui.js"></script>
+</body>
+</html>

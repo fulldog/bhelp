@@ -1,0 +1,131 @@
+@charset "utf-8";
+*{
+  margin:0;
+  padding:0;
+}
+html{
+  //height:100%;
+}
+body{
+  //background:#f5f5f5;
+  background:#efeff4;
+  //height:100%;
+}
+.titleBar{
+  position: fixed;
+  top:0;
+  left:0;
+  z-index: 99999;
+  width:100%;
+  height:0.93rem;
+  line-height:0.93rem;
+  text-align: center;
+  background:#f5f5f5;
+  color:#000;
+  font-size:0.32rem;
+  .close{
+    position:absolute;
+    left:10px;
+    font-size:0.4rem;
+    color:#000;
+
+  }
+  .more{
+    position: absolute;
+    right:10px;
+    font-size:0.4rem;
+    color:#000;
+  }
+}
+.titile{
+  margin-top:0.93rem;
+  height:.86rem;
+  line-height:.86rem;
+  text-align: center;
+  font-size:0.3rem;
+  color:#000;
+  background:#fff;
+  border-bottom:2px solid #dcdcdc;
+}
+.purchaseNone{
+  display: none;
+  .list{
+    width:2.15rem;
+    height:2.3rem;
+    margin:3.18rem auto 0.4rem;
+    img{
+      width:100%;
+      display: block;
+    }
+  }
+  .tip{
+    p{
+      font-size:0.28rem;
+      color:#b1b4b3;
+      height:0.6rem;
+      line-height:0.6rem;
+      text-align: center;
+    }
+    .p2{
+      font-size:0.2rem;
+    }
+  }
+  .jump{
+    margin-top:0.3rem;
+    a{
+      width:40%;
+      margin:0 auto;
+      background:#55b837;
+      font-size:0.28rem;
+    }
+  }
+}
+.purchase{
+  .jewelryList{
+    margin-top:0;
+    .weui-cell{
+      padding:0.4rem 0.4rem;
+      img{
+        width:1.22rem;
+        height:1.42rem;
+        margin-right:.5rem;
+        display:block
+      }
+      .name{
+        font-size:.3rem;
+        color:#000;
+        height:0.6rem;
+        line-height:0.6rem;
+      }
+      .validity{
+        font-size:0.25rem;
+        color:#a8a8aa;
+        height:0.421rem;
+        line-height:0.42rem;
+        margin-top:0.08rem;
+      }
+      .update{
+        font-size:0.25rem;
+        color:#a8a8aa;
+      }
+    }
+
+  }
+}
+.no_more{
+  margin: 1em auto;
+  border-top:none;
+  .weui-loadmore__tips{
+    background:none;
+  }
+}
+.weui-footer{
+  .weui-footer__links{
+    padding:0.48rem 0;
+  }
+  .weui-footer__text{
+    height:0.45rem;
+    line-height:0.45rem;
+  }
+}
+

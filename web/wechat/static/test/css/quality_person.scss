@@ -1,0 +1,122 @@
+@charset "utf-8";
+*{
+  margin:0;
+  padding:0;
+}
+html{
+  height:100%;
+}
+body{
+  //background:#f5f5f5;
+  background:#fff;
+  height:100%;
+}
+.titleBar{
+  position: fixed;
+  top:0;
+  left:0;
+  z-index: 99999;
+  width:100%;
+  height:0.93rem;
+  line-height:0.93rem;
+  text-align: center;
+  background:#f5f5f5;
+  color:#000;
+  font-size:0.32rem;
+  .close{
+    position:absolute;
+    left:10px;
+    font-size:0.4rem;
+    color:#000;
+
+  }
+  .more{
+    position: absolute;
+    right:10px;
+    font-size:0.4rem;
+    color:#000;
+  }
+
+}
+.subNav{
+  z-index: 99999;
+  position: fixed;
+  left:0;
+  top:0.93rem;
+  width:100%;
+  height:.84rem;
+  line-height:.84rem;
+  background:#1d1d21;
+  .weui-flex__item{
+    padding:0 0.22rem;
+    color:#b4b4b4;
+    font-size:.28rem;
+    .ico{
+      margin-right:0.08rem;
+      font-size: 0.32rem;
+    }
+    .ico2{
+      margin:0 0.01rem;
+    }
+    a{
+      color:#b4b4b4;
+    }
+  }
+  .item2{
+    text-align: right;
+  }
+}
+
+.personList{
+  margin-top: 1.77rem;
+  padding:0.06rem 0.3rem 3rem;
+  .listTitle{
+    height:0.8rem;
+    line-height:0.8rem;
+    font-family: '黑体';
+    font-size:0.3rem;
+  }
+  .weui-cells {
+    margin-top:0;
+    .weui-cell{
+      padding: 10px 0;
+      &:before{
+        left:0;
+      }
+    }
+    .weui-cell__hd{
+      width:1.64rem;
+      height:1.23rem;
+      border:1px solid #c7c6c6;
+      border-radius: 0.07rem;
+      overflow: hidden;
+      img{
+        display:block;
+        width:100%;
+      }
+    }
+    p{
+      padding-left: 0.2rem;
+      font-size:.3rem;
+    }
+    .weui-cell__ft{
+      font-size:.2rem;
+      color:#fb251a;
+    }
+    .weui-cell__ft:after{
+      display:none;
+    }
+    &:after{
+      display:none;
+    }
+  }
+}
+.weui-footer{
+  .weui-footer__links{
+    padding:0.48rem 0;
+  }
+  .weui-footer__text{
+    height:0.45rem;
+    line-height:0.45rem;
+  }
+}

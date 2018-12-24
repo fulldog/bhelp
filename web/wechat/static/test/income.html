@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">-->
+<meta name="viewport" content="initial-scale=1,maximum-scale=1, minimum-scale=1">
+<meta name="description" content="">
+<title>我的收益</title>
+    <script type="text/javascript">
+        window.onload = function () {
+            (function(e,t){var i=document,n=window;var l=i.documentElement;var r,a;var d,o=document.createElement("style");var s;function m(){var i=l.getBoundingClientRect().width;if(!t){t=540}if(i>t){i=t}var n=i*100/e;o.innerHTML="html{font-size:"+n+"px !important;}"}r=i.querySelector('meta[name="viewport"]');a="width=device-width,initial-scale=1,maximum-scale=1.0,user-scalable=no,viewport-fit=cover";if(r){r.setAttribute("content",a)}else{r=i.createElement("meta");r.setAttribute("name","viewport");r.setAttribute("content",a);if(l.firstElementChild){l.firstElementChild.appendChild(r)}else{var c=i.createElement("div");c.appendChild(r);i.write(c.innerHTML);c=null}}m();if(l.firstElementChild){l.firstElementChild.appendChild(o)}else{var c=i.createElement("div");c.appendChild(o);i.write(c.innerHTML);c=null}n.addEventListener("resize",function(){clearTimeout(s);s=setTimeout(m,300)},false);n.addEventListener("pageshow",function(e){if(e.persisted){clearTimeout(s);s=setTimeout(m,300)}},false);if(i.readyState==="complete"){i.body.style.fontSize="16px"}else{i.addEventListener("DOMContentLoaded",function(e){i.body.style.fontSize="16px"},false)}})(750,750);
+        }
+
+    </script>
+    <!--<script src="js/flexible.js"></script>-->
+
+
+    <link rel="stylesheet" href="css/weui.min.css">
+<link rel="stylesheet" href="css/jquery-weui.css">
+<link rel="stylesheet" href="font/iconfont.css">
+<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="css/income.css">
+<script type="text/javascript" src="font/iconfont.js"></script>
+
+</head>
+<body ontouchstart>
+
+    <!--顶部标题-->
+    <div class="titleBar">
+        我的收益
+        <span class="iconfont icon-close close"></span>
+        <span class="iconfont icon-more more"></span>
+    </div>
+    <div class="wrap">
+        <p class="title">累计收益</p>
+        <p class="money">0.00</p>
+        <div class="weui-flex incomeList">
+            <div class="weui-flex__item">今日收益<span class="todayProfit">0.00</span></div>
+            <div class="weui-flex__item">可提现收益<span class="cashableIncome">0.00</span></div>
+        </div>
+        <div class="cash"><a href="cashWithdrawal.html" class="weui-btn">提现</a></div>
+    </div>
+    <p class="detail">收益明细</p>
+    <div class="weui-cells detailCon">
+        <a class="weui-cell" href="javascript:;">
+            <div class="weui-cell__bd">
+                <p class="brief">乔迎昆  购买  注册会员高级会员800</p>
+                <p class="time">2018-10-11  09:13:28</p>
+            </div>
+            <div class="weui-cell__ft">
+                <p class="money">+50.00</p>
+                <p class="sure">确认收益</p>
+            </div>
+        </a>
+        <a class="weui-cell" href="javascript:;">
+            <div class="weui-cell__bd">
+                <p class="brief">乔迎昆  购买  专栏慕弘陈列jslafjsa</p>
+                <p class="time">2018-10-15  09:13:28</p>
+            </div>
+            <div class="weui-cell__ft">
+                <p class="money">+50.00</p>
+                <p class="sure">确认收益</p>
+            </div>
+        </a>
+        <a class="weui-cell" href="javascript:;">
+            <div class="weui-cell__bd">
+                <p class="brief">乔迎昆  购买  注册会员43643646</p>
+                <p class="time">2018-10-19  09:13:28</p>
+            </div>
+            <div class="weui-cell__ft">
+                <p class="money">+50.00</p>
+                <p class="sure">确认收益</p>
+            </div>
+        </a>
+        <a class="weui-cell" href="javascript:;">
+            <div class="weui-cell__bd">
+                <p class="brief">乔迎昆  购买  注册会员43643646</p>
+                <p class="time">2018-10-19  09:13:28</p>
+            </div>
+            <div class="weui-cell__ft">
+                <p class="money">+50.00</p>
+                <p class="sure">确认收益</p>
+            </div>
+        </a>
+        <a class="weui-cell" href="javascript:;">
+            <div class="weui-cell__bd">
+                <p class="brief">乔迎昆  购买  注册会员43643646</p>
+                <p class="time">2018-10-19  09:13:28</p>
+            </div>
+            <div class="weui-cell__ft">
+                <p class="money">+50.00</p>
+                <p class="sure">确认收益</p>
+            </div>
+        </a>
+    </div>
+
+    <!--页脚-->
+    <div class="weui-footer weui-footer_fixed-bottom">
+        <p class="weui-footer__links">
+            <a href="javascript:void(0);" class="weui-footer__link">店铺主页</a>|
+            <a href="javascript:void(0);" class="weui-footer__link">个人中心</a>|
+            <a href="javascript:void(0);" class="weui-footer__link">关注我们</a>|
+            <a href="javascript:void(0);" class="weui-footer__link">问题反馈</a>
+        </p>
+        <p class="weui-footer__text">宝帮宝提供技术支持</p>
+        <p class="weui-footer__text">Copyright © 2018 bbb.com</p>
+    </div>
+
+
+
+    <script src="js/jquery-2.1.4.js"></script>
+    <script src="js/fastclick.js"></script>
+    <script src="js/swiper.min.js"></script>
+    <script src="js/common.js"></script>
+    <!--<script src="js/flexible.js"></script>-->
+
+    <script>
+        $(function() {
+            FastClick.attach(document.body);
+
+        });
+    </script>
+    <script src="js/jquery-weui.js"></script>
+</body>
+</html>
