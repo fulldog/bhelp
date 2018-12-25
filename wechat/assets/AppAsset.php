@@ -9,19 +9,30 @@ use yii\web\AssetBundle;
  */
 class AppAsset extends AssetBundle
 {
-    public $basePath = '@webroot';
+    public $basePath = '@resources';
 
-    public $baseUrl = '@web';
+    public $baseUrl = '@resources';
 
     public $css = [
-        // 'css/site.css',
+        'css/weui.min.css',
+        'css/jquery-weui.css',
+        'font/iconfont.css',
+        'css/common.css',
+        'css/index.css',
     ];
 
     public $js = [
+        'font/iconfont.js',
+        'js/jquery-2.1.4.js',
+        'js/fastclick.js',
+        'js/swiper.min.js',
+        'js/common.js'
     ];
 
     public $depends = [
         // 'yii\web\YiiAsset',
         // 'yii\bootstrap\BootstrapAsset',
     ];
+
+    public $jsOptions = ['position' => \yii\web\View::POS_HEAD];
 }
