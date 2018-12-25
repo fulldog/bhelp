@@ -1,12 +1,9 @@
-<!--顶部标题-->
-<div class="titleBar" id="titleBar">
-  宝帮宝
-  <span class="iconfont icon-close close"></span>
-  <span class="iconfont icon-more more"></span>
-</div>
+<?php
+//$this->registerCssFile(Yii::getAlias('@bbb').'/css/index.css',['depends'=>\wechat\assets\AppAsset::class]);
+?>
 <!--搜索框-->
 <div class="weui-search-bar" id="searchBar">
-  <form class="weui-search-bar__form">
+  <form class="weui-search-bar__form" action="<?=Yii::$app->urlManager->createUrl(['index/search'])?>">
     <div class="weui-search-bar__box">
       <i class="weui-icon-search"></i>
       <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required="">
@@ -22,9 +19,9 @@
 <!--轮播图-->
 <div  class="swiper-container banner" data-space-between='10' data-pagination='.swiper-pagination' data-autoplay="1000">
   <div class="swiper-wrapper">
-    <div class="swiper-slide"><img src="images/bbb001.jpg" alt="" width="100%" ></div>
-    <div class="swiper-slide"><img src="images/bbb002.jpg" alt="" width="100%" ></div>
-    <div class="swiper-slide"><img src="images/bbb003.jpg" alt="" width="100%" ></div>
+    <div class="swiper-slide"><img src="<?=Yii::$app->params['bbb']?>/images/bbb001.jpg" alt="" width="100%" ></div>
+    <div class="swiper-slide"><img src="<?=Yii::$app->params['bbb']?>/images/bbb002.jpg" alt="" width="100%" ></div>
+    <div class="swiper-slide"><img src="<?=Yii::$app->params['bbb']?>/images/bbb003.jpg" alt="" width="100%" ></div>
   </div>
   <div class="swiper-pagination"></div>
 </div>
@@ -44,25 +41,25 @@
 <div class="weui-flex nav">
     <div class="weui-flex__item">
         <a href="qualityTraining.html" class="nav_item">
-            <img src="images/iconnav_12.jpg" alt="">
+            <img src="<?=Yii::$app->params['bbb']?>/images/iconnav_12.jpg" alt="">
             <div class="name">精品培训</div>
         </a>
     </div>
     <div class="weui-flex__item">
         <a href="marketingPlanning.html" class="nav_item">
-            <img src="images/iconnav_14.jpg" alt="">
+            <img src="<?=Yii::$app->params['bbb']?>/images/iconnav_14.jpg" alt="">
             <div class="name">营销策划</div>
         </a>
     </div>
     <div class="weui-flex__item">
         <a href="wehatMarketing.html" class="nav_item">
-            <img src="images/iconnav_16.jpg" alt="">
+            <img src="<?=Yii::$app->params['bbb']?>/images/iconnav_16.jpg" alt="">
             <div class="name">微信营销</div>
         </a>
     </div>
     <div class="weui-flex__item">
         <a href="jewelryColumn.html" class="nav_item">
-            <img src="images/iconnav_18.jpg" alt="">
+            <img src="<?=Yii::$app->params['bbb']?>/images/iconnav_18.jpg" alt="">
             <div class="name">珠宝专栏</div>
         </a>
     </div>
@@ -77,7 +74,7 @@
             <div class="weui-panel__bd">
                 <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg listItem">
                     <div class="weui-media-box__hd pic">
-                        <img class="weui-media-box__thumb" src="images/bbbwc_38.jpg">
+                        <img class="weui-media-box__thumb" src="<?=Yii::$app->params['bbb']?>/images/bbbwc_38.jpg">
                     </div>
                     <div class="weui-media-box__bd">
                         <h4 class="titleA">轻奢示例方案·升级版</h4>
@@ -91,7 +88,7 @@
                 </a>
                 <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg listItem">
                     <div class="weui-media-box__hd pic">
-                        <img class="weui-media-box__thumb" src="images/bbbwc_38.jpg">
+                        <img class="weui-media-box__thumb" src="<?=Yii::$app->params['bbb']?>/images/bbbwc_38.jpg">
                     </div>
                     <div class="weui-media-box__bd">
                         <h4 class="titleA">微信营销·新零售</h4>
@@ -105,7 +102,7 @@
                 </a>
                 <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg listItem">
                     <div class="weui-media-box__hd pic">
-                        <img class="weui-media-box__thumb" src="images/bbbwc_38.jpg">
+                        <img class="weui-media-box__thumb" src="<?=Yii::$app->params['bbb']?>/images/bbbwc_38.jpg">
                     </div>
                     <div class="weui-media-box__bd">
                         <h4 class="titleA">精品陈列·升级版</h4>
@@ -119,7 +116,7 @@
                 </a>
                 <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg listItem">
                     <div class="weui-media-box__hd pic">
-                        <img class="weui-media-box__thumb" src="images/bbbwc_38.jpg">
+                        <img class="weui-media-box__thumb" src="<?=Yii::$app->params['bbb']?>/images/bbbwc_38.jpg">
                     </div>
                     <div class="weui-media-box__bd">
                         <h4 class="titleA">益智游戏</h4>
@@ -133,7 +130,7 @@
                 </a>
                 <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg listItem">
                     <div class="weui-media-box__hd pic">
-                        <img class="weui-media-box__thumb" src="images/bbbwc_38.jpg">
+                        <img class="weui-media-box__thumb" src="<?=Yii::$app->params['bbb']?>/images/bbbwc_38.jpg">
                     </div>
                     <div class="weui-media-box__bd">
                         <h4 class="titleA">轻奢示例方案·升级版</h4>
@@ -147,7 +144,7 @@
                 </a>
                 <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg listItem">
                     <div class="weui-media-box__hd pic">
-                        <img class="weui-media-box__thumb" src="images/bbbwc_38.jpg">
+                        <img class="weui-media-box__thumb" src="<?=Yii::$app->params['bbb']?>/images/bbbwc_38.jpg">
                     </div>
                     <div class="weui-media-box__bd">
                         <h4 class="titleA">轻奢示例方案·升级版</h4>
@@ -161,7 +158,7 @@
                 </a>
                 <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg listItem">
                     <div class="weui-media-box__hd pic">
-                        <img class="weui-media-box__thumb" src="images/bbbwc_38.jpg">
+                        <img class="weui-media-box__thumb" src="<?=Yii::$app->params['bbb']?>/images/bbbwc_38.jpg">
                     </div>
                     <div class="weui-media-box__bd">
                         <h4 class="titleA">轻奢示例方案·升级版</h4>
@@ -175,7 +172,7 @@
                 </a>
                 <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg listItem">
                     <div class="weui-media-box__hd pic">
-                        <img class="weui-media-box__thumb" src="images/bbbwc_38.jpg">
+                        <img class="weui-media-box__thumb" src="<?=Yii::$app->params['bbb']?>/images/bbbwc_38.jpg">
                     </div>
                     <div class="weui-media-box__bd">
                         <h4 class="titleA">轻奢示例方案·升级版</h4>
@@ -217,3 +214,47 @@
     </a>
 </div>
 
+<!--模态层-->
+<div class="weui-mask weui-mask--visible"></div>
+<!--注册弹窗-->
+<div class="weui-dialog weui-skin_android weui-dialog--visible registerBox">
+  <div class="img">
+    <span class="iconfont icon-zhucehuiyuan"></span>
+  </div>
+  <a href="<?=Yii::$app->urlManager->createUrl(['index/register'])?>" class="register">
+    注&nbsp;册<br>
+    会&nbsp;员
+  </a>
+</div>
+<script>
+  $(function() {
+    $(".banner").swiper(
+      {
+        speed: 400,
+        spaceBetween: 100,
+        loop: true,
+        autoplay: 3000,
+        pagination: {
+          el: '.swiper-pagination',
+        },
+      }
+    );
+    function noticSwiper(){
+      $(".notice").swiper(
+        {
+          speed: 200,
+          spaceBetween: 100,
+          loop: true,
+          autoplay: 3000,
+          direction: 'vertical',
+
+        }
+      )
+    }
+    setTimeout(noticSwiper,100)
+    $(".weui-mask").click(function () {
+      $(this).removeClass('weui-mask--visible');
+      $('.weui-dialog').removeClass('weui-dialog--visible')
+    })
+  });
+</script>

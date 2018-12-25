@@ -31,4 +31,5 @@ return [
     ],
     /** ------ 当前的微信用户信息 ------ **/
     'wechatMember' => [],
+    'bbb'=>Yii::getAlias('@bbb')
 ];

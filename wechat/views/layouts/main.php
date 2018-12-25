@@ -31,69 +31,30 @@ AppAsset::register($this);
 </style>
 <body ontouchstart>
 <?php $this->beginBody() ?>
-
+<!--顶部标题-->
+  <div class="titleBar">
+      <?=$this->params['title']?>
+    <span class="iconfont icon-close close"></span>
+    <span class="iconfont icon-more more"></span>
+  </div>
     <?= $content ?>
 
-<!--模态层-->
-<div class="weui-mask weui-mask--visible"></div>
-<!--注册弹窗-->
-<div class="weui-dialog weui-skin_android weui-dialog--visible registerBox">
-  <div class="img">
-    <span class="iconfont icon-zhucehuiyuan"></span>
-  </div>
-  <a href="register.html" class="register">
-    注&nbsp;册<br>
-    会&nbsp;员
-  </a>
-</div>
-
 <!--续费弹窗-->
-<!--<div class="weui-dialog weui-skin_android weui-dialog&#45;&#45;visible registerBox">
+<div class="weui-dialog weui-skin_android weui-dialog&#45;&#45;visible registerBox" style="display: none">
     <div class="img img2">
         <span class="iconfont icon-wenxintishi tips"></span><br>
         <i class="tips2">温馨提示</i>
     </div>
     <p>您的会员已到期,【部分内容】,不能查阅.</p>
-    <a href="registerRenew.html" class="renew">续费会员</a>
+    <a href="<?=Yii::$app->urlManager->createUrl(['index/recharge'])?>" class="renew">续费会员</a>
     <span class="iconfont icon-guanbi close"></span>
-</div>-->
+</div>
 
-<script>
+<script type="application/javascript">
   $(function() {
     FastClick.attach(document.body);
-    $(".banner").swiper(
-      {
-        speed: 400,
-        spaceBetween: 100,
-        loop: true,
-        autoplay: 3000,
-        pagination: {
-          el: '.swiper-pagination',
-        },
-      }
-    );
-    function noticSwiper(){
-      $(".notice").swiper(
-        {
-          speed: 200,
-          spaceBetween: 100,
-          loop: true,
-          autoplay: 3000,
-          direction: 'vertical',
-
-        }
-      )
-    }
-    setTimeout(noticSwiper,100)
-    $(".weui-mask").click(function () {
-      $(this).removeClass('weui-mask--visible');
-      $('.weui-dialog').removeClass('weui-dialog--visible')
-    })
   });
-</script>
-<script src="<?=Yii::getAlias('@resources')?>/js/jquery-weui.js"></script>
-<script>
-  /*function isIPhoneX(fn){
+  function isIPhoneX(fn){
       var u = navigator.userAgent;
       var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
       if (isIOS) {
@@ -106,7 +67,7 @@ AppAsset::register($this);
           }
       }
   }
-  isIPhoneX()*/
+  isIPhoneX();
 </script>
 <?= Alert::widget() ?>
 <?php $this->endBody() ?>

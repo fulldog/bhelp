@@ -8,10 +8,10 @@
 
 namespace wechat\controllers;
 
+use common\models\bbb\SmsLog;
+use yii\helpers\Json;
 
-use common\controllers\BaseController;
-
-class IndexController extends BaseController
+class IndexController extends MyController
 {
 
     function behaviors()
@@ -30,12 +30,50 @@ class IndexController extends BaseController
     }
 
     function actionIndex(){
-        $this->view->params['description'] = '';
-        $this->view->params['title'] = 'bbb';
+
         return $this->render('index');
     }
 
-    function actionGet(){
-        echo \Yii::getAlias('@web');
+    function actionRegister(){
+
+        if (\Yii::$app->request->isPost){
+
+        }
+
+        return $this->render('register');
+    }
+
+    function actionSearch(){
+
+    }
+
+    function actionRecharge(){
+
+    }
+
+    function actionSms(){
+        if (\Yii::$app->request->isAjax && ($phone = \Yii::$app->request->get('phone'))){
+            if (preg_match('/^1(3|4|5|8|7)[0-9]{9}$/',$phone)){
+               //todo sms
+                $sms = new SmsLog();
+                $code = random_int(100000,999999);
+                $sms->phone = $phone;
+                $sms->code = $code;
+                if ($sms->save()){
+                    exit(Json::encode([
+                        'data'=>[
+                            'code'=>$code
+                        ],
+                        'msg'=>'',
+                        'status'=>'succ'
+                    ]));
+                }
+            }
+        }
+        exit(Json::encode([
+            'data'=>[],
+            'msg'=>'请输入正确的手机号',
+            'status'=>'fail'
+        ]));
     }
 }
