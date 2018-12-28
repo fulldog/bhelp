@@ -232,13 +232,6 @@ class AttachmentController extends WController
         if ($model->load(Yii::$app->request->post()) && $model->local_url)
         {
             // 本地前缀
-//<<<<<<< HEAD
-//            $material = $this->app->material;
-//            $result = $material->uploadVoice(StringHelper::getLocalFilePath($model->local_url, 'voices'));
-//            if (!isset($result['media_id']) && $result['media_id']){
-//                return $this->message('msg:'.$result['errmsg'].'code:'.$result['errcode'], $this->redirect(['index', 'type' => 'voice']), 'error');
-//            }
-//=======
             $result = $this->app->material->uploadVoice(StringHelper::getLocalFilePath(StringHelper::iconvForWindows($model->local_url), 'voices'));
             // 验证微信报错
             if ($error = Yii::$app->debris->getWechatError($result, false))
@@ -246,7 +239,6 @@ class AttachmentController extends WController
                 return $this->message($error, $this->redirect(['index', 'type' => 'voice']), 'error');
             }
 
-//>>>>>>> upstream/master
             Attachment::add($model->local_url, 'voice', '', $result['media_id']);
 
             return $this->redirect(['index', 'type' => 'voice']);
