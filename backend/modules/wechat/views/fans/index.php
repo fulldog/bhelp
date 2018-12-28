@@ -2,6 +2,8 @@
 use yii\helpers\Url;
 use yii\widgets\LinkPager;
 use common\models\wechat\Fans;
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 
 $this->title = '粉丝管理';
 $this->params['breadcrumbs'][] = ['label' =>  $this->title];
@@ -26,17 +28,26 @@ $this->params['breadcrumbs'][] = ['label' =>  $this->title];
                         <div class="tab-pane active">
                             <div class="panel-body">
                                 <div class="col-sm-12">
-                                    <div class="col-sm-3">
-                                        <span class="btn btn-white" id="sync"> 同步选中粉丝</span>
-                                        <span class="btn btn-white" onclick="getAllFans()"> 同步全部粉丝</span>
+                                    <div class="col-sm-6">
+                                        <span class="btn btn-white" id="sync"> 同步选中粉丝信息</span>
+                                        <span class="btn btn-white" onclick="getAllFans()"> 同步全部粉丝信息</span>
                                     </div>
-                                    <div class="col-sm-5">
-                                        <form action="" method="get" class="form-horizontal" role="form" id="form">
-                                            <div class="input-group m-b">
-                                                <input type="text" class="form-control" name="keyword" placeholder="<?= $keyword ? $keyword : '请输入昵称/粉丝编号'?>"/>
-                                                <span class="input-group-btn"><button class="btn btn-white"><i class="fa fa-search"></i> 搜索</button></span>
-                                            </div>
-                                        </form>
+                                    <div class="col-sm-6">
+                                        <?php $form = ActiveForm::begin([
+                                            'action' => Url::to(['index']),
+                                            'method' => 'get'
+                                        ]); ?>
+                                        <div class="col-sm-5">
+                                            <?= \yii\helpers\Html::dropDownList('follow', $follow, [1 => '已关注', -1 => '未关注'], ['class' => 'form-control']);?>
+                                        </div>
+                                        <div class="input-group m-b">
+                                            <?= Html::textInput('keyword', $keyword, [
+                                                'placeholder' => '请输入昵称/粉丝编号',
+                                                'class' => 'form-control'
+                                            ])?>
+                                            <?= Html::tag('span', '<button class="btn btn-white"><i class="fa fa-search"></i> 搜索</button>', ['class' => 'input-group-btn'])?>
+                                        </div>
+                                        <?php ActiveForm::end(); ?>
                                     </div>
                                     <div class="ibox float-e-margins">
                                         <table class="table table-hover">
@@ -103,12 +114,12 @@ $this->params['breadcrumbs'][] = ['label' =>  $this->title];
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <?= LinkPager::widget([
-                                                    'pagination'        => $pages,
-                                                    'maxButtonCount'    => 5,
-                                                    'firstPageLabel'    => "首页",
-                                                    'lastPageLabel'     => "尾页",
-                                                    'nextPageLabel'     => "下一页",
-                                                    'prevPageLabel'     => "上一页",
+                                                    'pagination' => $pages,
+                                                    'maxButtonCount' => 5,
+                                                    'firstPageLabel' => "首页",
+                                                    'lastPageLabel' => "尾页",
+                                                    'nextPageLabel' => "下一页",
+                                                    'prevPageLabel' => "上一页",
                                                 ]);?>
                                             </div>
                                         </div>
