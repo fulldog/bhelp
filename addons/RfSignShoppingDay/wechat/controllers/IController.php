@@ -47,7 +47,7 @@ class IController extends AddonsBaseController
         }
 
         /** 当前进入微信用户信息 **/
-        Yii::$app->params['wechatMember'] = json_decode(Yii::$app->session->get('wechatUser'), true);
+        Yii::$app->params['wechatMember'] = json_decode(Yii::$app->session->get('_wechatUser'), true);
 
         /** 非微信网页打开时候开启模拟数据 **/
         if (empty(Yii::$app->params['wechatMember']) && Yii::$app->params['simulateUser']['switch'] == true)

@@ -10,12 +10,12 @@ class SmsLog extends \common\models\common\BaseModel
 {
 
     public $attributes = [
-        'phone','code'
+        'phone','code','imgcode','created_at','updated_at'
     ];
 
     public static function tableName()
     {
-        return '{{%bbb_smslog}}';
+        return '{{%sms_log}}';
     }
 
 }
