@@ -9,7 +9,7 @@ return [
 
     /** ------ 非微信打开的时候是否开启微信模拟数据 ------ **/
     'simulateUser' => [
-        'switch' => false,// 微信应用模拟用户检测开关
+        'switch' => true,// 微信应用模拟用户检测开关
         'userInfo' => [
             'id' => 'oW6qtS0foQGHDIzMitZTWHuoQGHDzMIdEX-7ik',
             'nickname' => '简言',

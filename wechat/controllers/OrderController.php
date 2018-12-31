@@ -14,7 +14,7 @@ use common\helpers\StringHelper;
 use common\models\common\PayLog;
 use common\helpers\UrlHelper;
 
-class OrderController extends WController
+class OrderController extends MyController
 {
     public function actions()
     {

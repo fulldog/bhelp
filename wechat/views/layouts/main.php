@@ -32,11 +32,13 @@ AppAsset::register($this);
 <body ontouchstart>
 <?php $this->beginBody() ?>
 <!--顶部标题-->
+<!--
   <div class="titleBar">
-      <?=$this->params['title']?>
+      <?php //echo $this->params['title']?>
     <span class="iconfont icon-close close"></span>
     <span class="iconfont icon-more more"></span>
   </div>
+  -->
     <?= $content ?>
 
 <!--续费弹窗-->

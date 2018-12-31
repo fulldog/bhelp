@@ -22,7 +22,7 @@ class PayHelper
      * @param string $tradeType 支付方式
      * @return string
      */
-    public static function getOutTradeNo($totalFee, string $orderSn, int $payType, $tradeType = 'JSAPI', $orderGroup = 1)
+    public static function getOutTradeNo($totalFee, string $orderSn, int $payType, $tradeType = 'JSAPI', $orderGroup = 1,$arr = [])
     {
         $payModel = new PayLog();
         $payModel->out_trade_no = time() . StringHelper::randomNum();
@@ -31,6 +31,12 @@ class PayHelper
         $payModel->order_group = $orderGroup;
         $payModel->pay_type = $payType;
         $payModel->trade_type = $tradeType;
+        if (!empty($arr)){
+            $payModel->member_id = isset($arr['member_id']) ?? 0;
+            $payModel->desc = isset($arr['desc']) ?? 0;
+            $payModel->goods = isset($arr['goods']) ?? 0;
+            $payModel->openid = isset($arr['openid']) ?? 0;
+        }
         $payModel->save();
 
         return $payModel->out_trade_no;

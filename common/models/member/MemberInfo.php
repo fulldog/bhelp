@@ -15,7 +15,7 @@ use yii\behaviors\TimestampBehavior;
  * @property string $password_hash 密码
  * @property string $auth_key 授权令牌
  * @property string $password_reset_token 密码重置令牌
- * @property int $type 类别[1:普通会员;10管理员]
+ * @property int $type 类别[1:普通会员;2:VIP;10管理员]
  * @property string $nickname 昵称
  * @property string $realname 真实姓名
  * @property string $head_portrait 头像

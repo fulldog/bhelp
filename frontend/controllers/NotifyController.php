@@ -58,11 +58,11 @@ class NotifyController extends Controller
             // 记录写入文件日志
 //<<<<<<< HEAD
             $message = ArrayHelper::toArray($message);
-            $logPath = Yii::getAlias('@wechat') . "/runtime/pay_log/" . date('Y-m').'/'. date('Ymd') .'.log';
+            $logPath = Yii::getAlias('@runtime') . "/pay_log/" . date('Y-m').'/'. date('Ymd') .'.log';
             FileHelper::writeLog($logPath, json_encode($message));
 //=======
-            $logPath = Yii::getAlias('@runtime') . "/pay_log/" . date('Y_m_d') . "/" . $message->openid . '.txt';
-            FileHelper::writeLog($logPath, json_encode(ArrayHelper::toArray($message)));
+//            $logPath = Yii::getAlias('@runtime') . "/pay_log/" . date('Y_m_d') . "/" . $message->openid . '.txt';
+//            FileHelper::writeLog($logPath, json_encode(ArrayHelper::toArray($message)));
 //>>>>>>> upstream/master
 
             // 如果订单不存在 或者 订单已经支付过了，如果成功返回订单的编号和类型

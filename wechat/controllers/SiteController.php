@@ -11,7 +11,7 @@ use common\helpers\UrlHelper;
  * Class SiteController
  * @package wechat\controllers
  */
-class SiteController extends WController
+class SiteController extends MyController
 {
     /**
      * @return array

@@ -110,7 +110,7 @@ class Menu extends \common\models\common\BaseModel
         // 让 url 支持参数传递
         foreach ($models as &$model)
         {
-            $params = unserialize($model['params']);
+            $params = isset($model['params']) ? unserialize($model['params']) : null;
             empty($params) && $params = [];
             $model['fullUrl'][] = $model['url'];
             foreach ($params as $param)

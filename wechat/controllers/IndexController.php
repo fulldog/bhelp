@@ -8,8 +8,16 @@
 
 namespace wechat\controllers;
 
+use common\helpers\PayHelper;
+use common\helpers\StringHelper;
+use common\helpers\UrlHelper;
+use common\models\bbb\MemberVipInfos;
 use common\models\bbb\SmsLog;
+use common\models\common\PayLog;
+use common\models\member\MemberInfo;
+use common\models\wechat\Fans;
 use yii\helpers\Json;
+use yii\web\Response;
 
 class IndexController extends MyController
 {
@@ -30,18 +38,138 @@ class IndexController extends MyController
     }
 
     function actionIndex(){
-
         return $this->render('index');
     }
 
     function actionRegister(){
+        if (\Yii::$app->request->isAjax){
+            \Yii::$app->response->format = Response::FORMAT_JSON;
+            $vipMoney = \Yii::$app->request->post('vipMoney');
+            $phone = \Yii::$app->request->post('phone');
+            $phoneCode = \Yii::$app->request->post('phoneCode');
+            $recommendCode = \Yii::$app->request->post('recommendCode');
+            if ($vipMoney!=\Yii::$app->params['vipMoney']){
+                return [
+                    'msg'=>'金额错误，购买VIP需要￥'.\Yii::$app->params['vipMoney'],
+                    'status'=>0
+                ];
+            }
+            if (!$this->checkPhoneCode($phone,$phoneCode)){
+                return [
+                    'msg'=>'手机验证码有误',
+                    'status'=>0
+                ];
+            }
+            if (MemberInfo::findOne(['username'=>$phone])){
+                return [
+                    'msg'=>'抱歉，该手机号已被注册',
+                    'status'=>0
+                ];
+            }else{
+                $user = new MemberInfo();
+                $user->username = $phone;
+                $user->nickname = \Yii::$app->params['wechatMember']['nickname'];
+                $user->head_portrait = \Yii::$app->params['wechatMember']['avatar'];
+                $user->sex = \Yii::$app->params['wechatMember']['original']['sex'];
+//                $user->area = \Yii::$app->params['wechatMember']['original']['country'];
+                $user->provinces = \Yii::$app->params['wechatMember']['original']['province'];
+                $user->city = \Yii::$app->params['wechatMember']['original']['city'];
+                if ($user->save() && Fans::updateAll(['member_id'=>$user->id],['openid'=>$this->openid])){
+                    \Yii::$app->session->set('user_info',$user->toArray());
+                    $vip = new MemberVipInfos();
+                    $vip->openid = $this->openid;
+                    $vip->member_id = $user->id;
+                    $vip->parent_id = MemberVipInfos::getMidByCode($recommendCode);
+                    $vip->recommendCode = MemberVipInfos::getCode();
+//                    $vip->vipend_at = \Yii::$app->request->get('start');
+//                    $vip->vipstart_at =
+//                    $vip->vipage = ceil((\Yii::$app->request->get('end')-\Yii::$app->request->get('start'))/86400);
+                    $vip->save();
 
-        if (\Yii::$app->request->isPost){
+                    $totalFee = $vipMoney*100;// 支付金额单位：分
+                    $orderSn =  'BbB'.date('YmdHis').StringHelper::randomNum();
 
+                    $orderData = [
+                        'trade_type' => 'JSAPI', // JSAPI，NATIVE，APP...
+                        'body' => '帮宝帮会员购买',
+                        'detail' => '帮宝帮会员购买',
+                        'notify_url' => UrlHelper::toFront(['notify/wechat']), // 支付结果通知网址，如果不设置则会使用配置里的默认地址
+                        'out_trade_no' => PayHelper::getOutTradeNo($totalFee/100, $orderSn, 1, PayLog::PAY_TYPE_WECHAT, 'JSAPI',[
+                            'goods' => '帮宝帮会员购买',
+                            'desc' => '帮宝帮会员购买',
+                            'member_id'=>$user->id,
+                            'openid' => \Yii::$app->wechat->user->openid
+                        ]), // 支付
+                        'total_fee' => $totalFee,
+                        'openid' => \Yii::$app->wechat->user->openid, // trade_type=JSAPI，此参数必传，用户在商户appid下的唯一标识，
+                    ];
+
+                    $payment = \Yii::$app->wechat->payment;
+                    $result = $payment->order->unify($orderData);
+                    if ($result['return_code'] == 'SUCCESS')
+                    {
+                        return [
+                            'status'=>2,
+                            'data'=>[
+                                'json'=>$payment->jssdk->bridgeConfig($result['prepay_id']),
+                                'orderSn'=>$orderSn
+                            ]
+                        ];
+                    }
+                    else
+                    {
+                        return [
+                            'msg'=>'抱歉，订单创建失败',
+                            'status'=>1,
+                            'data'=>[
+                                'orderSn'=>$orderSn
+                            ]
+                        ];
+                    }
+                }
+            }
+            return [
+                'msg'=>'抱歉，注册失败',
+                'status'=>0
+            ];
         }
-
         return $this->render('register');
     }
+
+    function actionOrder(){
+        $orderSn = \Yii::$app->request->get('orderSn');
+        if (!$orderSn){
+            $this->redirect(UrlHelper::to(['site/error']));
+        }
+        $orderInfo = PayLog::findOne(['order_sn'=>$orderSn])->toArray();
+        $orderData = [
+            'trade_type' => 'JSAPI', // JSAPI，NATIVE，APP...
+            'body' => $orderInfo['goods'],
+            'detail' => $orderInfo['desc'],
+            'notify_url' => UrlHelper::toFront(['notify/wechat']), // 支付结果通知网址，如果不设置则会使用配置里的默认地址
+            'out_trade_no' => $orderInfo['out_trade_no'], // 支付
+            'total_fee' => $orderInfo['total_fee']*100,
+            'openid' => \Yii::$app->wechat->user->openid, // trade_type=JSAPI，此参数必传，用户在商户appid下的唯一标识，
+        ];
+
+        $payment = \Yii::$app->wechat->payment;
+        $result = $payment->order->unify($orderData);
+        $json = '';
+        if ($result['return_code'] == 'SUCCESS')
+        {
+            $json = $payment->jssdk->bridgeConfig($result['prepay_id']);
+        }
+        return $this->render('order',[
+            'json'=>$json,
+            'total_fee'=>$orderInfo['total_fee'],
+            'order_sn'=>$orderSn,
+        ]);
+    }
+
+    function actionOrderSucc(){
+        return $this->render('succ');
+    }
+
 
     function actionSearch(){
 
@@ -52,11 +180,20 @@ class IndexController extends MyController
     }
 
     function actionSms(){
+
         if (\Yii::$app->request->isAjax && ($phone = \Yii::$app->request->get('phone'))){
             if (preg_match('/^1(3|4|5|8|7)[0-9]{9}$/',$phone)){
                //todo sms
                 $sms = new SmsLog();
-                $code = random_int(100000,999999);
+                if ($has = $sms::find()->where(['phone'=>$phone])->orderBy(['id'=>SORT_DESC])->one()){
+                    if ((time() - $has['created_at'])<60*10){
+                        exit(Json::encode([
+                            'msg'=>'短信验证码获取时间不能超过10Min',
+                            'status'=>0
+                        ]));
+                    }
+                }
+                $code = random_int(1000,999999);
                 $sms->phone = $phone;
                 $sms->code = $code;
                 if ($sms->save()){
@@ -65,7 +202,7 @@ class IndexController extends MyController
                             'code'=>$code
                         ],
                         'msg'=>'',
-                        'status'=>'succ'
+                        'status'=>1
                     ]));
                 }
             }
@@ -73,7 +210,11 @@ class IndexController extends MyController
         exit(Json::encode([
             'data'=>[],
             'msg'=>'请输入正确的手机号',
-            'status'=>'fail'
+            'status'=>0
         ]));
+    }
+
+    function checkPhoneCode($phone,$code){
+        return SmsLog::find()->where(['phone'=>$phone,'code'=>$code])->orderBy(['id'=>SORT_DESC])->one();
     }
 }

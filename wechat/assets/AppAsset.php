@@ -41,7 +41,7 @@ class AppAsset extends AssetBundle
     {
         $css_arr = [
             'index'=>'css/index.css',
-            'register'=>'css/register.css',
+            'register'=>'css/registerRenew.css',
         ];
         if (isset($css_arr[\Yii::$app->controller->action->id])){
             $this->css = ArrayHelper::merge($this->css,[$css_arr[\Yii::$app->controller->action->id]]);
