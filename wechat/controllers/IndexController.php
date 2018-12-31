@@ -63,32 +63,38 @@ class IndexController extends MyController
                     'status'=>0
                 ];
             }else{
-                $user = new MemberInfo();
-                $user->username = $phone;
-                $user->nickname = \Yii::$app->params['wechatMember']['nickname'];
-                $user->head_portrait = \Yii::$app->params['wechatMember']['avatar'];
-                $user->sex = \Yii::$app->params['wechatMember']['original']['sex'];
+                $sn = 'BbB'.date('YmdHis').StringHelper::randomNum();
+                $flag = \Yii::$app->db->transaction(function() use ($phone,$vipMoney,$recommendCode,$sn) {
+                    $user = new MemberInfo();
+                    $user->username = $phone;
+                    $user->nickname = \Yii::$app->params['wechatMember']['nickname'];
+                    $user->head_portrait = \Yii::$app->params['wechatMember']['avatar'];
+                    $user->sex = \Yii::$app->params['wechatMember']['original']['sex'];
 //                $user->area = \Yii::$app->params['wechatMember']['original']['country'];
-                $user->provinces = \Yii::$app->params['wechatMember']['original']['province'];
-                $user->city = \Yii::$app->params['wechatMember']['original']['city'];
-                if ($user->save() && Fans::updateAll(['member_id'=>$user->id],['openid'=>$this->openid])){
-                    \Yii::$app->session->set('user_info',$user->toArray());
+                    $user->provinces = \Yii::$app->params['wechatMember']['original']['province'];
+                    $user->city = \Yii::$app->params['wechatMember']['original']['city'];
+                    $user->save();
+
                     $order = new Orders();
-                    $order->order_sn ='BbB'.date('YmdHis').StringHelper::randomNum();
+                    $order->order_sn = $sn;
                     $order->member_id = $user->id;
                     $order->money = $vipMoney;
                     $order->goods = '帮宝帮会员购买';
                     $order->desc = '帮宝帮会员购买';
                     $order->rec_code = $recommendCode;
-                    if ($order->save()){
-                        return [
-                            'status'=>1,
-                            'msg'=>'下单成功',
-                            'data'=>[
-                                'order_sn' => $order->order_sn
-                            ]
-                        ];
-                    }
+                    $order->save();
+
+                    \Yii::$app->session->set('user_info',$user->toArray());
+                    Fans::updateAll(['member_id'=>$user->id],['openid'=>$this->openid]);
+                });
+                if ($flag){
+                    return [
+                        'status'=>1,
+                        'msg'=>'下单成功',
+                        'data'=>[
+                            'order_sn' => $sn
+                        ]
+                    ];
                 }
             }
             return [
