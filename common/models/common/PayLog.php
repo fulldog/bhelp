@@ -74,7 +74,7 @@ class PayLog extends \common\models\common\BaseModel
     public function rules()
     {
         return [
-            [['order_group', 'pay_type', 'pay_status', 'status', 'created_at', 'updated_at','member_id'], 'integer'],
+            [['order_group', 'pay_type', 'pay_status', 'status', 'created_at', 'updated_at'], 'integer'],
             [['total_fee', 'pay_fee'], 'number'],
             [['order_sn', 'mch_id'], 'string', 'max' => 20],
             [['openid', 'transaction_id'], 'string', 'max' => 50],
@@ -104,9 +104,6 @@ class PayLog extends \common\models\common\BaseModel
             'pay_status' => '支付状态',
             'trade_type' => '支付类别',
             'status' => '状态',
-            'goods' => '商品',
-            'desc' => '描述',
-            'member_id' => 'member_id',
             'created_at' => '创建时间',
             'updated_at' => '修改时间',
         ];

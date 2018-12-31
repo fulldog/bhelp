@@ -86,7 +86,6 @@ class IndexController extends MyController
 //                    $vip->vipage = ceil((\Yii::$app->request->get('end')-\Yii::$app->request->get('start'))/86400);
                     $vip->save();
 
-                    $totalFee = $vipMoney*100;// 支付金额单位：分
                     $orderSn =  'BbB'.date('YmdHis').StringHelper::randomNum();
 
                     $orderData = [
@@ -94,13 +93,8 @@ class IndexController extends MyController
                         'body' => '帮宝帮会员购买',
                         'detail' => '帮宝帮会员购买',
                         'notify_url' => UrlHelper::toFront(['notify/wechat']), // 支付结果通知网址，如果不设置则会使用配置里的默认地址
-                        'out_trade_no' => PayHelper::getOutTradeNo($totalFee/100, $orderSn, 1, PayLog::PAY_TYPE_WECHAT, 'JSAPI',[
-                            'goods' => '帮宝帮会员购买',
-                            'desc' => '帮宝帮会员购买',
-                            'member_id'=>$user->id,
-                            'openid' => \Yii::$app->wechat->user->openid
-                        ]), // 支付
-                        'total_fee' => $totalFee,
+                        'out_trade_no' => PayHelper::getOutTradeNo($vipMoney*100, $orderSn, 1, PayLog::PAY_TYPE_WECHAT, 'JSAPI'), // 支付
+                        'total_fee' => $vipMoney*100,
                         'openid' => \Yii::$app->wechat->user->openid, // trade_type=JSAPI，此参数必传，用户在商户appid下的唯一标识，
                     ];
 
@@ -137,7 +131,7 @@ class IndexController extends MyController
     }
 
     function actionOrder(){
-        $orderSn = \Yii::$app->request->get('orderSn');
+        $orderSn = intval(\Yii::$app->request->get('orderSn'));
         if (!$orderSn){
             $this->redirect(UrlHelper::to(['site/error']));
         }

@@ -189,6 +189,7 @@ class NotifyController extends Controller
     public function actionWechat()
     {
         $response = Yii::$app->pay->wechat->notify();
+        file_put_contents(dirname(__FILE__).'/l.log',var_export($response->getRequestData(),1),FILE_APPEND);
         if ($response->isPaid())
         {
             //pay success 注意微信会发二次消息过来 需要判断是通知还是回调
