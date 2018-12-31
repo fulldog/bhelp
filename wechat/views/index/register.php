@@ -99,7 +99,7 @@
     let _json = data.json;
     let _order = data.orderSn;
     WeixinJSBridge.invoke(
-      'getBrandWCPayRequest', json,
+      'getBrandWCPayRequest', _json,
       function(res){
         if(res.err_msg == "get_brand_wcpay_request:ok" ){
           location.href = '<?=\common\helpers\UrlHelper::to(['index/order-succ','do'=>'succ'])?>'+'&orderSn='+_order
