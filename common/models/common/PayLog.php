@@ -22,9 +22,6 @@ use Yii;
  * @property int $status 状态[-1:删除;0:禁用;1启用]
  * @property int $created_at 创建时间
  * @property int $updated_at 修改时间
- * @property int $member_id
- * @property int $goods
- * @property int $desc
  */
 class PayLog extends \common\models\common\BaseModel
 {
