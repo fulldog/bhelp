@@ -53,9 +53,9 @@ class OrdersController extends \wechat\controllers\MyController
         ]);
     }
 
-    public function actionList()
+    public function actionRecharge()
     {
-        return $this->render('list');
+        return $this->render('recharge');
     }
 
     function actionSucc(){
