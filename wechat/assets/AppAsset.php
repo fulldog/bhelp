@@ -40,10 +40,11 @@ class AppAsset extends AssetBundle
     function init()
     {
         $css_arr = [
-            'index'=>'css/index.css',
-            'register'=>'css/registerRenew.css',
+            'index/index'=>'css/index.css',
+            'index/register'=>'css/registerRenew.css',
+            'orders/info'=>'css/registerRenew.css',
         ];
-        if (isset($css_arr[\Yii::$app->controller->action->id])){
+        if (isset($css_arr[\Yii::$app->requestedRoute])){
             $this->css = ArrayHelper::merge($this->css,[$css_arr[\Yii::$app->controller->action->id]]);
         }
 
