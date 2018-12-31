@@ -25,7 +25,7 @@ class OrdersController extends \wechat\controllers\MyController
 
     public function actionInfo()
     {
-        $orderSn = intval(\Yii::$app->request->get('orderSn'));
+        $orderSn = \Yii::$app->request->get('orderSn');
         $orderInfo = Orders::findOne(['order_sn'=>$orderSn]);
         if (!$orderInfo){
             $this->redirect(UrlHelper::to(['site/error']));
