@@ -30,8 +30,6 @@
       <label for="">会员有效期：</label>
       <!--<input class="weui-flex__item ref-Code" type="text">-->
       <span class="weui-flex__item effective"><?=Yii::$app->formatter->asDate(time())?> 至 <?=Yii::$app->formatter->asDate(strtotime('+1 year'))?></span>
-      <input class="" type="hidden" name="start" value="<?=time()?>">
-      <input class="" type="hidden" name="end" value="<?=strtotime('+1 year')?>">
     </div>
     <div class="weui-flex item">
       <label for="">推荐编码：</label>
@@ -41,8 +39,8 @@
       <label for="">支付金额：</label>
       <span class="weui-flex__item selectTrue"><img src="<?=Yii::$app->params['bbb']?>/images/payment_05.png" alt=""></span>
       <input class="" type="hidden" name="vipMoney" value="<?=Yii::$app->params['vipMoney']?>">
-      <input name="_csrf-wechat" type="hidden" id="_csrf-wechat" value="<?=Yii::$app->request->csrfToken?>">
       <span class="original_price">¥ <?=Yii::$app->params['vipMoney']?></span>
+      <input name="_csrf-wechat" type="hidden" id="_csrf-wechat" value="<?=Yii::$app->request->csrfToken?>">
     </div>
     <div class="submit">
       <a href="javascript:void(0);" id="register" class="weui-btn weui-btn_sub">立即开通</a>
@@ -59,11 +57,7 @@
       type:'post',
       success:function(data) {
         if (data.status>0){
-          if (data.status==2){
-            onBridgeReady(data.data);
-          }else{
-            location.href ='<?=\common\helpers\UrlHelper::to(['index/order']);?>'+'?orderSn='+data.data.orderSn
-          }
+          location.href ='<?=\common\helpers\UrlHelper::to(['order/info']);?>'+'?orderSn='+data.data.order_sn
         }else {
           alert(data.msg);
         }
@@ -93,32 +87,4 @@
       return false;
     }
   }
-</script>
-<script type="text/javascript" charset="utf-8">
-  function onBridgeReady(data){
-    let _json = data.json;
-    let _order = data.orderSn;
-    WeixinJSBridge.invoke(
-      'getBrandWCPayRequest', _json,
-      function(res){
-        if(res.err_msg == "get_brand_wcpay_request:ok" ){
-          location.href = '<?=\common\helpers\UrlHelper::to(['index/order-succ','do'=>'succ'])?>'+'&orderSn='+_order
-          // 使用以上方式判断前端返回,微信团队郑重提示：
-          //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
-        }else {
-          location.href ='<?=\common\helpers\UrlHelper::to(['index/order']);?>'+'?orderSn='+_order
-          // alert(JSON.stringify(res));
-        }
-      });
-  }
-  // if (typeof WeixinJSBridge == "undefined"){
-  //   if( document.addEventListener ){
-  //     document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
-  //   }else if (document.attachEvent){
-  //     document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
-  //     document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
-  //   }
-  // }else{
-  //   alert('WeixinJSBridge:undefined');
-  // }
 </script>

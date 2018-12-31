@@ -8,12 +8,9 @@
 
 namespace wechat\controllers;
 
-use common\helpers\PayHelper;
 use common\helpers\StringHelper;
-use common\helpers\UrlHelper;
-use common\models\bbb\MemberVipInfos;
+use common\models\bbb\Orders;
 use common\models\bbb\SmsLog;
-use common\models\common\PayLog;
 use common\models\member\MemberInfo;
 use common\models\wechat\Fans;
 use yii\helpers\Json;
@@ -76,47 +73,19 @@ class IndexController extends MyController
                 $user->city = \Yii::$app->params['wechatMember']['original']['city'];
                 if ($user->save() && Fans::updateAll(['member_id'=>$user->id],['openid'=>$this->openid])){
                     \Yii::$app->session->set('user_info',$user->toArray());
-                    $vip = new MemberVipInfos();
-                    $vip->openid = $this->openid;
-                    $vip->member_id = $user->id;
-                    $vip->parent_id = MemberVipInfos::getMidByCode($recommendCode);
-                    $vip->recommendCode = MemberVipInfos::getCode();
-//                    $vip->vipend_at = \Yii::$app->request->get('start');
-//                    $vip->vipstart_at =
-//                    $vip->vipage = ceil((\Yii::$app->request->get('end')-\Yii::$app->request->get('start'))/86400);
-                    $vip->save();
-
-                    $orderSn =  'BbB'.date('YmdHis').StringHelper::randomNum();
-
-                    $orderData = [
-                        'trade_type' => 'JSAPI', // JSAPI，NATIVE，APP...
-                        'body' => '帮宝帮会员购买',
-                        'detail' => '帮宝帮会员购买',
-                        'notify_url' => UrlHelper::toFront(['notify/wechat']), // 支付结果通知网址，如果不设置则会使用配置里的默认地址
-                        'out_trade_no' => PayHelper::getOutTradeNo($vipMoney*100, $orderSn, 1, PayLog::PAY_TYPE_WECHAT, 'JSAPI'), // 支付
-                        'total_fee' => $vipMoney*100,
-                        'openid' => \Yii::$app->wechat->user->openid, // trade_type=JSAPI，此参数必传，用户在商户appid下的唯一标识，
-                    ];
-
-                    $payment = \Yii::$app->wechat->payment;
-                    $result = $payment->order->unify($orderData);
-                    if ($result['return_code'] == 'SUCCESS')
-                    {
+                    $order = new Orders();
+                    $order->order_sn ='BbB'.date('YmdHis').StringHelper::randomNum();
+                    $order->member_id = $user->id;
+                    $order->money = $vipMoney;
+                    $order->goods = '帮宝帮会员购买';
+                    $order->desc = '帮宝帮会员购买';
+                    $order->rec_code = $recommendCode;
+                    if ($order->save()){
                         return [
-                            'status'=>2,
-                            'data'=>[
-                                'json'=>$payment->jssdk->bridgeConfig($result['prepay_id']),
-                                'orderSn'=>$orderSn
-                            ]
-                        ];
-                    }
-                    else
-                    {
-                        return [
-                            'msg'=>'抱歉，订单创建失败',
                             'status'=>1,
+                            'msg'=>'下单成功',
                             'data'=>[
-                                'orderSn'=>$orderSn
+                                'order_sn' => $order->order_sn
                             ]
                         ];
                     }
@@ -127,41 +96,10 @@ class IndexController extends MyController
                 'status'=>0
             ];
         }
+        if (Fans::findOne(['openid'=>$this->openid])->member_id>0){
+            $this->redirect(['order/recharge']);
+        }
         return $this->render('register');
-    }
-
-    function actionOrder(){
-        $orderSn = intval(\Yii::$app->request->get('orderSn'));
-        if (!$orderSn){
-            $this->redirect(UrlHelper::to(['site/error']));
-        }
-        $orderInfo = PayLog::findOne(['order_sn'=>$orderSn])->toArray();
-        $orderData = [
-            'trade_type' => 'JSAPI', // JSAPI，NATIVE，APP...
-            'body' => $orderInfo['goods'],
-            'detail' => $orderInfo['desc'],
-            'notify_url' => UrlHelper::toFront(['notify/wechat']), // 支付结果通知网址，如果不设置则会使用配置里的默认地址
-            'out_trade_no' => $orderInfo['out_trade_no'], // 支付
-            'total_fee' => $orderInfo['total_fee']*100,
-            'openid' => \Yii::$app->wechat->user->openid, // trade_type=JSAPI，此参数必传，用户在商户appid下的唯一标识，
-        ];
-
-        $payment = \Yii::$app->wechat->payment;
-        $result = $payment->order->unify($orderData);
-        $json = '';
-        if ($result['return_code'] == 'SUCCESS')
-        {
-            $json = $payment->jssdk->bridgeConfig($result['prepay_id']);
-        }
-        return $this->render('order',[
-            'json'=>$json,
-            'total_fee'=>$orderInfo['total_fee'],
-            'order_sn'=>$orderSn,
-        ]);
-    }
-
-    function actionOrderSucc(){
-        return $this->render('succ');
     }
 
 

@@ -190,7 +190,31 @@
     </div>
 
 </div>
-
+<!--模态层-->
+<div class="weui-mask weui-mask--visible"></div>
+<!--注册弹窗-->
+<? if (!$this->params['isVip']):?>
+  <div class="weui-dialog weui-skin_android weui-dialog--visible registerBox">
+    <div class="img">
+      <span class="iconfont icon-zhucehuiyuan"></span>
+    </div>
+    <a href="<?=Yii::$app->urlManager->createUrl(['index/register'])?>" class="register">
+      注&nbsp;册<br>
+      会&nbsp;员
+    </a>
+  </div>
+<?elseif (!$this->params['vipEnable']):?>
+  <!--续费弹窗-->
+  <div class="weui-dialog weui-skin_android weui-dialog&#45;&#45;visible registerBox" style="display: none">
+    <div class="img img2">
+      <span class="iconfont icon-wenxintishi tips"></span><br>
+      <i class="tips2">温馨提示</i>
+    </div>
+    <p>您的会员已到期,【部分内容】,不能查阅.</p>
+    <a href="<?=Yii::$app->urlManager->createUrl(['order/recharge'])?>" class="renew">续费会员</a>
+    <span class="iconfont icon-guanbi close"></span>
+  </div>
+<?endif;?>
 <!--------页脚-------->
 <div class="weui-tabbar">
     <a href="#" class="weui-tabbar__item weui-bar__item--on">
@@ -214,18 +238,6 @@
     </a>
 </div>
 
-<!--模态层-->
-<div class="weui-mask weui-mask--visible"></div>
-<!--注册弹窗-->
-<div class="weui-dialog weui-skin_android weui-dialog--visible registerBox">
-  <div class="img">
-    <span class="iconfont icon-zhucehuiyuan"></span>
-  </div>
-  <a href="<?=Yii::$app->urlManager->createUrl(['index/register'])?>" class="register">
-    注&nbsp;册<br>
-    会&nbsp;员
-  </a>
-</div>
 <script>
   $(function() {
     $(".banner").swiper(

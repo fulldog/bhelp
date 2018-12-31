@@ -39,18 +39,9 @@ AppAsset::register($this);
     <span class="iconfont icon-more more"></span>
   </div>
   -->
+
     <?= $content ?>
 
-<!--续费弹窗-->
-<div class="weui-dialog weui-skin_android weui-dialog&#45;&#45;visible registerBox" style="display: none">
-    <div class="img img2">
-        <span class="iconfont icon-wenxintishi tips"></span><br>
-        <i class="tips2">温馨提示</i>
-    </div>
-    <p>您的会员已到期,【部分内容】,不能查阅.</p>
-    <a href="<?=Yii::$app->urlManager->createUrl(['index/recharge'])?>" class="renew">续费会员</a>
-    <span class="iconfont icon-guanbi close"></span>
-</div>
 
 <script type="application/javascript">
   $(function() {
