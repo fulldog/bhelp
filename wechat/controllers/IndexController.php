@@ -86,6 +86,8 @@ class IndexController extends MyController
 
                     \Yii::$app->session->set('user_info',$user->toArray());
                     Fans::updateAll(['member_id'=>$user->id],['openid'=>$this->openid]);
+
+                    return true;
                 });
                 if ($flag){
                     return [
