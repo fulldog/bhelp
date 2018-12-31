@@ -18,8 +18,8 @@ use Yii;
  * @property int $status 0待支付；1已支付
  * @property string $goods
  * @property string $desc
- * @property int $update_time
- * @property int $creat_time
+ * @property int $updated_at
+ * @property int $created_at
  * @property int $rec_code
  * @property int $month_limit
  */
@@ -40,7 +40,7 @@ class Orders extends BaseModel
     {
         return [
             [['member_id', 'order_sn'], 'required'],
-            [['member_id', 'status', 'update_time', 'creat_time','month_limit'], 'integer'],
+            [['member_id', 'status', 'updated_at', 'created_at','month_limit'], 'integer'],
             [['money'], 'number'],
             [['order_sn', 'trade_type', 'rec_code','trade_no', 'out_trade_no', 'goods', 'desc'], 'string', 'max' => 255],
         ];
@@ -62,8 +62,8 @@ class Orders extends BaseModel
             'status' => '0待支付；1已支付',
             'goods' => 'Goods',
             'desc' => 'Desc',
-            'update_time' => 'Update Time',
-            'creat_time' => 'Creat Time',
+            'updated_at' => 'Update Time',
+            'updated_at' => 'Creat Time',
             'rec_code' => '邀请码',
             'month_limit' => '购买时长：月'
         ];
