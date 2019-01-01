@@ -31,8 +31,8 @@ class MyController extends WController
     function _saveWechatUser(){
         //&& $this->openGetWechatUser && \Yii::$app->wechat->isWechat
         if (!empty(\Yii::$app->params['wechatMember'])){
-            $fan = Fans::findOne(['openid'=>$this->openid]);
             $this->openid = \Yii::$app->params['wechatMember']['id'];
+            $fan = Fans::findOne(['openid'=>$this->openid]);
             if (!$fan){
                 $fan = new Fans();
                 $fan->openid = $this->openid;
