@@ -64,7 +64,7 @@ class OrderController extends MyController
         $orderSn = \Yii::$app->request->get('orderSn');
         $orderInfo = Orders::findOne(['order_sn'=>$orderSn]);
         if (!$orderInfo){
-            $this->redirect(UrlHelper::to(['site/error']));
+            $this->redirect(UrlHelper::to(['site/error']))->send();
         }
         $orderData = [
             'trade_type' => 'JSAPI', // JSAPI，NATIVE，APP...
@@ -123,5 +123,10 @@ class OrderController extends MyController
         return $this->render('recharge',[
             'orderInfo'=>$orderInfo
         ]);
+    }
+
+    function actionSucc(){
+
+        return $this->render('succ');
     }
 }
