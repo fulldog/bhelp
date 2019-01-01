@@ -34,6 +34,7 @@ class MyController extends WController
             $fan = Fans::findOne(['openid'=>$this->openid]);
             $this->openid = \Yii::$app->params['wechatMember']['id'];
             if (!$fan){
+                $fan = new Fans();
                 $fan->openid = $this->openid;
                 $fan->nickname = \Yii::$app->params['wechatMember']['nickname'];
                 $fan->head_portrait = \Yii::$app->params['wechatMember']['avatar'];
