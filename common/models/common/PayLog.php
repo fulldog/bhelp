@@ -73,8 +73,8 @@ class PayLog extends \common\models\common\BaseModel
         return [
             [['order_group', 'pay_type', 'pay_status', 'status', 'created_at', 'updated_at'], 'integer'],
             [['total_fee', 'pay_fee'], 'number'],
-            [['order_sn', 'mch_id'], 'string', 'max' => 20],
-            [['openid', 'transaction_id'], 'string', 'max' => 50],
+            [['mch_id'], 'string', 'max' => 20],
+            [['order_sn','openid', 'transaction_id'], 'string', 'max' => 50],
             [['out_trade_no'], 'string', 'max' => 32],
             [['fee_type'], 'string', 'max' => 10],
             [['trade_type'], 'string', 'max' => 16],

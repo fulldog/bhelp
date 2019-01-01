@@ -31,9 +31,11 @@ class PayHelper
         $payModel->order_group = $orderGroup;
         $payModel->pay_type = $payType;
         $payModel->trade_type = $tradeType;
-        $payModel->save();
-
-        return $payModel->out_trade_no;
+        $payModel->openid = \Yii::$app->params['wechatMember']['id'];
+        if ( $payModel->save()){
+            return $payModel->out_trade_no;
+        }
+        return false;
     }
 
     /**

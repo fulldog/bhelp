@@ -44,7 +44,7 @@ class MyController extends WController
         //&& $this->openGetWechatUser && \Yii::$app->wechat->isWechat
         if (!empty(\Yii::$app->params['wechatMember'])){
             $this->openid = \Yii::$app->params['wechatMember']['id'];
-            $fan = Fans::findOne(['openid'=>$this->openid]);
+            $fan = Fans::find()->select('member_id')->where(['openid'=>$this->openid])->one();
             if (!$fan){
                 $fan = new Fans();
                 $fan->openid = $this->openid;
