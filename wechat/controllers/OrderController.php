@@ -76,15 +76,15 @@ class OrderController extends MyController
             'openid' => $this->openid, // trade_type=JSAPI，此参数必传，用户在商户appid下的唯一标识，
         ];
 
-//        $payment = \Yii::$app->wechat->payment;
-//        $result = $payment->order->unify($orderData);
-//        $json = '';
-//        if ($result['return_code'] == 'SUCCESS')
-//        {
-//            $json = $payment->jssdk->bridgeConfig($result['prepay_id']);
-//        }
+        $payment = \Yii::$app->wechat->payment;
+        $result = $payment->order->unify($orderData);
+        $json = '';
+        if ($result['return_code'] == 'SUCCESS')
+        {
+            $json = $payment->jssdk->bridgeConfig($result['prepay_id']);
+        }
         return $this->render('pay',[
-            'json'=>'',
+            'json'=>$json,
             'orderInfo'=>$orderInfo->toArray()
         ]);
     }
