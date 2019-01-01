@@ -57,7 +57,7 @@
       type:'post',
       success:function(data) {
         if (data.status>0){
-          location.href ='<?=\common\helpers\UrlHelper::to(['orders/info']);?>'+'?orderSn='+data.data.order_sn
+          location.href ='<?=\common\helpers\UrlHelper::to(['index/order-info']);?>'+'?orderSn='+data.data.order_sn
         }else {
           alert(data.msg);
         }

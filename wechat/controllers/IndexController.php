@@ -8,9 +8,12 @@
 
 namespace wechat\controllers;
 
+use common\helpers\PayHelper;
 use common\helpers\StringHelper;
+use common\helpers\UrlHelper;
 use common\models\bbb\Orders;
 use common\models\bbb\SmsLog;
+use common\models\common\PayLog;
 use common\models\member\MemberInfo;
 use common\models\wechat\Fans;
 use yii\helpers\Json;
@@ -115,12 +118,40 @@ class IndexController extends MyController
 
     }
 
-    function actionRecharge(){
+    function actionOrderRecharge(){
 
     }
 
-    function actionSms(){
+    function actionOrderInfo(){
+        $orderSn = \Yii::$app->request->get('orderSn');
+        $orderInfo = Orders::findOne(['order_sn'=>$orderSn]);
+        if (!$orderInfo){
+            $this->redirect(UrlHelper::to(['site/error']));
+        }
+        $orderData = [
+            'trade_type' => 'JSAPI', // JSAPI，NATIVE，APP...
+            'body' => $orderInfo['goods'],
+            'detail' => $orderInfo['desc'],
+            'notify_url' => UrlHelper::toFront(['notify/wechat']), // 支付结果通知网址，如果不设置则会使用配置里的默认地址
+            'out_trade_no' => PayHelper::getOutTradeNo($orderInfo['money']*100, $orderSn, PayLog::PAY_TYPE_WECHAT), // 支付
+            'total_fee' => $orderInfo['money']*100,
+            'openid' => $this->openid, // trade_type=JSAPI，此参数必传，用户在商户appid下的唯一标识，
+        ];
 
+        $payment = \Yii::$app->wechat->payment;
+        $result = $payment->order->unify($orderData);
+        $json = '';
+        if ($result['return_code'] == 'SUCCESS')
+        {
+            $json = $payment->jssdk->bridgeConfig($result['prepay_id']);
+        }
+        return $this->render('order-info',[
+            'json'=>$json,
+            'orderInfo'=>$orderInfo->toArray()
+        ]);
+    }
+
+    function actionSms(){
         if (\Yii::$app->request->isAjax && ($phone = \Yii::$app->request->get('phone'))){
             if (preg_match('/^1(3|4|5|8|7)[0-9]{9}$/',$phone)){
                //todo sms
@@ -133,7 +164,11 @@ class IndexController extends MyController
                         ]));
                     }
                 }
-                $code = random_int(1000,999999);
+                if (YII_ENV!='prod'){
+                    $code = 123456;
+                }else{
+                    $code = random_int(1000,999999);
+                }
                 $sms->phone = $phone;
                 $sms->code = $code;
                 if ($sms->save()){
