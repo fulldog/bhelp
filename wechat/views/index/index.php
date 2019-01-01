@@ -1,5 +1,5 @@
 <?php
-//$this->registerCssFile(Yii::getAlias('@bbb').'/css/index.css',['depends'=>\wechat\assets\AppAsset::class]);
+$this->registerCssFile(Yii::getAlias('@bbb').'/css/index.css',['depends'=>\wechat\assets\AppAsset::class]);
 ?>
 <!--搜索框-->
 <div class="weui-search-bar" id="searchBar">
@@ -193,7 +193,7 @@
 <!--模态层-->
 <div class="weui-mask weui-mask--visible"></div>
 <!--注册弹窗-->
-<? if (!$this->params['isVip']):?>
+<?if (!$isVip):?>
   <div class="weui-dialog weui-skin_android weui-dialog--visible registerBox">
     <div class="img">
       <span class="iconfont icon-zhucehuiyuan"></span>
@@ -203,9 +203,9 @@
       会&nbsp;员
     </a>
   </div>
-<?elseif (!$this->params['vipEnable']):?>
+<?elseif (!$vipEnable):?>
   <!--续费弹窗-->
-  <div class="weui-dialog weui-skin_android weui-dialog&#45;&#45;visible registerBox" style="display: none">
+  <div class="weui-dialog weui-skin_android weui-dialog&#45;&#45;visible registerBox" style="">
     <div class="img img2">
       <span class="iconfont icon-wenxintishi tips"></span><br>
       <i class="tips2">温馨提示</i>

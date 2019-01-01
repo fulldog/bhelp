@@ -11,6 +11,7 @@ namespace wechat\controllers;
 use common\helpers\PayHelper;
 use common\helpers\StringHelper;
 use common\helpers\UrlHelper;
+use common\models\bbb\MemberVipInfos;
 use common\models\bbb\Orders;
 use common\models\bbb\SmsLog;
 use common\models\common\PayLog;
@@ -38,7 +39,19 @@ class IndexController extends MyController
     }
 
     function actionIndex(){
-        return $this->render('index');
+        $vips = MemberVipInfos::findOne(['member_id'=>$this->memberId]);
+        $data = [
+            'isVip' =>false,
+            'vipEnable' =>false,
+        ];
+        if ($vips){
+            $time = time();
+            $this->isVip = $data['isVip'] = true;
+            if ($time>$vips->vipstart_at && $time<$vips->vipend_at){
+                $this->vipEnable = $data['vipEnable'] = true;
+            }
+        }
+        return $this->render('index',$data);
     }
 
     function actionRegister(){
