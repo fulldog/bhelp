@@ -120,8 +120,8 @@ class IndexController extends MyController
                 'status'=>0
             ];
         }
-        if (Fans::findOne(['openid'=>$this->openid])->member_id>0){
-            $this->redirect(['order/recharge']);
+        if ($this->memberId > 0){
+            $this->redirect(['index/order-recharge']);
         }
         return $this->render('register');
     }
@@ -132,6 +132,41 @@ class IndexController extends MyController
     }
 
     function actionOrderRecharge(){
+        $orderInfo = Orders::find()->where(['member_id'=>$this->memberId])->orderBy(['id'=>SORT_DESC])->limit(1)->one();
+        if ($orderInfo && $orderInfo->status==0){
+            $data = $orderInfo->toArray();
+        }else{
+            $sn = 'BbB'.date('YmdHis').StringHelper::randomNum();
+            $order = new Orders();
+            $order->order_sn = $sn;
+            $order->member_id = $this->memberId;
+            $order->money = \Yii::$app->params['vipMoney'];
+            $order->goods = '帮宝帮会员购买';
+            $order->desc = '帮宝帮会员购买';
+            $order->save();
+            $data = $order->toArray();
+        }
+        $orderData = [
+            'trade_type' => 'JSAPI', // JSAPI，NATIVE，APP...
+            'body' => $data['goods'],
+            'detail' => $data['desc'],
+            'notify_url' => UrlHelper::toFront(['notify/wechat']), // 支付结果通知网址，如果不设置则会使用配置里的默认地址
+            'out_trade_no' => PayHelper::getOutTradeNo($data['money']*100, $data['order_sn'], PayLog::PAY_TYPE_WECHAT), // 支付
+            'total_fee' => $data['money']*100,
+            'openid' => $this->openid, // trade_type=JSAPI，此参数必传，用户在商户appid下的唯一标识，
+        ];
+
+        $payment = \Yii::$app->wechat->payment;
+        $result = $payment->order->unify($orderData);
+        $json = '';
+        if ($result['return_code'] == 'SUCCESS')
+        {
+            $json = $payment->jssdk->bridgeConfig($result['prepay_id']);
+        }
+        return $this->render('order-recharge',[
+            'json'=>$json,
+            'orderInfo'=>$data
+        ]);
 
     }
 

@@ -5,6 +5,7 @@
  * Date: 2018/12/25
  * Time: 21:49
  */
+$this->registerCssFile(Yii::getAlias('@bbb').'/css/registerRenew.css',['depends'=>\wechat\assets\AppAsset::class]);
 ?>
 <div class="banner">
     <img src="<?=Yii::$app->params['bbb']?>/images/register_05.png" alt="">
