@@ -7,6 +7,16 @@
  */
 $this->registerCssFile(Yii::getAlias('@bbb').'/css/registerRenew.css',['depends'=>\wechat\assets\AppAsset::class]);
 ?>
+<style>
+  div .submit{
+    margin-top: 0.3rem;
+  }
+</style>
+<div class="titleBar">
+  支付
+  <span class="iconfont icon-close close"></span>
+  <span class="iconfont icon-more more"></span>
+</div>
 <div class="banner">
   <img src="<?=Yii::$app->params['bbb']?>/images/register_05.png" alt="">
 </div>

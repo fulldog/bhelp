@@ -2,6 +2,11 @@
 /* @var $this yii\web\View */
 $this->registerCssFile(Yii::getAlias('@bbb').'/css/registerRenew.css',['depends'=>\wechat\assets\AppAsset::class]);
 ?>
+<style>
+  div .submit{
+    margin-top: 0.3rem;
+  }
+</style>
 <!--顶部标题-->
 <div class="titleBar">
   会员续费
