@@ -40,17 +40,17 @@ class IndexController extends MyController
 
     function actionIndex(){
         $vips = MemberVipInfos::findOne(['member_id'=>$this->memberId]);
-        $data = [
-            'isVip' =>false,
-            'vipEnable' =>false,
-        ];
         if ($vips){
             $time = time();
-            $this->isVip = $data['isVip'] = true;
+            $this->isVip = true;
             if ($time>$vips->vipstart_at && $time<$vips->vipend_at){
-                $this->vipEnable = $data['vipEnable'] = true;
+                $this->vipEnable = true;
             }
         }
+        $data = [
+            'isVip' => $this->isVip,
+            'vipEnable' =>$this->vipEnable,
+        ];
         return $this->render('index',$data);
     }
 
