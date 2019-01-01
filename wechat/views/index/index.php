@@ -211,7 +211,7 @@ $this->registerCssFile(Yii::getAlias('@bbb').'/css/index.css',['depends'=>\wecha
       <i class="tips2">温馨提示</i>
     </div>
     <p>您的会员已到期,【部分内容】,不能查阅.</p>
-    <a href="<?=Yii::$app->urlManager->createUrl(['index/order-recharge'])?>" class="renew">续费会员</a>
+    <a href="<?=Yii::$app->urlManager->createUrl(['order/recharge'])?>" class="renew">续费会员</a>
     <span class="iconfont icon-guanbi close"></span>
   </div>
 <?endif;?>

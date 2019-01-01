@@ -40,6 +40,7 @@ $this->registerCssFile(Yii::getAlias('@bbb').'/css/registerRenew.css',['depends'
       <label for="">支付金额：</label>
       <span class="weui-flex__item selectTrue"><img src="<?=Yii::$app->params['bbb']?>/images/payment_05.png" alt=""></span>
       <input class="" type="hidden" name="vipMoney" value="<?=Yii::$app->params['vipMoney']?>">
+      <input class="" type="hidden" name="vipLimit" value="<?=Yii::$app->params['default_month']?>">
       <span class="original_price">¥ <?=Yii::$app->params['vipMoney']?></span>
       <input name="_csrf-wechat" type="hidden" id="_csrf-wechat" value="<?=Yii::$app->request->csrfToken?>">
     </div>
@@ -58,7 +59,7 @@ $this->registerCssFile(Yii::getAlias('@bbb').'/css/registerRenew.css',['depends'
       type:'post',
       success:function(data) {
         if (data.status>0){
-          location.href ='<?=\common\helpers\UrlHelper::to(['index/order-info']);?>'+'?orderSn='+data.data.order_sn
+          location.href ='<?=\common\helpers\UrlHelper::to(['order/pay']);?>'+'?orderSn='+data.data.order_sn
         }else {
           alert(data.msg);
         }

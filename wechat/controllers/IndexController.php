@@ -61,6 +61,7 @@ class IndexController extends MyController
             $phone = \Yii::$app->request->post('phone');
             $phoneCode = \Yii::$app->request->post('phoneCode');
             $recommendCode = \Yii::$app->request->post('recommendCode');
+            $vipLimit = \Yii::$app->request->post('vipLimit');
             if ($vipMoney!=\Yii::$app->params['vipMoney']){
                 return [
                     'msg'=>'金额错误，购买VIP需要￥'.\Yii::$app->params['vipMoney'],
@@ -80,30 +81,32 @@ class IndexController extends MyController
                 ];
             }else{
                 $sn = 'BbB'.date('YmdHis').StringHelper::randomNum();
-                $flag = \Yii::$app->db->transaction(function() use ($phone,$vipMoney,$recommendCode,$sn) {
+                $flag = \Yii::$app->db->transaction(function() use ($phone,$vipMoney,$recommendCode,$sn,$vipLimit) {
                     $user = new MemberInfo();
-                    $user->username = $phone;
+                    $user->username = $user->mobile_phone = $phone;
                     $user->nickname = \Yii::$app->params['wechatMember']['nickname'];
                     $user->head_portrait = \Yii::$app->params['wechatMember']['avatar'];
                     $user->sex = \Yii::$app->params['wechatMember']['original']['sex'];
-//                $user->area = \Yii::$app->params['wechatMember']['original']['country'];
-                    $user->provinces = \Yii::$app->params['wechatMember']['original']['province'];
-                    $user->city = \Yii::$app->params['wechatMember']['original']['city'];
-                    $user->save();
+//                    $user->area = \Yii::$app->params['wechatMember']['original']['country'];
+//                    $user->provinces = \Yii::$app->params['wechatMember']['original']['province'];
+//                    $user->city = \Yii::$app->params['wechatMember']['original']['city'];
+                    $u = $user->save();
+
+                    \Yii::$app->session->set('user_info',$user->toArray());
+                    Fans::updateAll(['member_id'=>$user->id],['openid'=>$this->openid]);
 
                     $order = new Orders();
                     $order->order_sn = $sn;
                     $order->member_id = $user->id;
                     $order->money = $vipMoney;
+                    $order->month_limit = $vipLimit;
                     $order->goods = '帮宝帮会员购买';
                     $order->desc = '帮宝帮会员购买';
                     $order->rec_code = $recommendCode;
-                    $order->save();
+                    $f = $order->save();
 
-                    \Yii::$app->session->set('user_info',$user->toArray());
-                    Fans::updateAll(['member_id'=>$user->id],['openid'=>$this->openid]);
+                    return $u && $f;
 
-                    return true;
                 });
                 if ($flag){
                     return [
@@ -121,82 +124,9 @@ class IndexController extends MyController
             ];
         }
         if ($this->memberId > 0){
-            $this->redirect(['index/order-recharge']);
+            $this->redirect(['order/recharge']);
         }
         return $this->render('register');
-    }
-
-
-    function actionSearch(){
-
-    }
-
-    function actionOrderRecharge(){
-        $orderInfo = Orders::find()->where(['member_id'=>$this->memberId])->orderBy(['id'=>SORT_DESC])->limit(1)->one();
-        if ($orderInfo && $orderInfo->status==0){
-            $data = $orderInfo->toArray();
-        }else{
-            $sn = 'BbB'.date('YmdHis').StringHelper::randomNum();
-            $order = new Orders();
-            $order->order_sn = $sn;
-            $order->member_id = $this->memberId;
-            $order->money = \Yii::$app->params['vipMoney'];
-            $order->goods = '帮宝帮会员购买';
-            $order->desc = '帮宝帮会员购买';
-            $order->save();
-            $data = $order->toArray();
-        }
-        $orderData = [
-            'trade_type' => 'JSAPI', // JSAPI，NATIVE，APP...
-            'body' => $data['goods'],
-            'detail' => $data['desc'],
-            'notify_url' => UrlHelper::toFront(['notify/wechat']), // 支付结果通知网址，如果不设置则会使用配置里的默认地址
-            'out_trade_no' => PayHelper::getOutTradeNo($data['money']*100, $data['order_sn'], PayLog::PAY_TYPE_WECHAT), // 支付
-            'total_fee' => $data['money']*100,
-            'openid' => $this->openid, // trade_type=JSAPI，此参数必传，用户在商户appid下的唯一标识，
-        ];
-
-        $payment = \Yii::$app->wechat->payment;
-        $result = $payment->order->unify($orderData);
-        $json = '';
-        if ($result['return_code'] == 'SUCCESS')
-        {
-            $json = $payment->jssdk->bridgeConfig($result['prepay_id']);
-        }
-        return $this->render('order-recharge',[
-            'json'=>$json,
-            'orderInfo'=>$data
-        ]);
-
-    }
-
-    function actionOrderInfo(){
-        $orderSn = \Yii::$app->request->get('orderSn');
-        $orderInfo = Orders::findOne(['order_sn'=>$orderSn]);
-        if (!$orderInfo){
-            $this->redirect(UrlHelper::to(['site/error']));
-        }
-        $orderData = [
-            'trade_type' => 'JSAPI', // JSAPI，NATIVE，APP...
-            'body' => $orderInfo['goods'],
-            'detail' => $orderInfo['desc'],
-            'notify_url' => UrlHelper::toFront(['notify/wechat']), // 支付结果通知网址，如果不设置则会使用配置里的默认地址
-            'out_trade_no' => PayHelper::getOutTradeNo($orderInfo['money']*100, $orderSn, PayLog::PAY_TYPE_WECHAT), // 支付
-            'total_fee' => $orderInfo['money']*100,
-            'openid' => $this->openid, // trade_type=JSAPI，此参数必传，用户在商户appid下的唯一标识，
-        ];
-
-        $payment = \Yii::$app->wechat->payment;
-        $result = $payment->order->unify($orderData);
-        $json = '';
-        if ($result['return_code'] == 'SUCCESS')
-        {
-            $json = $payment->jssdk->bridgeConfig($result['prepay_id']);
-        }
-        return $this->render('order-info',[
-            'json'=>$json,
-            'orderInfo'=>$orderInfo->toArray()
-        ]);
     }
 
     function actionSms(){
