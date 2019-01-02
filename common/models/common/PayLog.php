@@ -22,6 +22,7 @@ use Yii;
  * @property int $status 状态[-1:删除;0:禁用;1启用]
  * @property int $created_at 创建时间
  * @property int $updated_at 修改时间
+ * @property int $pay_time 支付完成时间
  */
 class PayLog extends \common\models\common\BaseModel
 {
@@ -71,7 +72,7 @@ class PayLog extends \common\models\common\BaseModel
     public function rules()
     {
         return [
-            [['order_group', 'pay_type', 'pay_status', 'status', 'created_at', 'updated_at'], 'integer'],
+            [['order_group', 'pay_type', 'pay_status', 'status', 'created_at', 'updated_at','pay_time'], 'integer'],
             [['total_fee', 'pay_fee'], 'number'],
             [['mch_id'], 'string', 'max' => 20],
             [['order_sn','openid', 'transaction_id'], 'string', 'max' => 50],
@@ -100,6 +101,7 @@ class PayLog extends \common\models\common\BaseModel
             'fee_type' => '支付',
             'pay_status' => '支付状态',
             'trade_type' => '支付类别',
+            'pay_time'=>'支付完成时间',
             'status' => '状态',
             'created_at' => '创建时间',
             'updated_at' => '修改时间',

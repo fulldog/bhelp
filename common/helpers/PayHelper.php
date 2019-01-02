@@ -60,6 +60,7 @@ class PayHelper
         }
 
         $model->attributes = $data;
+        $model->pay_time = $data['time_end'];
         $model->pay_status = StatusEnum::ENABLED;
         if ($model->save())
         {

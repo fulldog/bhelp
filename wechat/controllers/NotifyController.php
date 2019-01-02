@@ -42,6 +42,9 @@ class NotifyController extends Controller
         $response = Yii::$app->wechat->payment->handlePaidNotify(function($message, $fail)
         {
             $message = ArrayHelper::toArray($message);
+            if (empty($message)){
+                return $fail('通信失败，请稍后再通知我');
+            }
             $logPath = Yii::getAlias('@runtime') . "/pay_log/" . date('Y-m').'/'. date('Ymd') .'.log';
             FileHelper::writeLog($logPath, json_encode($message));
             // 如果订单不存在 或者 订单已经支付过了，如果成功返回订单的编号和类型
@@ -51,9 +54,9 @@ class NotifyController extends Controller
                 return true;
             }
             /////////////  建议在这里调用微信的【订单查询】接口查一下该笔订单的情况，确认是已经支付 /////////////
-            if ($info = \Yii::$app->wechat->payment->order->queryByOutTradeNumber($message['out_trade_no'])){
+            //if ($info = \Yii::$app->wechat->payment->order->queryByOutTradeNumber($message['out_trade_no'])){
                 //todo
-            }
+            //}
 
             // 判断订单组别来源 比如课程、购物或者其他
             if ($orderInfo['order_group'] == PayLog::ORDER_GROUP)
@@ -66,8 +69,8 @@ class NotifyController extends Controller
             }
 
             // return_code 表示通信状态，不代表支付状态
-            if ($message['return_code'] === 'SUCCESS')
-            {
+//            if ($message['return_code'] === 'SUCCESS')
+//            {
                 if ($message['result_code'] === 'SUCCESS') // 用户支付成功
                 {
                     $order->status  = StatusEnum::WECHAT_SUCC;
@@ -76,13 +79,13 @@ class NotifyController extends Controller
                 {
                     $order->status  = StatusEnum::WECHAT_FAIL;
                 }
-                $order->trade_type =  $orderInfo['trade_type'];
+                $order->trade_type =   $orderInfo['trade_type'];
                 $order->out_trade_no =  $orderInfo['out_trade_no'];
-            }
-            else
-            {
-                return $fail('通信失败，请稍后再通知我');
-            }
+//            }
+//            else
+//            {
+//                return $fail('通信失败，请稍后再通知我');
+//            }
 
             $order->save(); // 保存订单
             return true; // 返回处理完成
