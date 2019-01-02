@@ -6,7 +6,7 @@ use common\models\common\BaseModel;
 use Yii;
 
 /**
- * This is the model class for table "{{%orders}}".
+ * This is the model class for table "{{%bbb_orders}}".
  *
  * @property int $id
  * @property int $member_id
@@ -30,7 +30,7 @@ class Orders extends BaseModel
      */
     public static function tableName()
     {
-        return '{{%orders}}';
+        return '{{%bbb_orders}}';
     }
 
     /**
@@ -59,7 +59,7 @@ class Orders extends BaseModel
             'trade_no' => 'Trade No',
             'out_trade_no' => 'Out Trade No',
             'money' => 'Money',
-            'status' => '0待支付；1已支付',
+            'status' => '0待支付；1已支付；2已退款',
             'goods' => 'Goods',
             'desc' => 'Desc',
             'updated_at' => 'Update Time',

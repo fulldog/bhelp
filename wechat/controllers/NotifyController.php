@@ -51,6 +51,9 @@ class NotifyController extends Controller
                 return true;
             }
             /////////////  建议在这里调用微信的【订单查询】接口查一下该笔订单的情况，确认是已经支付 /////////////
+            if ($info = \Yii::$app->wechat->payment->order->queryByOutTradeNumber($message['out_trade_no'])){
+                //todo
+            }
 
             // 判断订单组别来源 比如课程、购物或者其他
             if ($orderInfo['order_group'] == PayLog::ORDER_GROUP)
@@ -67,12 +70,14 @@ class NotifyController extends Controller
             {
                 if ($message['result_code'] === 'SUCCESS') // 用户支付成功
                 {
-                    $order->pay_status = StatusEnum::WECHAT_SUCC;
+                    $order->status  = StatusEnum::WECHAT_SUCC;
                 }
                 elseif ($message['result_code'] === 'FAIL') // 用户支付失败
                 {
-                    $order->pay_status = StatusEnum::WECHAT_FAIL;
+                    $order->status  = StatusEnum::WECHAT_FAIL;
                 }
+                $order->trade_type =  $orderInfo['trade_type'];
+                $order->out_trade_no =  $orderInfo['out_trade_no'];
             }
             else
             {

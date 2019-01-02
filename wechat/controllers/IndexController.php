@@ -74,7 +74,7 @@ class IndexController extends MyController
                     'status'=>0
                 ];
             }
-            if (MemberInfo::findOne(['username'=>$phone])){
+            if (MemberInfo::find()->where(['username'=>$phone])->exists()){
                 return [
                     'msg'=>'抱歉，该手机号已被注册',
                     'status'=>0
