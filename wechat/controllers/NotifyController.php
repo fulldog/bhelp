@@ -11,11 +11,13 @@ namespace wechat\controllers;
 use common\enums\StatusEnum;
 use common\helpers\FileHelper;
 use common\helpers\PayHelper;
+use common\models\bbb\MemberVipInfos;
 use common\models\bbb\Orders;
 use common\models\common\PayLog;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
+use yii\web\Response;
 
 class NotifyController extends Controller
 {
@@ -32,6 +34,7 @@ class NotifyController extends Controller
 
     public function actionWechat()
     {
+        Yii::$app->response->format = Response::FORMAT_XML;
         // 微信支付参数配置
         Yii::$app->params['wechatPaymentConfig'] = ArrayHelper::merge([
             'app_id' => $this->config['wechat_appid'],
@@ -68,29 +71,37 @@ class NotifyController extends Controller
                 }
             }
 
-            // return_code 表示通信状态，不代表支付状态
-//            if ($message['return_code'] === 'SUCCESS')
-//            {
-                if ($message['result_code'] === 'SUCCESS') // 用户支付成功
-                {
-                    $order->status  = StatusEnum::WECHAT_SUCC;
-                }
-                elseif ($message['result_code'] === 'FAIL') // 用户支付失败
-                {
-                    $order->status  = StatusEnum::WECHAT_FAIL;
-                }
-                $order->trade_type =   $orderInfo['trade_type'];
-                $order->out_trade_no =  $orderInfo['out_trade_no'];
-//            }
-//            else
-//            {
-//                return $fail('通信失败，请稍后再通知我');
-//            }
+            if ($message['result_code'] === 'SUCCESS') // 用户支付成功
+            {
+                $order->status  = StatusEnum::WECHAT_SUCC;
+            }
+            elseif ($message['result_code'] === 'FAIL') // 用户支付失败
+            {
+                $order->status  = StatusEnum::WECHAT_FAIL;
+            }
+            $order->trade_type =   $orderInfo['trade_type'];
+            $order->out_trade_no =  $orderInfo['out_trade_no'];
+
 
             $order->save(); // 保存订单
+
+            if (!($vip = MemberVipInfos::findOne(['member_id'=>$order->member_id]))){
+                $vip = new MemberVipInfos();
+                $vip->member_id = $order->member_id;
+                $vip->recommendCode = MemberVipInfos::getCode();
+                $vip->parent_id = MemberVipInfos::getPidByCode($order->rec_code);
+                $vip->openid = $message['openid'];
+            }
+            $vip->vipage += $order->month_limit;
+            $vip->vipstart_at = time();
+            $vip->vipend_at = strtotime("+".$order->month_limit.' month');
+            $vip->save();
             return true; // 返回处理完成
         });
 
-        return $response;
+        if ($response){
+            return PayHelper::notifyWechatSuccess();
+        }
+        return PayHelper::notifyWechatFail();
     }
 }

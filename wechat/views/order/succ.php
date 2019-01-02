@@ -5,6 +5,7 @@
  * Date: 2018/12/31
  * Time: 22:11
  */
+$this->registerCssFile(Yii::getAlias('@bbb').'/css/registerRenew.css',['depends'=>\wechat\assets\AppAsset::class]);
 ?>
 
 <div class="weui-msg">

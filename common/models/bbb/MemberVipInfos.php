@@ -60,7 +60,8 @@ class MemberVipInfos extends BaseModel
         ];
     }
 
-    static function getMidByCode($recommendCode){
+    static function getPidByCode($recommendCode=''){
+        if (!$recommendCode) return '';
         $res = self::find()->select('member_id')->where(['recommendCode'=>$recommendCode])->one();
         return !empty($res) ? $res->member_id : 0;
     }
