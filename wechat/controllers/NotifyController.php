@@ -62,7 +62,7 @@ class NotifyController extends Controller
             if ($orderInfo['order_group'] == PayLog::ORDER_GROUP)
             {
                 /* @var $order \yii\db\ActiveRecord */
-                if (!($order = Orders::fineOne(['order_sn' => $orderInfo['order_sn']])))
+                if (!($order = Orders::findOne(['order_sn' => $orderInfo['order_sn']])))
                 {
                     return true;
                 }
