@@ -57,6 +57,15 @@ class MyController extends WController
                 $fan->save();
             }else{
                 $this->memberId = $fan->member_id;
+                $vips = MemberVipInfos::findOne(['member_id'=>$this->memberId]);
+                if ($vips){
+                    $time = time();
+                    $this->isVip = true;
+                    \Yii::$app->params['vipEndTime'] = $vips->vipend_at;
+                    if ($time>$vips->vipstart_at && $time<$vips->vipend_at){
+                        $this->vipEnable = true;
+                    }
+                }
             }
         }
     }
