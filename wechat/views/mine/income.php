@@ -28,46 +28,6 @@ $this->registerCssFile(Yii::getAlias('@bbb').'/css/income.css',['depends'=>\wech
             <p class="sure">确认收益</p>
         </div>
     </a>
-    <a class="weui-cell" href="javascript:;">
-        <div class="weui-cell__bd">
-            <p class="brief">乔迎昆  购买  专栏慕弘陈列jslafjsa</p>
-            <p class="time">2018-10-15  09:13:28</p>
-        </div>
-        <div class="weui-cell__ft">
-            <p class="money">+50.00</p>
-            <p class="sure">确认收益</p>
-        </div>
-    </a>
-    <a class="weui-cell" href="javascript:;">
-        <div class="weui-cell__bd">
-            <p class="brief">乔迎昆  购买  注册会员43643646</p>
-            <p class="time">2018-10-19  09:13:28</p>
-        </div>
-        <div class="weui-cell__ft">
-            <p class="money">+50.00</p>
-            <p class="sure">确认收益</p>
-        </div>
-    </a>
-    <a class="weui-cell" href="javascript:;">
-        <div class="weui-cell__bd">
-            <p class="brief">乔迎昆  购买  注册会员43643646</p>
-            <p class="time">2018-10-19  09:13:28</p>
-        </div>
-        <div class="weui-cell__ft">
-            <p class="money">+50.00</p>
-            <p class="sure">确认收益</p>
-        </div>
-    </a>
-    <a class="weui-cell" href="javascript:;">
-        <div class="weui-cell__bd">
-            <p class="brief">乔迎昆  购买  注册会员43643646</p>
-            <p class="time">2018-10-19  09:13:28</p>
-        </div>
-        <div class="weui-cell__ft">
-            <p class="money">+50.00</p>
-            <p class="sure">确认收益</p>
-        </div>
-    </a>
 </div>
 
-<?=\wechat\helper\widgets\FooterNav::widget()?>
+<?=\wechat\common\widgets\FooterNav::widget()?>

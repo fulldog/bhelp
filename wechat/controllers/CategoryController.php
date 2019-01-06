@@ -42,4 +42,9 @@ class CategoryController extends MyController
     }
 
 
+    function actionShopkeeper(){
+        $catid = $this->request_get('catid');
+
+        return $this->render('shopkeeper');
+    }
 }

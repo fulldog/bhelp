@@ -42,4 +42,4 @@ $this->registerCssFile(Yii::getAlias('@bbb').'/css/myPurchase.css',['depends'=>\
 <div class="weui-loadmore weui-loadmore_line no_more">
     <span class="weui-loadmore__tips">没有更多…</span>
 </div>
-<?=\wechat\helper\widgets\FooterNav::widget()?>
+<?=\wechat\common\widgets\FooterNav::widget()?>

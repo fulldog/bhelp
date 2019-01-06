@@ -9,12 +9,14 @@
 namespace wechat\controllers;
 
 use common\models\bbb\Orders;
+use unclead\multipleinput\assets\FontAwesomeAsset;
 use Yii;
 use common\helpers\PayHelper;
 use common\helpers\StringHelper;
 use common\models\common\PayLog;
 use common\helpers\UrlHelper;
 use yii\base\Response;
+use yii\helpers\Json;
 
 class OrderController extends MyController
 {
@@ -136,6 +138,17 @@ class OrderController extends MyController
     }
 
     function actionSubscribe(){
+        $sid = Yii::$app->request->get('sid');
 
+        if (Yii::$app->request->isPost && Yii::$app->request->isAjax){
+            //创建订单
+            exit(Json::encode([
+                'status'=>0
+            ]));
+        }
+
+        return $this->render('subscribe',[
+            'sid'=>$sid
+        ]);
     }
 }

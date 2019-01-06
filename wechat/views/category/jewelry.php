@@ -12,7 +12,7 @@ $this->registerCssFile(Yii::getAlias('@bbb').'/css/jewelryColumn.css',['depends'
 <div class="columns">
     <div class="listTitle">珠宝专栏</div>
     <div class="weui-cells jewelryList">
-        <a class="weui-cell weui-cell_access" href="<?=Yii::$app->urlManager->createUrl(['mine/index'])?>">
+        <a class="weui-cell weui-cell_access" href="<?=Yii::$app->urlManager->createUrl(['order/subscribe','sid'=>1])?>">
             <div class="weui-cell__hd"><img src="<?=Yii::$app->params['bbb']?>/images/jewelry_12.jpg" alt=""></div>
             <div class="weui-cell__bd">
                 <p class="name">杜半·珠宝与设计</p>

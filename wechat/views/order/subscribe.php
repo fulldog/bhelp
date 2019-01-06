@@ -26,5 +26,22 @@ $this->registerCssFile(Yii::getAlias('@bbb').'/css/subscribe.css',['depends'=>\w
 </div>
 
 <div class="book">
-    <a href="subscribePay.html" class="weui-btn weui-btn_primary">订阅专栏¥99.00</a>
+    <a href="javascript:void(0);" onclick="dopay()" class="weui-btn weui-btn_primary">订阅专栏¥99.00</a>
 </div>
+<script>
+  function dopay() {
+    $.ajax({
+      url:'<?=\yii\helpers\Url::to(['order/subscribe','sid'=>$sid])?>',
+      data:{'_csrf-wechat':'<?=Yii::$app->request->csrfToken?>'},
+      dataType:'json',
+      type:'post',
+      success:function(data) {
+        if (data.status>0){
+
+        }else {
+
+        }
+      }
+    })
+  }
+</script>

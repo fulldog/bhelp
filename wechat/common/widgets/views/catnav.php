@@ -12,8 +12,8 @@
   </div>
   <div class="weui-flex__item item2">
     <i class="weui-icon-search ico"></i>
-    <a href="<?=Yii::$app->urlManager->createUrl(['mine/subscribe'])?>">关注</a>
+    <a href="<?=Yii::$app->urlManager->createUrl(['mine/purchase'])?>">关注</a>
     <i class="ico2">|</i>
-    <a href="<?=Yii::$app->urlManager->createUrl(['mine/purchase'])?>">我的</a>
+    <a href="<?=Yii::$app->urlManager->createUrl(['mine/index'])?>">我的</a>
   </div>
 </div>

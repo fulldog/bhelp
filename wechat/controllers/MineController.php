@@ -25,7 +25,9 @@ class MineController extends MyController
         ]);
     }
 
+    //我的已购
     function actionPurchase(){
+        $this->view->params['title'] = '我的已购';
         return $this->render('purchase',[
 
         ]);

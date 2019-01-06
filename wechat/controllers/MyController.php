@@ -69,4 +69,14 @@ class MyController extends WController
             }
         }
     }
+
+    function request_get($name)
+    {
+        return \Yii::$app->request->get($name);
+    }
+
+    function request_post($name)
+    {
+        return \Yii::$app->request->post($name);
+    }
 }

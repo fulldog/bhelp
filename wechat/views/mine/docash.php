@@ -24,7 +24,7 @@ $this->registerCssFile(Yii::getAlias('@bbb').'/css/cashWithdrawal.css',['depends
     <p>您的提现将会转入到微信零钱中</p>
 </div>
 </form>
-<?=\wechat\helper\widgets\FooterNav::widget()?>
+<?=\wechat\common\widgets\FooterNav::widget()?>
 <script>
     $('#submit').on('click',function() {
       $.ajax({
