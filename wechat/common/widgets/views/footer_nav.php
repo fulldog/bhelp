@@ -10,7 +10,7 @@
 <div class="weui-footer weui-footer_fixed-bottom">
     <p class="weui-footer__links">
         <a href="javascript:void(0);" class="weui-footer__link">店铺主页</a>|
-        <a href="javascript:void(0);" class="weui-footer__link">个人中心</a>|
+        <a href="<?\Yii::$app->urlManager->createUrl(['mine/index'])?>" class="weui-footer__link">个人中心</a>|
         <a href="javascript:void(0);" class="weui-footer__link">关注我们</a>|
         <a href="javascript:void(0);" class="weui-footer__link">问题反馈</a>
     </p>

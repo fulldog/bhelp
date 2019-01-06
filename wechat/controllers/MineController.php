@@ -48,4 +48,16 @@ class MineController extends MyController
 
         ]);
     }
+
+    function actionMessage(){
+        return $this->render('message',[
+
+        ]);
+    }
+
+    function actionSubscribe(){
+        return $this->render('subscribe',[
+
+        ]);
+    }
 }

@@ -5,7 +5,7 @@
  * Date: 2019/1/5
  * Time: 23:00
  */
-namespace wechat\helper\widgets;
+namespace wechat\common\widgets;
 
 class FooterNav extends \yii\base\Widget
 {

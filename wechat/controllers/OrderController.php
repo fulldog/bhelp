@@ -134,4 +134,8 @@ class OrderController extends MyController
 
         return $this->render('succ');
     }
+
+    function actionSubscribe(){
+
+    }
 }
