@@ -11,8 +11,11 @@
   <span class="title">公告</span>
   <div  class="swiper-container notice">
     <div class="swiper-wrapper">
-      <div class="swiper-slide">宝帮宝,货通天下。利射四海11111</div>
-      <div class="swiper-slide">宝帮宝,货通天下。利射四海22222</div>
+      <?if(!empty($notice)):?>
+        <?foreach ($notice as $v):?>
+          <div class="swiper-slide"><?=$v['notice']?></div>
+        <?endforeach;?>
+      <?endif;?>
     </div>
   </div>
 </div>

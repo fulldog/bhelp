@@ -8,10 +8,12 @@
 
 namespace wechat\controllers;
 
+use addons\RfArticle\common\models\Article;
 use common\helpers\PayHelper;
 use common\helpers\StringHelper;
 use common\helpers\UrlHelper;
 use common\models\bbb\MemberVipInfos;
+use common\models\bbb\Notice;
 use common\models\bbb\Orders;
 use common\models\bbb\SmsLog;
 use common\models\common\PayLog;
@@ -42,6 +44,7 @@ class IndexController extends MyController
         $data = [
             'isVip' => $this->isVip,
             'vipEnable' =>$this->vipEnable,
+            'list'=>Article::find()->where(['position'=>1,'status'=>1])->limit(20)->select('*')->orderBy(['sort'=>SORT_DESC,'created_at'=>SORT_DESC])->all(),
         ];
         return $this->render('index',$data);
     }
@@ -161,5 +164,16 @@ class IndexController extends MyController
 
     function checkPhoneCode($phone,$code){
         return SmsLog::find()->where(['phone'=>$phone,'code'=>$code])->orderBy(['id'=>SORT_DESC])->one();
+    }
+
+    function actionDetail(){
+        $id = \Yii::$app->request->get('id');
+        if (!$id){
+            return $this->to_404();
+        }
+        \Yii::$app->db->createCommand('update '.Article::tableName().' set view=view+1 where id='.intval($id))->execute();
+        return $this->render('detail',[
+            'data'=>Article::findOne(['id'=>$id])
+        ]);
     }
 }

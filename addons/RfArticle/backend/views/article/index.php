@@ -39,6 +39,23 @@ $this->params['breadcrumbs'][] = $this->title;
                         'id',
                         'title',
                         [
+                            'label'=> '分类',
+                             'attribute' => 'cate.title',
+                        ],
+                        [
+                            'label'=> '推荐位',
+                            'filter' => false, //不显示搜索框
+                            'attribute' => 'position',
+                            'value' => function ($model) {
+                                $arr = [
+                                    '1' => "首页",
+                                    '2' => "列表",
+                                    '4' => "内页",
+                                ];
+                                return $arr[$model->position];
+                            },
+                        ],
+                        [
                             'attribute' => 'sort',
                             'filter' => false, //不显示搜索框
                             'value' => function ($model) {

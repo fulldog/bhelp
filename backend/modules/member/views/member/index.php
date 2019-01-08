@@ -47,8 +47,8 @@ $this->params['breadcrumbs'][] = ['label' => $this->title];
                             <th>登录账号</th>
                             <th>真实姓名</th>
                             <th>手机号码</th>
-                            <th>邮箱</th>
-                            <th>账户金额</th>
+<!--                            <th>邮箱</th>-->
+<!--                            <th>账户金额</th>-->
                             <th>最后登陆</th>
                             <th>操作</th>
                         </tr>
@@ -63,13 +63,13 @@ $this->params['breadcrumbs'][] = ['label' => $this->title];
                                 <td><?= Html::encode($model->username) ?></td>
                                 <td><?= Html::encode($model->realname) ?></td>
                                 <td><?= $model->mobile_phone?></td>
-                                <td><?= $model->email ?></td>
-                                <td>
-                                    余额：<?= $model->user_money?><br>
-                                    积分：<?= $model->user_integral?><br>
-                                    累计消费：<?= $model->accumulate_money?><br>
-                                    累积金额：<?= $model->frozen_money?><br>
-                                </td>
+<!--                                <td>--><?//= $model->email ?><!--</td>-->
+<!--                                <td>-->
+<!--                                    余额：--><?//= $model->user_money?><!--<br>-->
+<!--                                    积分：--><?//= $model->user_integral?><!--<br>-->
+<!--                                    累计消费：--><?//= $model->accumulate_money?><!--<br>-->
+<!--                                    累积金额：--><?//= $model->frozen_money?><!--<br>-->
+<!--                                </td>-->
                                 <td>
                                     最后访问IP：<?= $model->last_ip?><br>
                                     最后访问：<?= Yii::$app->formatter->asDatetime($model->last_time)?><br>
@@ -77,11 +77,11 @@ $this->params['breadcrumbs'][] = ['label' => $this->title];
                                     注册时间：<?= Yii::$app->formatter->asDatetime($model->created_at)?>
                                 </td>
                                 <td>
-                                    <?= HtmlHelper::linkButton(['ajax-edit', 'id' => $model->id], '账号密码', [
-                                        'data-toggle' => 'modal',
-                                        'data-target' => '#ajaxModal',
-                                    ])?>
-                                    <?= HtmlHelper::linkButton(['address/index', 'member_id' => $model->id], '收货地址')?>
+<!--                                    --><?//= HtmlHelper::linkButton(['ajax-edit', 'id' => $model->id], '账号密码', [
+//                                        'data-toggle' => 'modal',
+//                                        'data-target' => '#ajaxModal',
+//                                    ])?>
+<!--                                    --><?//= HtmlHelper::linkButton(['address/index', 'member_id' => $model->id], '收货地址')?>
                                     <?= HtmlHelper::edit(['edit','id' => $model->id])?>
                                     <?= HtmlHelper::status($model['status']); ?>
                                     <?= HtmlHelper::delete(['destroy','id' => $model->id])?>

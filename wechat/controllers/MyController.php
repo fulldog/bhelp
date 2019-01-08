@@ -79,4 +79,8 @@ class MyController extends WController
     {
         return \Yii::$app->request->post($name);
     }
+
+    function to_404(){
+        return $this->render('404');
+    }
 }
