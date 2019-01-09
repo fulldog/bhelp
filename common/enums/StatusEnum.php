@@ -22,6 +22,11 @@ class StatusEnum
     public static $listExplain = [
         self::ENABLED => '启用',
         self::DISABLED => '禁用',
+//        self::WECHAT_FAIL => '支付失败',
+//        self::WECHAT_SUCC => '支付成功',
+    ];
+
+    public static $WechatStatus = [
         self::WECHAT_FAIL => '支付失败',
         self::WECHAT_SUCC => '支付成功',
     ];

@@ -8,11 +8,13 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="notice-form">
+<div class="notice-index" style="padding: 20px">
 
     <?php $form = ActiveForm::begin(); ?>
 
-<!--    --><?//= $form->field($model, 'admin_id')->textInput() ?>
+    <?= $form->field($model, 'type')->dropDownList(['1'=>'公告',2=>'消息'],[
+        'style'=>'width:200px;'
+    ])?>
 
     <?= $form->field($model, 'notice')->textInput(['maxlength' => true]) ?>
 

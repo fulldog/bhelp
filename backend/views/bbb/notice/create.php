@@ -10,9 +10,9 @@ $this->title = '创建公告';
 $this->params['breadcrumbs'][] = ['label' => 'Notices', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="notice-create">
+<div class="notice-index" style="padding: 20px">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h3><?= Html::encode($this->title) ?></h3>
 
     <?= $this->render('_form', [
         'model' => $model,

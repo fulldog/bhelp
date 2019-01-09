@@ -13,10 +13,13 @@ use Yii;
  * @property int $admin_id
  * @property string $notice
  * @property int $created_at
+ * @property int $type
  * @property int $updated_at
  */
 class Notice extends BaseModel
 {
+    const NOTICE=1;
+    const MESSAGE=2;
     /**
      * {@inheritdoc}
      */
@@ -31,7 +34,7 @@ class Notice extends BaseModel
     public function rules()
     {
         return [
-            [['admin_id', 'created_at', 'updated_at'], 'integer'],
+            [['admin_id', 'created_at', 'updated_at','type'], 'integer'],
             [['notice'], 'string', 'max' => 255],
         ];
     }
@@ -45,6 +48,7 @@ class Notice extends BaseModel
             'id' => 'ID',
             'admin_id' => '创建者',
             'notice' => '公告内容',
+            'type' => '类型',
             'created_at' => '创建日期',
             'updated_at' => '更新日期',
         ];
@@ -58,5 +62,13 @@ class Notice extends BaseModel
     {
         $this->admin_id = Yii::$app->user->getId();
         return parent::beforeSave($insert);
+    }
+
+    function getStatus(){
+        $type = [
+            1=>'公告',
+            2=>'消息'
+        ];
+        return $type[$this->type];
     }
 }

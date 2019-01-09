@@ -10,10 +10,10 @@ use yii\grid\GridView;
 $this->title = '公告列表';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="notice-index">
+<div class="notice-index" style="padding: 20px">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <h3><?= Html::encode($this->title) ?></h3>
+    <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a('新增公告', ['create'], ['class' => 'btn btn-success']) ?>
@@ -21,26 +21,38 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+//        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+//            'id',
             [
                 'label'=>'创建者',
                 'attribute' => 'relate.username',
             ],
             [
+                'label'=>'类型',
+                'value'=>function($model){
+                      return $model->getStatus($model->type);
+                }
+            ],
+            [
                 'attribute' => 'notice',
             ],
-            'created_at:datetime',
             [
-                'attribute' => 'updated_at',
+                'attribute' => 'created_at',
                 'filter' => false, //不显示搜索框
                 'format'=>'datetime'
             ],
+//            [
+//                'attribute' => 'updated_at',
+//                'filter' => false, //不显示搜索框
+//                'format'=>'datetime'
+//            ],
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',
+                'template'=>'{update}&nbsp;&nbsp;{delete}'
+            ],
         ],
     ]); ?>
 </div>

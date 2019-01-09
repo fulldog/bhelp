@@ -5,7 +5,6 @@ namespace backend\controllers\bbb;
 use common\models\common\SearchModel;
 use Yii;
 use common\models\bbb\Notice;
-use common\models\bbb\NoticeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -76,7 +75,7 @@ class NoticeController extends Controller
         $model = new Notice();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('create', [
@@ -96,7 +95,7 @@ class NoticeController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('update', [
