@@ -58,9 +58,9 @@ AppAsset::register($this);
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
-        <div class="col-sm-2" id="explain">
-            <?= AddonLeftWidget::widget(); ?>
-        </div>
+<!--        <div class="col-sm-2" id="explain">-->
+<!--            --><?//= AddonLeftWidget::widget(); ?>
+<!--        </div>-->
         <div class="col-sm-10">
             <?= $content; ?>
         </div>
