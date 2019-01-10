@@ -45,8 +45,9 @@ $this->params['breadcrumbs'][] = ['label' => $this->title];
                             <th>#</th>
                             <th>头像</th>
                             <th>登录账号</th>
+                            <th>绑定微信</th>
                             <th>真实姓名</th>
-                            <th>手机号码</th>
+<!--                            <th>手机号码</th>-->
 <!--                            <th>邮箱</th>-->
 <!--                            <th>账户金额</th>-->
                             <th>最后登陆</th>
@@ -61,8 +62,14 @@ $this->params['breadcrumbs'][] = ['label' => $this->title];
                                     <img src="<?= HtmlHelper::headPortrait(Html::encode($model->head_portrait));?>" class="img-circle">
                                 </td>
                                 <td><?= Html::encode($model->username) ?></td>
+                                <td><?
+                                    $wechat = \common\models\wechat\Fans::find()->select('openid,nickname')->where(['member_id'=>$model->id])->asArray()->one();
+                                    if ($wechat){
+                                      echo $wechat['nickname'];
+                                    }
+                                    ?></td>
                                 <td><?= Html::encode($model->realname) ?></td>
-                                <td><?= $model->mobile_phone?></td>
+<!--                                <td>--><?//= $model->mobile_phone?><!--</td>-->
 <!--                                <td>--><?//= $model->email ?><!--</td>-->
 <!--                                <td>-->
 <!--                                    余额：--><?//= $model->user_money?><!--<br>-->

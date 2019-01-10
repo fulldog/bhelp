@@ -2,7 +2,9 @@
 
 namespace common\models\bbb;
 
+use addons\RfSignShoppingDay\common\models\User;
 use common\models\common\BaseModel;
+use common\models\member\MemberInfo;
 use Yii;
 
 /**
@@ -53,19 +55,30 @@ class Orders extends BaseModel
     {
         return [
             'id' => 'ID',
-            'member_id' => 'Member ID',
-            'order_sn' => 'Order Sn',
-            'trade_type' => 'Trade Type',
+            'member_id' => '会员ID',
+            'order_sn' => '订单号',
+            'trade_type' => '支付类型',
             'trade_no' => 'Trade No',
-            'out_trade_no' => 'Out Trade No',
-            'money' => 'Money',
-            'status' => '0待支付；1已支付；2已退款',
-            'goods' => 'Goods',
-            'desc' => 'Desc',
-            'updated_at' => 'Update Time',
-            'updated_at' => 'Creat Time',
+            'out_trade_no' => '外部单号',
+            'money' => '金额',
+            'status' => '状态',//0待支付；1已支付；2已退款
+            'goods' => '商品',
+            'desc' => '描述',
+            'updated_at' => '更新时间',
+            'created_at' => '创建时间',
             'rec_code' => '邀请码',
-            'month_limit' => '购买时长：月'
+            'month_limit' => '时长：月'
         ];
+    }
+
+    function getMembers(){
+        return $this->hasOne(MemberInfo::class,['id'=>'member_id']);
+    }
+
+    function getOrderStatus(){
+        $map = [
+            '待支付','已支付','已退款'
+        ];
+        return $map[$this->status];
     }
 }

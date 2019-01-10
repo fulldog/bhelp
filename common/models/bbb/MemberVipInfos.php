@@ -3,6 +3,7 @@
 namespace common\models\bbb;
 
 use common\models\common\BaseModel;
+use common\models\member\MemberInfo;
 use Yii;
 
 /**
@@ -10,7 +11,7 @@ use Yii;
  *
  * @property int $id
  * @property int $member_id
- * @property string $recommendCode 邀请码
+ * @property string $rec_code 邀请码
  * @property int $parent_id 上级推荐人
  * @property string $openid
  * @property int $vipage vip时长：天
@@ -37,7 +38,7 @@ class MemberVipInfos extends BaseModel
         return [
             [['member_id'], 'required'],
             [['member_id', 'parent_id', 'vipage', 'vipstart_at', 'vipend_at', 'created_at', 'updated_at'], 'integer'],
-            [['recommendCode', 'openid'], 'string', 'max' => 255],
+            [['rec_code', 'openid'], 'string', 'max' => 255],
         ];
     }
 
@@ -49,7 +50,7 @@ class MemberVipInfos extends BaseModel
         return [
             'id' => 'ID',
             'member_id' => 'Member ID',
-            'recommendCode' => '邀请码',
+            'rec_code' => '邀请码',
             'parent_id' => '上级推荐人',
             'openid' => 'Openid',
             'vipage' => 'vip时长：天',
@@ -86,9 +87,20 @@ class MemberVipInfos extends BaseModel
         if (!empty($convert)) {
             $code = ($convert > 0) ? strtoupper($code) : strtolower($code);
         }
-        if (self::find()->where(['recommendCode'=>$code])->exists()){
+        if (self::find()->where(['rec_code'=>$code])->exists()){
             return self::getCode($length, $type, $convert);
         }
         return $code;
+    }
+
+    function getRelatedCodeUser($code){
+        if ($code){
+            return self::find()->select(self::tableName().'.*,b.username')
+                ->where([self::tableName().'.rec_code'=>$code])
+                ->leftJoin(MemberInfo::tableName().' as b',self::tableName().'.member_id=b.id')
+                ->asArray()
+                ->one();
+        }
+        return ;
     }
 }

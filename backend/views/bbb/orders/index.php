@@ -4,19 +4,16 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\bbb\NoticeSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = '公告列表';
+$this->title = '订单列表';
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
-<div class="notice-index" style="padding: 20px">
-
-<!--    --><?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-    <p>
-        <?= Html::a('新增公告', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
+<div class="orders-index"style="padding: 20px">
+<!--    <p>-->
+<!--        --><?//= Html::a('Create Orders', ['create'], ['class' => 'btn btn-success']) ?>
+<!--    </p>-->
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -24,34 +21,63 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
             'id',
             [
-                'label'=>'创建者',
-                'attribute' => 'relate.username',
+                'attribute' => 'members.username',
+                'filter' => false, //不显示搜索框
+                'label'=>'购买者',
+            ],
+            'order_sn',
+            'out_trade_no',
+            [
+                'attribute' => 'trade_type',
+                'filter'=>['JSAPI'=>'JSAPI']
+            ],
+//            'trade_no',
+            [
+                'attribute' => 'month_limit',
+                'filter' => false, //不显示搜索框
+            ],
+//            [
+//                'label'=>'推荐用户',
+//                'value'=>function($model){
+//                    $info = (new \common\models\bbb\MemberVipInfos())->getRelatedCodeUser($model->rec_code);
+//                    if ($info){
+//                        return $info['username'];
+//                    }
+//                    return ;
+//                }
+//            ],
+            [
+                'attribute' => 'money',
+                'filter' => false, //不显示搜索框
             ],
             [
-                'label'=>'类型',
-                'attribute' => 'type',
+                'attribute' => 'status',
                 'value'=>function($model){
-                      return $model->getStatus($model->type);
+                    return $model->orderstatus;
                 },
-                'filter'=>[1=>'公告',2=>'消息']
+                'filter'=>['待支付','已支付','已退款']
             ],
+            'goods',
+//            'desc',
             [
-                'attribute' => 'notice',
+                'attribute' => 'updated_at',
+                'filter' => false, //不显示搜索框
+                'value'=>function($model){
+                    return date('Y-m-d H:i:s',$model->updated_at);
+                }
             ],
             [
                 'attribute' => 'created_at',
                 'filter' => false, //不显示搜索框
-                'format'=>'datetime'
+                'value'=>function($model){
+                    return date('Y-m-d H:i:s',$model->created_at);
+                }
             ],
-//            [
-//                'attribute' => 'updated_at',
-//                'filter' => false, //不显示搜索框
-//                'format'=>'datetime'
-//            ],
-
+//            'updated_at:datetime',
+//            'created_at:datetime',
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template'=>'{update}  {delete}',
+                'template'=>'{delete}',
                 'buttons' => [
                     // 下面代码来自于 yii\grid\ActionColumn 简单修改了下
                     'view' => function ($url, $model, $key) {

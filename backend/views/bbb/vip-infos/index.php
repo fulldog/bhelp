@@ -4,54 +4,35 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\bbb\NoticeSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = '公告列表';
+$this->title = 'VIP会员信息';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="notice-index" style="padding: 20px">
+<div class="member-vip-infos-index" style="padding: 20px">
 
-<!--    --><?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-    <p>
-        <?= Html::a('新增公告', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+<!--    <p>-->
+<!--        --><?//= Html::a('Create Member Vip Infos', ['create'], ['class' => 'btn btn-success']) ?>
+<!--    </p>-->
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'id',
-            [
-                'label'=>'创建者',
-                'attribute' => 'relate.username',
-            ],
-            [
-                'label'=>'类型',
-                'attribute' => 'type',
-                'value'=>function($model){
-                      return $model->getStatus($model->type);
-                },
-                'filter'=>[1=>'公告',2=>'消息']
-            ],
-            [
-                'attribute' => 'notice',
-            ],
-            [
-                'attribute' => 'created_at',
-                'filter' => false, //不显示搜索框
-                'format'=>'datetime'
-            ],
-//            [
-//                'attribute' => 'updated_at',
-//                'filter' => false, //不显示搜索框
-//                'format'=>'datetime'
-//            ],
+            'member_id',
+            'rec_code',
+            'parent_id',
+            'openid',
+            'vipage',
+            'vipstart_at',
+            'vipend_at',
+            'created_at',
+            'updated_at',
 
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template'=>'{update}  {delete}',
+                'template'=>'{update} {delete}',
                 'buttons' => [
                     // 下面代码来自于 yii\grid\ActionColumn 简单修改了下
                     'view' => function ($url, $model, $key) {
