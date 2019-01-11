@@ -20,15 +20,42 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'id',
-            'member_id',
+            [
+                'attribute'=>'member_id',
+                'value'=>function($model){
+                   $info = \common\models\member\MemberInfo::findOne(['id'=>$model->member_id]);
+                   return $info->username;
+                },
+                'label'=>'用户名'
+            ],
+            [
+                'label'=>'微信昵称',
+                'value'=>function($model){
+                    $info = \common\models\wechat\Fans::findOne(['openid'=>$model->openid]);
+                    return $info->nickname;
+                }
+            ],
             'rec_code',
-            'parent_id',
+            [
+                'attribute'=>'parent_id',
+                'value'=>function($model){
+                    if($model->parent_id){
+                        $info = \common\models\member\MemberInfo::findOne(['id'=>$model->parent_id]);
+                        return $info->username;
+                    }
+                }
+            ],
             'openid',
             'vipage',
-            'vipstart_at',
-            'vipend_at',
-            'created_at',
-            'updated_at',
+            'vipstart_at:datetime',
+            [
+                'attribute'=>'vipend_at',
+                'value'=>function($model){
+                   return Yii::$app->formatter->asRelativeTime($model->vipend_at);
+                }
+            ],
+//            'created_at',
+//            'updated_at',
 
             [
                 'class' => 'yii\grid\ActionColumn',

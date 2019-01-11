@@ -14,7 +14,7 @@ use Yii;
  * @property string $rec_code 邀请码
  * @property int $parent_id 上级推荐人
  * @property string $openid
- * @property int $vipage vip时长：天
+ * @property int $vipage vip时长：月
  * @property int $vipstart_at VIP开始时间
  * @property int $vipend_at VIP结束时间
  * @property int $created_at 创建时间
@@ -53,7 +53,7 @@ class MemberVipInfos extends BaseModel
             'rec_code' => '邀请码',
             'parent_id' => '上级推荐人',
             'openid' => 'Openid',
-            'vipage' => 'vip时长：天',
+            'vipage' => 'vipn年龄：月',
             'vipstart_at' => 'VIP开始时间',
             'vipend_at' => 'VIP结束时间',
             'created_at' => '创建时间',
