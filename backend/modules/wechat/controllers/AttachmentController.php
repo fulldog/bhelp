@@ -20,6 +20,7 @@ use EasyWeChat\Kernel\Messages\Article;
  *
  * Class AttachmentController
  * @package backend\modules\wechat\controllers
+ * @author jianyan74 <751393839@qq.com>
  */
 class AttachmentController extends WController
 {
@@ -54,8 +55,11 @@ class AttachmentController extends WController
      * 图文编辑
      *
      * @return array|string
+     * @throws \EasyWeChat\Kernel\Exceptions\HttpException
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidArgumentException
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \yii\web\UnprocessableEntityHttpException
      */
     public function actionNewsEdit()
     {
@@ -134,13 +138,25 @@ class AttachmentController extends WController
             {
                 if ($attach_id)
                 {
-                    // 更新到微信
-                    $material->updateArticle($attachment['media_id'], $article_list);
+                    // 更新图文
+                    foreach ($article_list as $k => $value)
+                    {
+                        $result = $material->updateArticle($attachment['media_id'], $value, $k);
+                        if ($error = Yii::$app->debris->getWechatError($result, false))
+                        {
+                            return ResultDataHelper::json(404, $error);
+                        }
+                    }
                 }
                 else
                 {
                     // 上传图文信息
                     $resource = $material->uploadArticle($article_list);
+                    if ($error = Yii::$app->debris->getWechatError($resource, false))
+                    {
+                        return ResultDataHelper::json(404, $error);
+                    }
+
                     // 获取图文信息
                     $getNews = $material->get($resource['media_id']);
                     $news_item = $getNews['news_item'];
@@ -232,7 +248,7 @@ class AttachmentController extends WController
         if ($model->load(Yii::$app->request->post()) && $model->local_url)
         {
             // 本地前缀
-            $result = $this->app->material->uploadVoice(StringHelper::getLocalFilePath(StringHelper::iconvForWindows($model->local_url), 'voices'));
+            $result = $this->app->material->uploadVoice(StringHelper::getLocalFilePath($model->local_url, 'voices'));
             // 验证微信报错
             if ($error = Yii::$app->debris->getWechatError($result, false))
             {
@@ -334,7 +350,6 @@ class AttachmentController extends WController
         if ($model->load(Yii::$app->request->post()))
         {
             $attachment = Attachment::findOne($attach_id);
-
             // 发送预览群发消息给指定的 openId 用户
             $preview = [
                 'text' => 'previewText',
@@ -418,9 +433,12 @@ class AttachmentController extends WController
         try
         {
             $lists = $this->app->material->list($type, $offset, $count);
-
             // 解析微信接口是否报错.报错则抛出错误信息
             Yii::$app->debris->getWechatError($lists);
+            if (empty($lists))
+            {
+                return ResultDataHelper::json(201, '同步完成');
+            }
 
             $total = $lists['total_count'];
             // 素材列表
@@ -498,7 +516,7 @@ class AttachmentController extends WController
                 {
                     // 批量插入数据
                     $field = ['file_name', 'media_id', 'media_url', 'media_type', 'is_temporary', 'created_at', 'updated_at'];
-                    Yii::$app->db->createCommand()->batchInsert(Attachment::tableName(), $field, $addMaterial)->execute();
+                    $result = Yii::$app->db->createCommand()->batchInsert(Attachment::tableName(), $field, $addMaterial)->execute();
                 }
 
                 break;

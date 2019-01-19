@@ -22,14 +22,8 @@ return [
         ],
         /** ------ 缓存 ------ **/
         'cache' => [
-//            'class' => 'yii\caching\FileCache',
-//            'cachePath' => '@backend/runtime/cache' // 注意如果要改成非文件缓存请删除，否则会报错
-            'class'=>'yii\redis\Cache',//使用redis缓存作为项目缓存
-            'redis'=>[
-                'hostname' => '127.0.0.1',
-                'port' => '6379',
-                'database' => 2
-            ],
+            'class' => 'yii\caching\FileCache',
+            'cachePath' => '@backend/runtime/cache' // 注意如果要改成非文件缓存请删除，否则会报错
         ],
         /** ------ 网站碎片管理 ------ **/
         'debris' => [
