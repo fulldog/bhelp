@@ -48,6 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'attribute' => 'position',
                             'value' => function ($model) {
                                 $arr = [
+                                    '0' => "不推荐",
                                     '1' => "首页",
                                     '2' => "列表",
                                     '4' => "内页",

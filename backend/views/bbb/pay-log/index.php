@@ -20,32 +20,68 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+//            ['class' => 'yii\grid\SerialColumn'],
 
             'id',
             'order_sn',
-            'openid',
+//            'openid',
 //            'order_group',
-//            'mch_id',
-//            'out_trade_no',
-//            'transaction_id',
-//            'total_fee',
+//            [
+//                'attribute'=>'mch_id',
+//                'label'=>'商户号'
+//            ],
+//            [
+//                'attribute'=>'out_trade_no',
+//                'label'=>'外部单号'
+//            ],
+            [
+                'attribute'=>'transaction_id',
+                'label'=>'微信单号'
+            ],
+            [
+                'attribute'=>'total_fee',
+                'label'=>'总额',
+                'value'=>function($model){
+                    return $model->total_fee/100;
+                }
+            ],
 //            'fee_type',
 //            'pay_type',
-//            'pay_fee',
-//            'pay_status',
-//            'pay_time:datetime',
+//            [
+//                'attribute'=>'pay_fee',
+//                'label'=>'已支付',
+//                'value'=>function($model){
+//                    return $model->pay_fee/100;
+//                }
+//            ],
+            [
+                'attribute'=>'pay_status',
+                'value'=>function($model){
+                    $map = ['未支付','已支付'];
+                    return $map[$model->pay_status];
+                },
+                'filter'=>['未支付','已支付']
+            ],
+            'pay_time:datetime',
 //            'trade_type',
-//            'refund_sn',
+            'refund_sn',
 //            'refund_fee',
-//            'is_refund',
+            [
+                'attribute'=>'is_refund',
+                'label'=>'退款',
+                'value'=>function($model){
+                    $map = ['未退款','已退款'];
+                    return $map[$model->is_refund];
+                },
+                'filter'=>['未退款','已退款']
+            ],
 //            'status',
-            'created_at:datetime',
-            'updated_at:datetime',
+//            'created_at:datetime',
+//            'updated_at:datetime',
 
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template'=>' {update} {refund} ',//{delete}
+                'template'=>'  {refund} {delete}',//{update}
                 'buttons' => [
                     // 下面代码来自于 yii\grid\ActionColumn 简单修改了下
                     'view' => function ($url, $model, $key) {
@@ -85,7 +121,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             'data-pjax' => '0',
                             'class'=>'btn btn-danger btn-sm '
                         ];
-                        return Html::a('退款', $url, $options);
+                        if (!$model->is_refund && $model->pay_status)
+                              return Html::a('退款', $url, $options);
                     },
                 ]
             ],

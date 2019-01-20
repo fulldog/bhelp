@@ -65,10 +65,10 @@ AppAsset::register($this);
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
-        <div class="col-sm-2" id="explain">
-            <?= AddonLeftWidget::widget(); ?>
-        </div>
-        <div class="col-sm-10">
+<!--        <div class="col-sm-2" id="explain">-->
+<!--            --><?//= AddonLeftWidget::widget(); ?>
+<!--        </div>-->
+        <div class="col-sm-12">
             <?= $content; ?>
         </div>
     </div>
@@ -181,25 +181,26 @@ AppAsset::register($this);
                 id = $(obj).parent().parent().attr('data-key');
             }
 
-            var sort = $(obj).val();
-            if(isNaN(sort)){
-                rfAffirm('排序只能为数字');
-                return false;
-            }else{
-                $.ajax({
-                    type:"get",
-                    url:"<?= AddonUrl::to(['ajax-update']); ?>",
-                    dataType: "json",
-                    data: {id:id,sort:sort},
-                    success: function(data){
-                        if(data.code != 200) {
-                            rfAffirm(data.message);
-                        }
+        var sort = $(obj).val();
+        if(isNaN(sort)){
+            rfAffirm('排序只能为数字');
+            return false;
+        }else{
+            $.ajax({
+                type:"get",
+                url:"<?= AddonUrl::to(['ajax-update'])?>",
+                dataType: "json",
+                data: {id:id,sort:sort},
+                success: function(data){
+                    if(data.code != 200) {
+                        rfAffirm(data.message);
                     }
-                });
-            }
+                }
+            });
         }
-    </script>
-    </body>
-    </html>
+    }
+</script>
+</body>
+</html>
 <?php $this->endPage() ?>
+

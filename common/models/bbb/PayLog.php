@@ -74,7 +74,7 @@ class PayLog extends BaseModel
             'pay_type' => '支付类型[1:微信;2:支付宝;3:银联]',
             'pay_fee' => '支付金额',
             'pay_status' => '支付状态',
-            'pay_time' => '创建时间',
+            'pay_time' => '支付时间',
             'trade_type' => '交易类型，取值为：JSAPI，NATIVE，APP等',
             'refund_sn' => '退款编号',
             'refund_fee' => '退款金额',

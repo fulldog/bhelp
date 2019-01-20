@@ -1,8 +1,8 @@
 <?php
 return [
     'adminEmail' => 'admin@example.com',
-    'adminAcronym' => 'RF',
-    'adminTitle' => 'RageFrame 应用开发引擎',
+    'adminAcronym' => 'bbb',
+    'adminTitle' => '宝帮宝',
 
     /** ------ 日志记录 ------ **/
     'user.log' => true,
@@ -13,7 +13,7 @@ return [
         'sys/manager/ajax-edit',
         'member/member/ajax-edit',
     ],
-
+    'user.log.except.code' => [],
     /** ------ 总管理员配置 ------ **/
     'adminAccount' => 1,// 系统管理员账号id
 

@@ -94,6 +94,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        return $this->redirect(['wechat/index/index']);
         return $this->render('index');
     }
 
