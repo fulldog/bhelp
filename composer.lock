@@ -4823,12 +4823,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-queue.git",
-                "reference": "92b7f241fb31de6474a65a0f3af955b2bb357fda"
+                "reference": "c8ab15903954d6dd4f6ccfee2cf28b3b2a4098de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-queue/zipball/92b7f241fb31de6474a65a0f3af955b2bb357fda",
-                "reference": "92b7f241fb31de6474a65a0f3af955b2bb357fda",
+                "url": "https://api.github.com/repos/yiisoft/yii2-queue/zipball/c8ab15903954d6dd4f6ccfee2cf28b3b2a4098de",
+                "reference": "c8ab15903954d6dd4f6ccfee2cf28b3b2a4098de",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -4905,7 +4905,7 @@
                 "sqs",
                 "yii"
             ],
-            "time": "2019-01-08T21:18:33+00:00"
+            "time": "2019-01-20T15:31:46+00:00"
         },
         {
             "name": "yiisoft/yii2-redis",
