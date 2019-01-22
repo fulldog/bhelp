@@ -9,7 +9,13 @@ use yii\grid\GridView;
 $this->title = 'VIP会员信息';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="member-vip-infos-index" style="padding: 20px">
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+        <h3 class="box-title"><?= $this->title; ?></h3>
+      </div>
+      <div class="box-body table-responsive">
 
 <!--    <p>-->
 <!--        --><?//= Html::a('Create Member Vip Infos', ['create'], ['class' => 'btn btn-success']) ?>
@@ -94,4 +100,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]); ?>
+      </div>
+    </div>
+  </div>
 </div>
