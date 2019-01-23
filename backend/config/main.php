@@ -82,13 +82,15 @@ return [
         'assetManager' => [
             // 线上建议将forceCopy设置成false，如果访问量不大无所谓
             'forceCopy' => true,
-            //'appendTimestamp' => true,
+            'linkAssets' => true, // 刷新后就可以清除缓存
+            //'appendTimestamp' => true,//实测对性能有影响
             'bundles' => [
                 'yii\web\JqueryAsset' => [
                     'sourcePath' => null,
                     'js' => []
                 ],
             ],
+
         ],
         'response' => [
             'class' => 'yii\web\Response',
