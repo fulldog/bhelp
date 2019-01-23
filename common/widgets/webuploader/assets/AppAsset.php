@@ -18,7 +18,7 @@ class AppAsset extends AssetBundle {
 
     public $js = [
         'js/uploader.js',
-        'js/sortable.min.js'
+        'js/Sortable.min.js'
     ];
 
     public $depends = [

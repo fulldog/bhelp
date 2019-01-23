@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <?= Html::jsFile('@web/resources/dist/js/vue.min.js')?>
-<?= Html::jsFile('@web/resources/dist/js/sortable.min.js')?>
+<?= Html::jsFile('@web/resources/dist/js/Sortable.min.js')?>
 <?= Html::jsFile('@web/resources/dist/js/vuedraggable.min.js')?>
 
 <div id="vueArea" class="wrapper-content animated fadeInRight">
