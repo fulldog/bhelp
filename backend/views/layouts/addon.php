@@ -49,10 +49,10 @@ AppAsset::register($this);
     </section>
     <section class="content">
       <div class="row">
-<!--        <div class="col-md-2" id="explain">-->
-<!--            --><?//= AddonLeftWidget::widget(); ?>
-<!--        </div>-->
-        <div class="col-md-12">
+        <div class="col-md-2" id="explain">
+            <?= AddonLeftWidget::widget(); ?>
+        </div>
+        <div class="col-md-10">
             <?= $content; ?>
         </div>
       </div>
