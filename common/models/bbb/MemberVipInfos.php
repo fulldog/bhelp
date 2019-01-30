@@ -27,7 +27,7 @@ class MemberVipInfos extends BaseModel
      */
     public static function tableName()
     {
-        return '{{%member_vip_infos}}';
+        return '{{%bbb_vip_infos}}';
     }
 
     /**

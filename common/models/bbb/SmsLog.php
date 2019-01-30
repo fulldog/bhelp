@@ -15,7 +15,7 @@ class SmsLog extends \common\models\common\BaseModel
 
     public static function tableName()
     {
-        return '{{%sms_log}}';
+        return '{{%bbb_sms_log}}';
     }
 
 }
