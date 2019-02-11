@@ -43,9 +43,8 @@ class m181228_021912_sys_manager extends Migration
         
         
         /* 表数据 */
-        $this->insert('{{%sys_manager}}',['id'=>'1','username'=>'admin','password_hash'=>'$2y$13$xmXSTDWVHNyWm4F0XNqQe.rDfY.rCKr/iZtfZYPOAMjdTVP2BJWtW','auth_key'=>'z6lrwixmdNF4VqtkXw6z-3vMZdSdngm2','password_reset_token'=>'','type'=>'10','realname'=>'简言','head_portrait'=>'','sex'=>'1','qq'=>'','email'=>'','birthday'=>'2017-02-25','provinces'=>'330000','city'=>'330200','area'=>'330203','address'=>'大潮街道666号','tel'=>'','mobile'=>'','visit_count'=>'0','last_time'=>'1545959014','last_ip'=>'127.0.0.1','role'=>'10','status'=>'1','created_at'=>'1449114934','updated_at'=>'1545959015']);
-        $this->insert('{{%sys_manager}}',['id'=>'2','username'=>'test','password_hash'=>'$2y$13$EaGMOaqz7F4L2jctAP8PHOdKgVWBfNLlPsmSnKlYNIoRVJjxPs4VS','auth_key'=>'cfW5L93qPKIXIPh-h-WfatyZVywbzPzm','password_reset_token'=>'','type'=>'1','realname'=>'','head_portrait'=>'','sex'=>'1','qq'=>'','email'=>'','birthday'=>NULL,'provinces'=>NULL,'city'=>NULL,'area'=>NULL,'address'=>'','tel'=>'','mobile'=>'','visit_count'=>'0','last_time'=>'1545795269','last_ip'=>'127.0.0.1','role'=>'10','status'=>'1','created_at'=>'1545031927','updated_at'=>'1545795269']);
-        
+        $this->insert('{{%sys_manager}}',['id'=>'1','username'=>'admin','password_hash'=>'$13$IjHD8QVSE/HVHoML/s/TE.AgAg.aEORG0x1Vejf87xUBRpVA.9aEa','auth_key'=>'z6lrwixmdNF4VqtkXw6z-3vMZdSdngm2','password_reset_token'=>'','type'=>'10','realname'=>'超级管理员','head_portrait'=>'','sex'=>'1','qq'=>'','email'=>'','birthday'=>'2017-02-25','provinces'=>'330000','city'=>'330200','area'=>'330203','address'=>'大潮街道666号','tel'=>'','mobile'=>'','visit_count'=>'0','last_time'=>'1545959014','last_ip'=>'127.0.0.1','role'=>'10','status'=>'1','created_at'=>'1449114934','updated_at'=>'1545959015']);
+
         /* 设置外键约束 */
         $this->execute('SET foreign_key_checks = 1;');
     }
