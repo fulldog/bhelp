@@ -2,7 +2,7 @@
 
 namespace backend\controllers\bbb;
 
-use common\models\bbb\BbbSpecials;
+use common\models\common\SearchModel;
 use Yii;
 use common\models\bbb\BbbSpecialDetails;
 use yii\data\ActiveDataProvider;
@@ -15,6 +15,8 @@ use yii\filters\VerbFilter;
  */
 class SpecialDetailsController extends Controller
 {
+    protected $pageSize = 10;
+    public $modelClass = 'common\models\bbb\BbbSpecialDetails';
     /**
      * {@inheritdoc}
      */
@@ -36,12 +38,22 @@ class SpecialDetailsController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => BbbSpecialDetails::find(),
+        $searchModel = new SearchModel([
+            'model' => BbbSpecialDetails::className(),
+            'scenario' => 'default',
+            'partialMatchAttributes' => ['title'], // 模糊查询
+            'defaultOrder' => [
+                'id' => SORT_DESC
+            ],
+            'pageSize' => $this->pageSize
         ]);
+        $dataProvider = $searchModel
+            ->search(Yii::$app->request->queryParams);
+//        $dataProvider->query->andWhere(['>=', 'status', StatusEnum::DISABLED]);
 
-        return $this->render('index', [
+        return $this->render($this->action->id, [
             'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
         ]);
     }
 
@@ -66,11 +78,10 @@ class SpecialDetailsController extends Controller
     public function actionCreate()
     {
         $model = new BbbSpecialDetails();
-        $model->loadDefaultValues();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
-
+        $model->loadDefaultValues();
         return $this->render('create', [
             'model' => $model,
         ]);
@@ -88,7 +99,7 @@ class SpecialDetailsController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('update', [

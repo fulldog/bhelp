@@ -44,7 +44,7 @@ use kartik\select2\Select2;
           <?= $form->field($model, 'totle')->textInput() ?>
 
           <?= $form->field($model, 'subscrible_count')->textInput() ?>
-
+          <?= $form->field($model, 'content')->widget(\common\widgets\ueditor\UEditor::className()) ?>
           <?= $form->field($model, 'status')->radioList(['1' => '启用','0' => '禁用']); ?>
 
       </div>

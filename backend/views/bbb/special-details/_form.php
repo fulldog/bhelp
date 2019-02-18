@@ -32,7 +32,24 @@ use kartik\select2\Select2;
               ],
           ]);?>
           <?= $form->field($model, 'desc')->textarea(); ?>
-          <?= $form->field($model, 'content')->widget(\common\widgets\ueditor\UEditor::className()) ?>
+          <?= $form->field($model, 'voice')->widget('common\widgets\webuploader\Files', [
+              'config' => [
+                  'pick' => [
+                      'multiple' => false,
+                  ],
+                  'accept' => [
+                      'extensions' => ['amr', 'mp3', 'wma', 'wav', 'amr'],
+                      'mimeTypes' => 'audio/*',
+                  ],
+                  'formData' => [
+                      // 保留原名称
+                      'originalName' => false
+                  ],
+                  'fileSingleSizeLimit' => 5120 * 1024 * 20,// 大小限制
+                  'independentUrl' => true,
+                  'select' => true, // 选择在线图片
+              ]
+          ])->label('音频')->hint('只支持 mp3/wma/wav/amr 格式,大小不超过为100M');?>
           <?= $form->field($model, 'view_count')->textInput() ?>
           <?= $form->field($model, 'status')->radioList(['1' => '启用','0' => '禁用']); ?>
       </div>

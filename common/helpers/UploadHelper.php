@@ -28,6 +28,11 @@ class UploadHelper
     const PREFIX_MERGE_CACHE = 'upload-file-guid:';
 
     /**
+     *源生文件名
+     */
+    public $File_name;
+
+    /**
      * 上传配置
      *
      * @var array
@@ -164,7 +169,7 @@ class UploadHelper
     public function verifyFile()
     {
         $file = UploadedFile::getInstanceByName($this->uploadFileName);
-
+        $this->File_name = $file->getBaseName();
         if (!$file)
         {
             throw new NotFoundHttpException('找不到上传文件，请检查上传类型');
@@ -544,7 +549,7 @@ class UploadHelper
 
         $config = $this->config;
         // 保留原名称
-        $config['originalName'] == false && $this->baseInfo['name'] = $config['prefix'] . StringHelper::randomNum(time());
+        ($config['originalName'] == false || $config['originalName'] == "false") && $this->baseInfo['name'] = $config['prefix'] . StringHelper::randomNum(time());
 
         // 文件路径
         $filePath = $config['path'] . date($config['subName'], time()) . "/";
@@ -580,7 +585,7 @@ class UploadHelper
                 }
             }
 
-            $config = ArrayHelper::filter($config, $this->filter);
+//            $config = ArrayHelper::filter($config, $this->filter);
             $this->config = ArrayHelper::merge(Yii::$app->params['uploadConfig'][$type], $config);
         }
         catch (\Exception $e)
@@ -665,7 +670,8 @@ class UploadHelper
         $attachment->specific_type = $this->baseInfo['type'];
         $attachment->size = $this->baseInfo['size'];
         $attachment->extension = $this->baseInfo['extension'];
-        $attachment->name = $this->baseInfo['name'];
+//        $attachment->name = $this->baseInfo['name'];
+        $attachment->name = $this->File_name;
         $attachment->base_url = $this->baseInfo['url'];
         $attachment->path = $path;
         if (!$attachment->save())

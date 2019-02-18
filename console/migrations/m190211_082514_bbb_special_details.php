@@ -17,7 +17,7 @@ class m190211_082514_bbb_special_details extends Migration
             'sid' => $this->integer(10)->notNull(),
             'title' => $this->string(100)->notNull()->comment('标题'),
             'desc' => $this->string(255)->comment('描述'),
-            'content' => $this->text(),
+            'voice' => $this->string(255)->comment('音频'),
             'view_count' => $this->integer(10)->defaultValue(0),
             'status' => $this->smallInteger()->defaultValue(1)->comment('状态'),
             'created_at' => 'int(10) unsigned NOT NULL DEFAULT \'0\' COMMENT \'创建时间\'',

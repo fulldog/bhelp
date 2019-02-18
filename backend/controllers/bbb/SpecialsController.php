@@ -17,7 +17,7 @@ use yii\filters\VerbFilter;
 class SpecialsController extends Controller
 {
 
-    use CurdTrait;
+//    use CurdTrait;
     protected $pageSize = 10;
     public $modelClass = 'common\models\bbb\BbbSpecials';
 
@@ -83,11 +83,10 @@ class SpecialsController extends Controller
     public function actionCreate()
     {
         $model = new BbbSpecials();
-        $model->loadDefaultValues();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
         }
-
+        $model->loadDefaultValues();
         return $this->render('create', [
             'model' => $model,
         ]);

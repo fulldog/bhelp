@@ -2,8 +2,6 @@
 
 namespace common\models\bbb;
 
-use Yii;
-
 /**
  * This is the model class for table "{{%bbb_specials}}".
  *
@@ -38,6 +36,7 @@ class BbbSpecials extends \common\models\common\BaseModel
         return [
             [['author', 'title'], 'required'],
             [['price'], 'number'],
+            [['content'], 'string'],
             [['totle', 'subscrible_count', 'status', 'created_at', 'updated_at'], 'integer'],
             [['author', 'head', 'title', 'desc', 'img'], 'string', 'max' => 255],
         ];
@@ -59,16 +58,17 @@ class BbbSpecials extends \common\models\common\BaseModel
             'totle' => '期数',
             'subscrible_count' => '订阅数',
             'status' => '状态',//0禁用 1启用
+            'content' => '内容',
             'created_at' => '创建时间',
             'updated_at' => '更新时间',
         ];
     }
 
     static function getAllAuthors(){
-        $result =  self::find()->select(['id','author'])->asArray()->all();
+        $result =  self::find()->select(['id','author','title'])->where(['status'=>1])->asArray()->all();
         $data = [];
         foreach ($result as $v){
-            $data[$v['id']] = $v['author'];
+            $data[$v['id']] = $v['author'].'--'.$v['title'];
         }
         return $data;
     }

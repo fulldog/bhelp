@@ -21,6 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
       <div class="box-body table-responsive">
           <?= GridView::widget([
               'dataProvider' => $dataProvider,
+              'filterModel' => $searchModel,
               'columns' => [
 //            ['class' => 'yii\grid\SerialColumn'],
 
@@ -28,7 +29,15 @@ $this->params['breadcrumbs'][] = $this->title;
                   [
                       'attribute' => '专栏分类',
                       'value'=>function($model){
-                          return $model->special['author'];
+                          return $model->special['author'].'-'.$model->special['title'];
+                      },
+                  ],
+                  [
+                      'attribute' => 'voice',
+                      'filter'=>false,
+                      'format'=>'raw',
+                      'value'=>function($model){
+                          return Html::a('播放',$model->voice,['target'=>'_blank']);
                       },
                   ],
                   [
@@ -41,8 +50,10 @@ $this->params['breadcrumbs'][] = $this->title;
                   ],
                   'title',
                   'desc',
-//                  'content:ntext',
-                  'view_count',
+                  [
+                      'attribute' => 'view_count',
+                      'filter'=>false
+                  ],
                   //'created_at',
                   //'updated_at',
                   [
