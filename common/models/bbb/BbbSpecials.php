@@ -16,7 +16,7 @@ use Yii;
  * @property string $price 价格
  * @property int $totle 期数
  * @property int $subscrible_count 订阅数
- * @property int $status 10 关闭 20 打开
+ * @property int $status 0 关闭 1 打开
  * @property int $created_at
  * @property int $updated_at
  */
@@ -58,9 +58,18 @@ class BbbSpecials extends \common\models\common\BaseModel
             'price' => '价格',
             'totle' => '期数',
             'subscrible_count' => '订阅数',
-            'status' => '10 关闭 20 打开',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'status' => '状态',//0禁用 1启用
+            'created_at' => '创建时间',
+            'updated_at' => '更新时间',
         ];
+    }
+
+    static function getAllAuthors(){
+        $result =  self::find()->select(['id','author'])->asArray()->all();
+        $data = [];
+        foreach ($result as $v){
+            $data[$v['id']] = $v['author'];
+        }
+        return $data;
     }
 }

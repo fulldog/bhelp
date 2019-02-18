@@ -16,10 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
       <div class="box-header">
         <h3 class="box-title"><?= $this->title; ?></h3>
         <div class="box-tools">
-            <?= HtmlHelper::create(['ajax-edit'], '创建', [
-                'data-toggle' => 'modal',
-                'data-target' => '#ajaxModal',
-            ])?>
+            <?= Html::a('新增专栏', ['create'], ['class' => 'btn btn-success']) ?>
         </div>
       </div>
       <div class="box-body table-responsive">
@@ -28,22 +25,60 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+//            ['class' => 'yii\grid\SerialColumn'],
 
-//            'id',
+            'id',
             'author',
             'head',
+            [
+                'attribute' => 'status',
+                'value'=>function($model){
+                    $arr = [1=>'启用',0=>'禁用'];
+                    return $arr[$model->status];
+                },
+                'filter'=>[1=>'启用',0=>'禁用']
+            ],
             'title',
             'desc',
-            //'img',
-            //'price',
-            //'totle',
-            //'subscrible_count',
-            //'status',
-            //'created_at',
-            //'updated_at',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'attribute' => 'img',
+                'value'=>function($model){
+                    return Html::img($model->img,['style'=>'width:100px;']);
+                },
+                'filter'=>false,
+                'format'=>'raw'
+            ],
+            'price',
+            'totle',
+//            'subscrible_count',
+//            'created_at',
+//            'updated_at',
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template'=>'{update} {delete}',
+                'buttons' => [
+                    'update' => function ($url, $model, $key) {
+                        $options = [
+                            'title' => Yii::t('yii', 'Update'),
+                            'aria-label' => Yii::t('yii', 'Update'),
+                            'data-pjax' => '0',
+                            'class'=>'btn btn-info btn-sm '
+                        ];
+                        return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, $options);
+                    },
+                    'delete' => function ($url, $model, $key) {
+                        $options = [
+                            'title' => Yii::t('yii', 'Delete'),
+                            'aria-label' => Yii::t('yii', 'Delete'),
+                            'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
+                            'data-method' => 'post',
+                            'data-pjax' => '0',
+                            'class'=>'btn btn-danger btn-sm '
+                        ];
+                        return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, $options);
+                    },
+                ]
+            ],
         ],
     ]); ?>
       </div>

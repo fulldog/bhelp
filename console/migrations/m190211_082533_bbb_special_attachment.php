@@ -20,7 +20,7 @@ class m190211_082533_bbb_special_attachment extends Migration
             'name' =>'varchar(255) DEFAULT NULL',
             'ext' =>'char(10) DEFAULT NULL',
             'size' =>'int(10) DEFAULT NULL',
-            'status' =>'int(3) DEFAULT \'20\' COMMENT \'10禁用\r\n20启用\'',
+            'status' =>'int(3) DEFAULT \'1\' COMMENT \'状态\'',
             'path' =>'varchar(255) DEFAULT NULL COMMENT \'物理路径\'',
             'url' =>'varchar(255) DEFAULT NULL',
             'created_at' =>'int(10) DEFAULT NULL',

@@ -5,16 +5,13 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\bbb\BbbSpecials */
 
-$this->title = 'Create Bbb Specials';
-$this->params['breadcrumbs'][] = ['label' => 'Bbb Specials', 'url' => ['index']];
+$this->title = $model->isNewRecord ? '新增' : '编辑';
+$this->params['breadcrumbs'][] = ['label' => '专栏列表', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="bbb-specials-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+<?= $this->render('_form', [
+    'model' => $model,
+]) ?>
 
-</div>

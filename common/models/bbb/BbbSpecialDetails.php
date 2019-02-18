@@ -13,7 +13,7 @@ use Yii;
  * @property string $desc
  * @property string $content
  * @property int $view_count 浏览量
- * @property int $status 10 关闭 20 打开
+ * @property int $status 0 关闭 1 打开
  * @property int $created_at
  * @property int $updated_at
  */
@@ -47,14 +47,19 @@ class BbbSpecialDetails extends \common\models\common\BaseModel
     {
         return [
             'id' => 'ID',
-            'sid' => 'Sid',
-            'title' => 'Title',
-            'desc' => 'Desc',
-            'content' => 'Content',
+            'sid' => '专栏分类',
+            'title' => '标题',
+            'desc' => '描述',
+            'content' => '内容',
             'view_count' => '浏览量',
-            'status' => '10 关闭 20 打开',
+            'status' => '状态',//0禁用 1启用
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
+    }
+
+    function getSpecial()
+    {
+        return $this->hasOne(BbbSpecials::class,['id'=>'sid']);
     }
 }

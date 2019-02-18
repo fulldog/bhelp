@@ -2,6 +2,7 @@
 
 namespace backend\controllers\bbb;
 
+use common\models\bbb\BbbSpecials;
 use Yii;
 use common\models\bbb\BbbSpecialDetails;
 use yii\data\ActiveDataProvider;
@@ -65,7 +66,7 @@ class SpecialDetailsController extends Controller
     public function actionCreate()
     {
         $model = new BbbSpecialDetails();
-
+        $model->loadDefaultValues();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }

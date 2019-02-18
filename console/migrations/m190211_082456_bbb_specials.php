@@ -22,10 +22,9 @@ class m190211_082456_bbb_specials extends Migration
             'price' => $this->decimal()->defaultValue(0),
             'totle' => $this->integer(10)->defaultValue(0)->comment('期数'),
             'subscrible_count' => $this->integer(10)->defaultValue(0)->comment('订阅数'),
-            'status' => $this->smallInteger()->defaultValue(20)->comment('状态'),
+            'status' => $this->smallInteger()->defaultValue(1)->comment('状态'),
             'created_at' => 'int(10) unsigned NOT NULL DEFAULT \'0\' COMMENT \'创建时间\'',
             'updated_at' => 'int(10) unsigned NOT NULL DEFAULT \'0\' COMMENT \'更新时间\'',
-            'PRIMARY KEY (`id`)'
         ], "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='珠宝专栏'");
     }
 
