@@ -8,15 +8,14 @@
 
 namespace wechat\controllers;
 
+use common\models\bbb\BbbSpecials;
+use common\models\bbb\MemberVipInfos;
 use common\models\bbb\Orders;
-use unclead\multipleinput\assets\FontAwesomeAsset;
 use Yii;
 use common\helpers\PayHelper;
 use common\helpers\StringHelper;
 use common\models\common\PayLog;
 use common\helpers\UrlHelper;
-use yii\base\Response;
-use yii\helpers\Json;
 
 class OrderController extends MyController
 {
@@ -67,12 +66,18 @@ class OrderController extends MyController
         ]);
     }
 
-    public function actionPay()
+    public function actionPay($orderSn)
     {
-        $orderSn = \Yii::$app->request->get('orderSn');
+        $view = 'pay';
+//        $orderSn = \Yii::$app->request->get('orderSn');
         $orderInfo = Orders::findOne(['order_sn'=>$orderSn]);
+        $special = '';
         if (!$orderInfo){
             $this->redirect(UrlHelper::to(['site/error']))->send();
+        }
+        if ($orderInfo->goods!='vip'){
+            $view = 'subscribePay';
+            $special = BbbSpecials::findOne(['id'=>$orderInfo['goods']])->toArray();
         }
         $orderData = [
             'trade_type' => 'JSAPI', // JSAPI，NATIVE，APP...
@@ -90,9 +95,10 @@ class OrderController extends MyController
         {
             $json = $payment->jssdk->bridgeConfig($result['prepay_id']);
         }
-        return $this->render('pay',[
+        return $this->render($view,[
             'json'=>$json,
-            'orderInfo'=>$orderInfo->toArray()
+            'orderInfo'=>$orderInfo->toArray(),
+            'special'=>$special
         ]);
     }
 
@@ -106,7 +112,7 @@ class OrderController extends MyController
             $order->member_id = $this->memberId;
             $order->money = $post['vipMoney'];
             $order->month_limit = $post['vipLimit'];
-            $order->goods = '帮宝帮会员续费';
+            $order->goods = 'vip';
             $order->desc = '帮宝帮会员续费';
             if ($order->save()){
                 return [
@@ -137,18 +143,50 @@ class OrderController extends MyController
         return $this->render('succ');
     }
 
-    function actionSubscribe(){
-        $sid = Yii::$app->request->get('sid');
-
+    function actionSubscribe($sid){
+        $special = BbbSpecials::findOne(['id'=>$sid])->toArray();
         if (Yii::$app->request->isPost && Yii::$app->request->isAjax){
+            \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+            $orders = Orders::findOne(['member_id'=>$this->memberId,'goods'=>$sid,'status'=>0]);
+            if ($orders){
+                return [
+                    'status'=>1,
+                    'msg'=>'下单成功',
+                    'data'=>[
+                        'order_sn' => $orders->order_sn
+                    ]
+                ];
+            }
+            $member = MemberVipInfos::findOne(['member_id'=>$this->memberId])->toArray();
             //创建订单
-            exit(Json::encode([
-                'status'=>0
-            ]));
+            $sn = 'BbB'.date('YmdHis').StringHelper::randomNum();
+            $order = new Orders();
+            $order->order_sn = $sn;
+            $order->member_id = $this->memberId;
+            $order->money = $special['price'];
+            $order->goods = $special['id'];
+            $order->desc =  $special['author'].'-'.$special['title'];
+            $order->rec_code = $member['recommendCode'];
+            if ($order->save()){
+                return [
+                    'status'=>1,
+                    'msg'=>'下单成功',
+                    'data'=>[
+                        'order_sn' => $sn
+                    ]
+                ];
+            }
+            return [
+                'status'=>0,
+                'msg'=>$order->getFirstErrorMessage(),
+                'data'=>[
+                ]
+            ];
         }
 
         return $this->render('subscribe',[
-            'sid'=>$sid
+            'info'=>$special
         ]);
     }
 }

@@ -11,17 +11,20 @@ $this->registerCssFile(Yii::getAlias('@bbb').'/css/jewelryColumn.css',['depends'
 <!--列表-->
 <div class="columns">
     <div class="listTitle">珠宝专栏</div>
-    <div class="weui-cells jewelryList">
-        <a class="weui-cell weui-cell_access" href="<?=Yii::$app->urlManager->createUrl(['order/subscribe','sid'=>1])?>">
-            <div class="weui-cell__hd"><img src="<?=Yii::$app->params['bbb']?>/images/jewelry_12.jpg" alt=""></div>
-            <div class="weui-cell__bd">
-                <p class="name">杜半·珠宝与设计</p>
-                <p class="job">杜半 深圳市珠宝设计师协会会长</p>
-                <p class="intro">带你领略珠宝灵魂魅力</p>
-                <p class="price">¥99/元</p>
-            </div>
-            <div class="weui-cell__ft"><span class="peopleNub">1002人已订阅</span></div>
+  <?if (!empty($list)):?>
+    <?foreach ($list as $v):?>
+      <div class="weui-cells jewelryList">
+        <a class="weui-cell weui-cell_access" href="<?=Yii::$app->urlManager->createUrl(['order/subscribe','sid'=>$v['id']])?>">
+          <div class="weui-cell__hd"><img src="<?=$v['img']?>" alt=""></div>
+          <div class="weui-cell__bd">
+            <p class="name"><?=$v['author'].'-'.$v['title']?></p>
+            <p class="job"><?=$v['author'].'-'.$v['head']?></p>
+            <p class="intro"><?=$v['desc']?></p>
+            <p class="price">¥<?=$v['price']?>/元</p>
+          </div>
+          <div class="weui-cell__ft"><span class="peopleNub"><?=$v['subscrible_count']?>人已订阅</span></div>
         </a>
-    </div>
-
+      </div>
+    <?endforeach;?>
+  <?endif;?>
 </div>

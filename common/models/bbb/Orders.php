@@ -44,7 +44,7 @@ class Orders extends BaseModel
             [['member_id', 'order_sn'], 'required'],
             [['member_id', 'status', 'updated_at', 'created_at','month_limit'], 'integer'],
             [['money'], 'number'],
-            [['order_sn', 'trade_type', 'rec_code','trade_no', 'out_trade_no', 'goods', 'desc'], 'string', 'max' => 255],
+            [['order_sn', 'trade_type', 'rec_code','trade_no', 'out_trade_no', 'desc'], 'string', 'max' => 255],
         ];
     }
 
@@ -80,5 +80,9 @@ class Orders extends BaseModel
             '待支付','已支付','已退款'
         ];
         return $map[$this->status];
+    }
+
+    function getRelateSpecial(){
+        return $this->hasOne(BbbSpecials::class,['id'=>'goods']);
     }
 }

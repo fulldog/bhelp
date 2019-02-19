@@ -10,6 +10,7 @@ namespace wechat\controllers;
 
 
 use common\models\bbb\MemberVipInfos;
+use common\models\member\MemberInfo;
 use common\models\wechat\Fans;
 
 class MyController extends WController
@@ -34,6 +35,9 @@ class MyController extends WController
     function init()
     {
         parent::init();
+        if (\Yii::$app->request->isAjax){
+            $this->enableCsrfValidation = false;
+        }
         $this->view->params['description'] = 'bbb';
         $this->view->params['title'] = 'bbb';
         $this->_saveWechatUser();
@@ -55,9 +59,12 @@ class MyController extends WController
                 $fan->province = \Yii::$app->params['wechatMember']['original']['province'];
                 $fan->city = \Yii::$app->params['wechatMember']['original']['city'];
                 $fan->save();
-            }else{
+            }elseif ($fan->member_id){
                 $this->memberId = $fan->member_id;
-                $vips = MemberVipInfos::findOne(['member_id'=>$this->memberId]);
+                $user = MemberInfo::findOne(['id'=>$fan->member_id]);
+                \Yii::$app->session->set('user_info',$user->toArray());
+
+                $vips = MemberVipInfos::findOne(['member_id'=>$fan->member_id]);
                 if ($vips){
                     $time = time();
                     $this->isVip = true;

@@ -32,7 +32,7 @@ class WController extends BaseController
         // Yii::$app->params['wechatConfig']['oauth']['scopes'] = ['snsapi_base'];
 
         // 开启微信模拟数据
-        Yii::$app->params['simulateUser']['switch'] = true;
+//        Yii::$app->params['simulateUser']['switch'] = true;
 
         // 微信登录
         $this->login();

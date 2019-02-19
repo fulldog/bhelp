@@ -9,6 +9,9 @@
 namespace wechat\controllers;
 
 
+use common\models\bbb\BbbMessages;
+use common\models\bbb\BbbSpecials;
+
 class MineController extends MyController
 {
     function actionIndex(){
@@ -41,7 +44,6 @@ class MineController extends MyController
     }
 
     function actionDocash(){
-
         if (\Yii::$app->request->isAjax && \Yii::$app->request->isPost){
 
         }
@@ -52,14 +54,22 @@ class MineController extends MyController
     }
 
     function actionMessage(){
-        return $this->render('message',[
+        if (\Yii::$app->request->isAjax && \Yii::$app->request->isPost){
+            BbbMessages::updateAll(['status'=>1],['id'=>$this->request_post('id')]);
+            exit($this->request_post('id'));
+        }
 
+//        BbbMessages::updateAll(['status'=>1],['uid'=>$this->memberId]);
+        $messages = BbbMessages::find()->select(['message','id','created_at','status'])->where(['uid'=>$this->memberId])->orderBy(['id'=>SORT_DESC])->limit(20)->asArray()->all();
+        return $this->render('message',[
+            'messages'=>$messages
         ]);
     }
 
     function actionSubscribe(){
-        return $this->render('subscribe',[
 
+        return $this->render('subscribe',[
+            'info'=>''
         ]);
     }
 }

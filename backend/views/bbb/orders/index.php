@@ -32,30 +32,6 @@ $this->params['breadcrumbs'][] = $this->title;
                       'label' => '购买者',
                   ],
                   'order_sn',
-                  'out_trade_no',
-                  [
-                      'attribute' => 'trade_type',
-                      'filter' => ['JSAPI' => 'JSAPI']
-                  ],
-//            'trade_no',
-                  [
-                      'attribute' => 'month_limit',
-                      'filter' => false, //不显示搜索框
-                  ],
-//            [
-//                'label'=>'推荐用户',
-//                'value'=>function($model){
-//                    $info = (new \common\models\bbb\MemberVipInfos())->getRelatedCodeUser($model->rec_code);
-//                    if ($info){
-//                        return $info['username'];
-//                    }
-//                    return ;
-//                }
-//            ],
-                  [
-                      'attribute' => 'money',
-                      'filter' => false, //不显示搜索框
-                  ],
                   [
                       'attribute' => 'status',
                       'value' => function ($model) {
@@ -63,7 +39,30 @@ $this->params['breadcrumbs'][] = $this->title;
                       },
                       'filter' => ['待支付', '已支付', '已退款']
                   ],
-                  'goods',
+                  [
+                      'attribute' => 'trade_type',
+                      'filter' => ['JSAPI' => 'JSAPI']
+                  ],
+                  [
+                      'attribute' => 'month_limit',
+                      'filter' => false, //不显示搜索框
+                  ],
+                  [
+                      'attribute' => 'money',
+                      'filter' => false, //不显示搜索框
+                  ],
+
+                  [
+                      'attribute' => 'goods',
+                      'filter' => false, //不显示搜索框
+                      'value' => function ($model) {
+                          if ($model->relateSpecial){
+                            return '订阅：'.$model->relateSpecial->author.'-'.$model->relateSpecial->title;
+                          }else{
+                            return $model->goods;
+                          }
+                      }
+                  ],
 //            'desc',
                   [
                       'attribute' => 'updated_at',
@@ -83,7 +82,7 @@ $this->params['breadcrumbs'][] = $this->title;
 //            'created_at:datetime',
                   [
                       'class' => 'yii\grid\ActionColumn',
-                      'template' => '{delete}',
+                      'template' => '{view} {delete}',
                       'buttons' => [
                           // 下面代码来自于 yii\grid\ActionColumn 简单修改了下
                           'view' => function ($url, $model, $key) {
@@ -91,6 +90,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                   'title' => Yii::t('yii', 'View'),
                                   'aria-label' => Yii::t('yii', 'View'),
                                   'data-pjax' => '0',
+                                  'class' => 'btn btn-info btn-sm '
                               ];
                               return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, $options);
                           },

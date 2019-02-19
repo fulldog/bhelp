@@ -13,8 +13,8 @@ return [
         'switch' => true,// 微信应用模拟用户检测开关
         'userInfo' => [
             'id' => 'osnGRwKTP9-gLSA1IrYJdpPlgTUw',
-            'nickname' => '简言',
-            'name' => '简言',
+            'nickname' => 'bbb',
+            'name' => 'bbb',
             'avatar' => 'http://wx.qlogo.cn/mmopen/Q3auHgzwzM4eoQGHDIsK05kWV5deHKK99ka7d65eecJZ7CRZGTlicuaoH7YzcbzYXo1pDR6N77bdLTwA6F2mZA1cFw7icJxwwSWbVgqk3l6gU/0',
             'original' => [
                 'openid' => 'osnGRwKTP9-gLSA1IrYJdpPlgTUw',
@@ -25,6 +25,7 @@ return [
                 'country' => '中国',
                 'headimgurl' => 'http://wx.qlogo.cn/mmopen/Q3auHgzwzM4eoQGHDIsK05kWV5deHKK99ka7d65eecJZ7CRZGTlicuaoH7YzcbzYXo1pDR6N77bdLTwA6F2mZA1cFw7icJxwwSWbVgqk3l6gU/0',
                 'privilege' => [],
+                'nickname' => 'bbb',
             ],
             'token' => '10_8ZUhjEP6s_nanE37Z7Zh3kFRA7ZhFRAALBtkCV1WE',
             'provider' => 'WeChat',

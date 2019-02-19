@@ -10,7 +10,7 @@
   <div class="swiper-wrapper">
     <?if(!empty($imgs)):?>
       <?foreach ($imgs as $v):?>
-      <div class="swiper-slide"><img src="<?=$v?>" alt="" width="100%" ></div>
+      <div class="swiper-slide"><img src="<?=$v['cover']?>" alt="" width="100%" ></div>
       <?endforeach;?>
     <?endif;?>
   </div>

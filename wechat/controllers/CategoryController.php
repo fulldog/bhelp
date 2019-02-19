@@ -9,6 +9,8 @@
 namespace wechat\controllers;
 
 
+use common\models\bbb\BbbSpecials;
+
 class CategoryController extends MyController
 {
 
@@ -32,8 +34,10 @@ class CategoryController extends MyController
 
     //珠宝
     function actionJewelry(){
-
-        return $this->render('jewelry');
+        //得到珠宝专栏
+        return $this->render('jewelry',[
+            'list'=>BbbSpecials::find()->where(['status'=>1])->asArray()->all()
+        ]);
     }
 
     function actionQualityPerson(){

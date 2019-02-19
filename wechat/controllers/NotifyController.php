@@ -82,20 +82,12 @@ class NotifyController extends Controller
             $order->trade_type =   $orderInfo['trade_type'];
             $order->out_trade_no =  $orderInfo['out_trade_no'];
 
-
             $order->save(); // 保存订单
 
-            if (!($vip = MemberVipInfos::findOne(['member_id'=>$order->member_id]))){
-                $vip = new MemberVipInfos();
-                $vip->member_id = $order->member_id;
-                $vip->recommendCode = MemberVipInfos::getCode();
-                $vip->parent_id = MemberVipInfos::getPidByCode($order->rec_code);
-                $vip->openid = $message['openid'];
+            if ($message['result_code'] === 'SUCCESS'){
+                $this->pay_success($order,$message['openid']);
             }
-            $vip->vipage += $order->month_limit;
-            $vip->vipstart_at = time();
-            $vip->vipend_at = strtotime("+".$order->month_limit.' month');
-            $vip->save();
+
             return true; // 返回处理完成
         });
 
@@ -103,5 +95,23 @@ class NotifyController extends Controller
             return PayHelper::notifyWechatSuccess();
         }
         return PayHelper::notifyWechatFail();
+    }
+
+    function pay_success($order,$openid){
+        if ($order->goods=='vips'){
+            if (!($vip = MemberVipInfos::findOne(['member_id'=>$order->member_id]))){
+                $vip = new MemberVipInfos();
+                $vip->member_id = $order->member_id;
+                $vip->recommendCode = MemberVipInfos::getCode();
+                $vip->parent_id = MemberVipInfos::getPidByCode($order->rec_code);
+                $vip->openid = $openid;
+            }
+            $vip->vipage += $order->month_limit;
+            $vip->vipstart_at = time();
+            $vip->vipend_at = strtotime("+".$order->month_limit.' month');
+            $vip->save();
+        }else{
+
+        }
     }
 }

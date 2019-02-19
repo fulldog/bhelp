@@ -11,7 +11,7 @@ use Yii;
  *
  * @property int $id
  * @property int $member_id
- * @property string $rec_code 邀请码
+ * @property string $recommendCode 邀请码
  * @property int $parent_id 上级推荐人
  * @property string $openid
  * @property int $vipage vip时长：月
@@ -38,7 +38,7 @@ class MemberVipInfos extends BaseModel
         return [
             [['member_id'], 'required'],
             [['member_id', 'parent_id', 'vipage', 'vipstart_at', 'vipend_at', 'created_at', 'updated_at'], 'integer'],
-            [['rec_code', 'openid'], 'string', 'max' => 255],
+            [['rec_code', 'openid','recommendCode'], 'string', 'max' => 255],
         ];
     }
 
@@ -50,7 +50,7 @@ class MemberVipInfos extends BaseModel
         return [
             'id' => 'ID',
             'member_id' => 'Member ID',
-            'rec_code' => '邀请码',
+            'recommendCode' => '邀请码',
             'parent_id' => '上级推荐人',
             'openid' => 'Openid',
             'vipage' => 'vipn年龄：月',

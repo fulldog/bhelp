@@ -63,6 +63,14 @@ class IndexController extends MyController
                     'status'=>0
                 ];
             }
+
+            if (!preg_match('/^1[345789]\d{9}$/',$phone)){
+                return [
+                    'msg'=>'手机号码有误',
+                    'status'=>0
+                ];
+            }
+
             if (!$this->checkPhoneCode($phone,$phoneCode)){
                 return [
                     'msg'=>'手机验证码有误',
@@ -78,16 +86,15 @@ class IndexController extends MyController
                 $sn = 'BbB'.date('YmdHis').StringHelper::randomNum();
                 $flag = \Yii::$app->db->transaction(function() use ($phone,$vipMoney,$recommendCode,$sn,$vipLimit) {
                     $user = new MemberInfo();
-                    $user->username = $user->mobile_phone = $phone;
+                    $user->username = $user->mobile = $phone;
                     $user->nickname = \Yii::$app->params['wechatMember']['nickname'];
                     $user->head_portrait = \Yii::$app->params['wechatMember']['avatar'];
-                    $user->sex = \Yii::$app->params['wechatMember']['original']['sex'];
+                    $user->gender = \Yii::$app->params['wechatMember']['original']['sex'];
 //                    $user->area = \Yii::$app->params['wechatMember']['original']['country'];
 //                    $user->provinces = \Yii::$app->params['wechatMember']['original']['province'];
 //                    $user->city = \Yii::$app->params['wechatMember']['original']['city'];
                     $u = $user->save();
 
-                    \Yii::$app->session->set('user_info',$user->toArray());
                     Fans::updateAll(['member_id'=>$user->id],['openid'=>$this->openid]);
 
                     $order = new Orders();
@@ -95,12 +102,16 @@ class IndexController extends MyController
                     $order->member_id = $user->id;
                     $order->money = $vipMoney;
                     $order->month_limit = $vipLimit;
-                    $order->goods = '帮宝帮会员购买';
+                    $order->goods = 'vip';
                     $order->desc = '帮宝帮会员购买';
                     $order->rec_code = $recommendCode;
                     $f = $order->save();
 
-                    return $u && $f;
+                    if ($u && $f){
+                        \Yii::$app->session->set('user_info',$user->toArray());
+                        return true;
+                    }
+                    return false;
 
                 });
                 if ($flag){

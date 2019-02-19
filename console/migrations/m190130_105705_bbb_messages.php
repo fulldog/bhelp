@@ -16,7 +16,7 @@ class m190130_105705_bbb_messages extends Migration
             'id' => 'int(10) NOT NULL AUTO_INCREMENT COMMENT \'主键\'',
             'uid' => 'int(10) NOT NULL ',
             'notice_id' => 'int(10) NULL  COMMENT \'公告ID\'',
-            'status' => 'tinyint(4) NULL DEFAULT \'1\' COMMENT \'状态\'',
+            'status' => 'tinyint(4) NULL DEFAULT \'0\' COMMENT \'状态\'',
             'message' => 'varchar(255) NULL DEFAULT \'\' COMMENT \'消息内容\'',
             'created_at' => 'int(10) unsigned NOT NULL DEFAULT \'0\' COMMENT \'创建时间\'',
             'updated_at' => 'int(10) unsigned NOT NULL DEFAULT \'0\' COMMENT \'更新时间\'',

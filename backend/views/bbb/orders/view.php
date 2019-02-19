@@ -10,39 +10,67 @@ $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Orders', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="orders-view">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
-
+<div class="row">
+  <div class="col-lg-12">
+    <div class="box">
+      <div class="box-header with-border">
+        <h3 class="box-title">基本信息</h3>
+      </div>
+      <div class="box-body">
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
             'member_id',
+            [
+                'attribute' => 'members.username',
+                'filter' => false, //不显示搜索框
+                'label' => '购买者',
+            ],
+            [
+                'label'=>'推荐者',
+                'value'=>function($model){
+                    $info = (new \common\models\bbb\MemberVipInfos())->getRelatedCodeUser($model->rec_code);
+                    if ($info){
+                        return $info['username'];
+                    }
+                    return ;
+                }
+            ],
             'order_sn',
-            'trade_type',
+            [
+                'attribute' => 'trade_type',
+                'filter' => ['JSAPI' => 'JSAPI']
+            ],
             'trade_no',
             'month_limit',
             'rec_code',
             'out_trade_no',
             'money',
-            'status',
-            'goods',
+            [
+                'attribute' => 'status',
+                'value' => function ($model) {
+                    return $model->orderstatus;
+                },
+                'filter' => ['待支付', '已支付', '已退款']
+            ],
+            [
+                'attribute' => 'goods',
+                'filter' => false, //不显示搜索框
+                'value' => function ($model) {
+                    if ($model->relateSpecial){
+                        return '订阅：'.$model->relateSpecial->author.'-'.$model->relateSpecial->title;
+                    }else{
+                        return $model->goods;
+                    }
+                }
+            ],
             'desc',
-            'updated_at',
-            'created_at',
+            'updated_at:datetime',
+            'created_at:datetime',
         ],
     ]) ?>
-
+      </div>
+    </div>
+  </div>
 </div>
