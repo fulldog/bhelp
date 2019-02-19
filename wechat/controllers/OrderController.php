@@ -144,6 +144,11 @@ class OrderController extends MyController
     }
 
     function actionSubscribe($sid){
+
+        if (Orders::findOne(['goods'=>$sid,'member_id'=>$this->memberId,'status'=>1])){
+            $this->redirect(UrlHelper::to(['special/detail','sid'=>$sid]))->send();
+        }
+
         $special = BbbSpecials::findOne(['id'=>$sid])->toArray();
         if (Yii::$app->request->isPost && Yii::$app->request->isAjax){
             \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;

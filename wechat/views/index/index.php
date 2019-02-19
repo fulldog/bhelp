@@ -1,6 +1,12 @@
 <?php
 $this->registerCssFile(Yii::getAlias('@bbb').'/css/index.css',['depends'=>\wechat\assets\AppAsset::class]);
 ?>
+<!--顶部标题-->
+<div class="titleBar" id="titleBar">
+  宝帮宝
+  <span class="iconfont icon-close close"></span>
+  <span class="iconfont icon-more more"></span>
+</div>
 <!--搜索框-->
 <?=\wechat\common\widgets\Search::widget()?>
 <!--轮播图-->
