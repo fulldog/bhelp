@@ -10,12 +10,6 @@ $this->title = 'Create Member Vip Infos';
 $this->params['breadcrumbs'][] = ['label' => 'Member Vip Infos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="member-vip-infos-create">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
-
-</div>
+<?= $this->render('_form', [
+    'model' => $model,
+]) ?>
