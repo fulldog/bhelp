@@ -7,6 +7,12 @@
  */
 $this->registerCssFile(Yii::getAlias('@bbb').'/css/message.css',['depends'=>\wechat\assets\AppAsset::class]);
 ?>
+<!--顶部标题-->
+<div class="titleBar">
+  我的消息
+  <span class="iconfont icon-close close"></span>
+  <span class="iconfont icon-more more"></span>
+</div>
 <!--消息列表-->
 <ul class="messageList">
   <?if(!empty($messages)):?>
@@ -32,7 +38,7 @@ $this->registerCssFile(Yii::getAlias('@bbb').'/css/message.css',['depends'=>\wec
 <script>
   function has_read(id) {
     $.ajax({
-      data:{id:id},
+      data:{id:id,'_csrf-wechat':'<?=Yii::$app->request->csrfToken?>'},
       dataType:'json',
       type:'post',
       success:function(data) {

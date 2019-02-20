@@ -22,6 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
           <?= GridView::widget([
               'dataProvider' => $dataProvider,
+              'filterModel' => $searchModel,
               'columns' => [
 //            ['class' => 'yii\grid\SerialColumn'],
                   'id',
@@ -40,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
                           return $info->nickname;
                       }
                   ],
-                  'rec_code',
+                  'recommendCode',
                   [
                       'attribute' => 'parent_id',
                       'value' => function ($model) {
@@ -48,16 +49,27 @@ $this->params['breadcrumbs'][] = $this->title;
                               $info = \common\models\member\MemberInfo::findOne(['id' => $model->parent_id]);
                               return $info->username;
                           }
-                      }
+                      },
+                      'filter'=>false
                   ],
-                  'openid',
-                  'vipage',
-                  'vipstart_at:datetime',
+//                  'openid',
+                  [
+                      'attribute' => 'vipage',
+                      'filter'=>false
+                  ],
+                  [
+                      'attribute' => 'vipstart_at',
+                      'value' => function ($model) {
+                          return Yii::$app->formatter->asDatetime($model->vipstart_at);
+                      },
+                      'filter'=>false
+                  ],
                   [
                       'attribute' => 'vipend_at',
                       'value' => function ($model) {
                           return Yii::$app->formatter->asRelativeTime($model->vipend_at);
-                      }
+                      },
+                      'filter'=>false
                   ],
 //            'created_at',
 //            'updated_at',

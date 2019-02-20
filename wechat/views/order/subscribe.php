@@ -37,7 +37,7 @@ $this->registerCssFile(Yii::getAlias('@bbb').'/css/subscribe.css',['depends'=>\w
   function dopay() {
     $.ajax({
       url:'<?=\yii\helpers\Url::to(['order/subscribe','sid'=>$info['id']])?>',
-      //data:{'_csrf-wechat':'<?//=Yii::$app->request->csrfToken?>//'},
+      data:{'_csrf-wechat':'<?=Yii::$app->request->csrfToken?>'},
       dataType:'json',
       type:'post',
       success:function(data) {

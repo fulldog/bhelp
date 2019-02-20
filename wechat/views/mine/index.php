@@ -7,6 +7,12 @@
  */
 $this->registerCssFile(Yii::getAlias('@bbb').'/css/mine.css',['depends'=>\wechat\assets\AppAsset::class]);
 ?>
+<!--顶部标题-->
+<div class="titleBar">
+  我的
+  <span class="iconfont icon-close close"></span>
+  <span class="iconfont icon-more more"></span>
+</div>
 <div class="nameWrap">
     <div class="userImage">
         <img src="<?=$user['avatar']?>" alt="">
@@ -80,13 +86,13 @@ $this->registerCssFile(Yii::getAlias('@bbb').'/css/mine.css',['depends'=>\wechat
         </div>
         <div class="weui-cell__ft"></div>
     </a>
-    <a class="weui-cell weui-cell_access" href="<?=Yii::$app->urlManager->createUrl(['mine/purchase'])?>">
-        <div class="weui-cell__hd listIcon"><img src="<?=Yii::$app->params['bbb']?>/images/mine_26.jpg" alt=""></div>
-        <div class="weui-cell__bd">
-            <p>我的收藏</p>
-        </div>
-        <div class="weui-cell__ft"></div>
-    </a>
+<!--    <a class="weui-cell weui-cell_access" href="--><?//=Yii::$app->urlManager->createUrl(['mine/purchase'])?><!--">-->
+<!--        <div class="weui-cell__hd listIcon"><img src="--><?//=Yii::$app->params['bbb']?><!--/images/mine_26.jpg" alt=""></div>-->
+<!--        <div class="weui-cell__bd">-->
+<!--            <p>我的收藏</p>-->
+<!--        </div>-->
+<!--        <div class="weui-cell__ft"></div>-->
+<!--    </a>-->
     <a class="weui-cell weui-cell_access" href="<?=Yii::$app->urlManager->createUrl(['mine/income'])?>">
         <div class="weui-cell__hd listIcon"><img src="<?=Yii::$app->params['bbb']?>/images/mine_32.jpg" alt=""></div>
         <div class="weui-cell__bd">

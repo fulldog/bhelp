@@ -23,7 +23,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'member_id')->textInput() ?>
 
-    <?= $form->field($model, 'rec_code')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'recommendCode')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'parent_id')->textInput() ?>
 

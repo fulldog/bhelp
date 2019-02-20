@@ -27,16 +27,16 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter' => false, //不显示搜索框
                 'label' => '购买者',
             ],
-            [
-                'label'=>'推荐者',
-                'value'=>function($model){
-                    $info = (new \common\models\bbb\MemberVipInfos())->getRelatedCodeUser($model->rec_code);
-                    if ($info){
-                        return $info['username'];
-                    }
-                    return ;
-                }
-            ],
+//            [
+//                'label'=>'推荐者',
+//                'value'=>function($model){
+//                    $info = (new \common\models\bbb\MemberVipInfos())->getRelatedCodeUser($model->rec_code);
+//                    if ($info){
+//                        return $info['username'];
+//                    }
+//                    return ;
+//                }
+//            ],
             'order_sn',
             [
                 'attribute' => 'trade_type',
@@ -44,7 +44,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'trade_no',
             'month_limit',
-            'rec_code',
             'out_trade_no',
             'money',
             [
@@ -59,7 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter' => false, //不显示搜索框
                 'value' => function ($model) {
                     if ($model->relateSpecial){
-                        return '订阅：'.$model->relateSpecial->author.'-'.$model->relateSpecial->title;
+                        return $model->relateSpecial->author.'-'.$model->relateSpecial->title;
                     }else{
                         return $model->goods;
                     }

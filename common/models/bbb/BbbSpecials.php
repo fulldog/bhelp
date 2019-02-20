@@ -72,4 +72,8 @@ class BbbSpecials extends \common\models\common\BaseModel
         }
         return $data;
     }
+
+    function getNewDetail(){
+        return BbbSpecialDetails::find()->where(['sid'=>$this->id])->orderBy(['id'=>'desc'])->one();
+    }
 }

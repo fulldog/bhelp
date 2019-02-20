@@ -18,21 +18,21 @@ $this->registerCssFile(Yii::getAlias('@bbb').'/css/registerRenew.css',['depends'
 </div>
 <!--输入框-->
 <p class="introduce">
-    <?=Yii::$app->params['desc_register']['introduce']?>
+    <?=Yii::$app->params['vip_desc']?>
 </p>
 <form id="form" onsubmit="return false;">
 <div class="payment">
   <div class="weui-flex item">
     <label for="">有效期：</label>
     <!--<input class="weui-flex__item ref-Code" type="text">-->
-    <span class="weui-flex__item effective"><?=Yii::$app->formatter->asDate(time())?> 至 <?=Yii::$app->formatter->asDate(strtotime('+1 year'))?></span>
+    <span class="weui-flex__item effective"><?=Yii::$app->formatter->asDate(time())?> 至 <?=Yii::$app->formatter->asDate(strtotime('+'.Yii::$app->params['vip_month'].' month'))?></span>
   </div>
   <div class="weui-flex item">
     <label for="">支付金额：</label>
-    <span class="weui-flex__item selectTrue"><img src="<?=Yii::$app->params['bbb']?>/images/payment_05.png" alt=""></span>
-    <input class="" type="hidden" name="vipMoney" value="<?=Yii::$app->params['vipMoney']?>">
-    <input class="" type="hidden" name="vipLimit" value="<?=Yii::$app->params['default_month']?>">
-    <span class="original_price">¥ <?=Yii::$app->params['vipMoney']?></span>
+    <span class="weui-flex__item selectTrue"><img src="<?=Yii::$app->params['vip_price_img']?>" alt=""></span>
+    <input class="" type="hidden" name="vipMoney" value="<?=Yii::$app->params['vip_price']?>">
+    <input class="" type="hidden" name="vipLimit" value="<?=Yii::$app->params['vip_month']?>">
+    <span class="original_price">¥ <?=Yii::$app->params['vip_price']?></span>
     <input name="_csrf-wechat" type="hidden" id="_csrf-wechat" value="<?=Yii::$app->request->csrfToken?>">
   </div>
   <div class="submit">

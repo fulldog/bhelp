@@ -104,7 +104,7 @@ class OrderController extends MyController
 
     function actionRecharge(){
         if (Yii::$app->request->isAjax){
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
             $post = Yii::$app->request->post();
             $sn = 'BbB'.date('YmdHis').StringHelper::randomNum();
             $order = new Orders();
@@ -151,7 +151,6 @@ class OrderController extends MyController
 
         $special = BbbSpecials::findOne(['id'=>$sid])->toArray();
         if (Yii::$app->request->isPost && Yii::$app->request->isAjax){
-            \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
             $orders = Orders::findOne(['member_id'=>$this->memberId,'goods'=>$sid,'status'=>0]);
             if ($orders){
@@ -171,7 +170,7 @@ class OrderController extends MyController
             $order->member_id = $this->memberId;
             $order->money = $special['price'];
             $order->goods = $special['id'];
-            $order->desc =  $special['author'].'-'.$special['title'];
+            $order->desc =  '订阅：'.$special['author'].'-'.$special['title'];
             $order->rec_code = $member['recommendCode'];
             if ($order->save()){
                 return [

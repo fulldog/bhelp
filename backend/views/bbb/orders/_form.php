@@ -31,8 +31,6 @@ use yii\widgets\ActiveForm;
 
           <?= $form->field($model, 'month_limit')->textInput() ?>
 
-          <?= $form->field($model, 'rec_code')->textInput(['maxlength' => true]) ?>
-
           <?= $form->field($model, 'out_trade_no')->textInput(['maxlength' => true]) ?>
 
           <?= $form->field($model, 'money')->textInput(['maxlength' => true]) ?>

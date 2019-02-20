@@ -104,10 +104,18 @@ class IndexController extends MyController
                     $order->month_limit = $vipLimit;
                     $order->goods = 'vip';
                     $order->desc = '帮宝帮会员购买';
-                    $order->rec_code = $recommendCode;
                     $f = $order->save();
+                    $v = true;
+                    if (!($vip = MemberVipInfos::findOne(['member_id'=>$user->id]))){
+                        $vip = new MemberVipInfos();
+                        $vip->member_id = $order->member_id;
+                        $vip->recommendCode = MemberVipInfos::getCode();
+                        $vip->parent_id = MemberVipInfos::getPidByCode($recommendCode);
+                        $vip->openid = $this->openid;
+                        $v = $vip->save();
+                    }
 
-                    if ($u && $f){
+                    if ($u && $f && $v){
                         \Yii::$app->session->set('user_info',$user->toArray());
                         return true;
                     }

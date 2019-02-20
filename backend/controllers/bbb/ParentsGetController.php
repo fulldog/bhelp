@@ -2,18 +2,17 @@
 
 namespace backend\controllers\bbb;
 
-use common\models\common\SearchModel;
 use Yii;
-use common\models\bbb\MemberVipInfos;
+use common\models\bbb\BbbParentsCash;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * VipInfosController implements the CRUD actions for MemberVipInfos model.
+ * ParentsGetController implements the CRUD actions for BbbParentsCash model.
  */
-class VipInfosController extends Controller
+class ParentsGetController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -31,31 +30,22 @@ class VipInfosController extends Controller
     }
 
     /**
-     * Lists all MemberVipInfos models.
+     * Lists all BbbParentsCash models.
      * @return mixed
      */
     public function actionIndex()
     {
-
-        $searchModel = new SearchModel([
-            'model' => MemberVipInfos::className(),
-            'scenario' => 'default',
-//            'partialMatchAttributes' => [''], // 模糊查询
-            'defaultOrder' => [
-                'id' => SORT_DESC
-            ],
-            'pageSize' => 20
+        $dataProvider = new ActiveDataProvider([
+            'query' => BbbParentsCash::find(),
         ]);
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
-     * Displays a single MemberVipInfos model.
+     * Displays a single BbbParentsCash model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -68,13 +58,13 @@ class VipInfosController extends Controller
     }
 
     /**
-     * Creates a new MemberVipInfos model.
+     * Creates a new BbbParentsCash model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new MemberVipInfos();
+        $model = new BbbParentsCash();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -86,7 +76,7 @@ class VipInfosController extends Controller
     }
 
     /**
-     * Updates an existing MemberVipInfos model.
+     * Updates an existing BbbParentsCash model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -106,7 +96,7 @@ class VipInfosController extends Controller
     }
 
     /**
-     * Deletes an existing MemberVipInfos model.
+     * Deletes an existing BbbParentsCash model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -120,15 +110,15 @@ class VipInfosController extends Controller
     }
 
     /**
-     * Finds the MemberVipInfos model based on its primary key value.
+     * Finds the BbbParentsCash model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return MemberVipInfos the loaded model
+     * @return BbbParentsCash the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = MemberVipInfos::findOne($id)) !== null) {
+        if (($model = BbbParentsCash::findOne($id)) !== null) {
             return $model;
         }
 

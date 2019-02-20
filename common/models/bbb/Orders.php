@@ -22,7 +22,6 @@ use Yii;
  * @property string $desc
  * @property int $updated_at
  * @property int $created_at
- * @property int $rec_code
  * @property int $month_limit
  */
 class Orders extends BaseModel
@@ -44,7 +43,7 @@ class Orders extends BaseModel
             [['member_id', 'order_sn'], 'required'],
             [['member_id', 'status', 'updated_at', 'created_at','month_limit'], 'integer'],
             [['money'], 'number'],
-            [['order_sn', 'trade_type', 'rec_code','trade_no', 'out_trade_no', 'desc'], 'string', 'max' => 255],
+            [['order_sn', 'trade_type','trade_no', 'out_trade_no', 'desc'], 'string', 'max' => 255],
         ];
     }
 
@@ -66,7 +65,6 @@ class Orders extends BaseModel
             'desc' => '描述',
             'updated_at' => '更新时间',
             'created_at' => '创建时间',
-            'rec_code' => '邀请码',
             'month_limit' => '时长：月'
         ];
     }

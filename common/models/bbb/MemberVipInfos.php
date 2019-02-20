@@ -53,7 +53,7 @@ class MemberVipInfos extends BaseModel
             'recommendCode' => '邀请码',
             'parent_id' => '上级推荐人',
             'openid' => 'Openid',
-            'vipage' => 'vipn年龄：月',
+            'vipage' => 'vip年龄：月',
             'vipstart_at' => 'VIP开始时间',
             'vipend_at' => 'VIP结束时间',
             'created_at' => '创建时间',
@@ -96,8 +96,8 @@ class MemberVipInfos extends BaseModel
     function getRelatedCodeUser($code){
         if ($code){
             return self::find()->select(self::tableName().'.*,b.username')
-                ->where([self::tableName().'.rec_code'=>$code])
                 ->leftJoin(MemberInfo::tableName().' as b',self::tableName().'.member_id=b.id')
+                ->where([self::tableName().'.recommendCode'=>$code])
                 ->asArray()
                 ->one();
         }

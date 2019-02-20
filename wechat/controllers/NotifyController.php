@@ -11,6 +11,9 @@ namespace wechat\controllers;
 use common\enums\StatusEnum;
 use common\helpers\FileHelper;
 use common\helpers\PayHelper;
+use common\models\bbb\BbbMypurchase;
+use common\models\bbb\BbbParentsCash;
+use common\models\bbb\BbbSetting;
 use common\models\bbb\MemberVipInfos;
 use common\models\bbb\Orders;
 use common\models\common\PayLog;
@@ -98,20 +101,32 @@ class NotifyController extends Controller
     }
 
     function pay_success($order,$openid){
+        $vip = MemberVipInfos::findOne(['member_id'=>$order->member_id,'openid'=>$openid]);
         if ($order->goods=='vips'){
-            if (!($vip = MemberVipInfos::findOne(['member_id'=>$order->member_id]))){
-                $vip = new MemberVipInfos();
-                $vip->member_id = $order->member_id;
-                $vip->recommendCode = MemberVipInfos::getCode();
-                $vip->parent_id = MemberVipInfos::getPidByCode($order->rec_code);
-                $vip->openid = $openid;
-            }
             $vip->vipage += $order->month_limit;
             $vip->vipstart_at = time();
             $vip->vipend_at = strtotime("+".$order->month_limit.' month');
             $vip->save();
+            $setting = BbbSetting::findOne(['key'=>'vip_point']);
         }else{
-
+            $purchase = new BbbMypurchase();
+            $purchase->sid = $order->goods;
+            $purchase->uid = $order->member_id;
+            $purchase->save();
+            $setting = BbbSetting::findOne(['key'=>'special_point']);
         }
+
+        //提成
+        if ($vip->parent_id && !empty($setting->value)){
+            $tc = new BbbParentsCash();
+            $tc->uid = $vip->parent_id;
+            $tc->child_uid = $vip->member_id;
+            $tc->goods = $order->goods;
+            $tc->desc = $order->goods=='vips' ? 'vip充值' : $order->desc;
+            $tc->money = $order->money;
+            $tc->get_money = round($order->money*$setting->value/100,2);
+            $tc->save();
+        }
+
     }
 }

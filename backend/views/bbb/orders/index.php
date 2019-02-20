@@ -15,9 +15,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="box">
       <div class="box-header">
         <h3 class="box-title"><?= $this->title; ?></h3>
-<!--        <div class="box-tools">-->
-<!--            --><?//= Html::a('新增专栏', ['create'], ['class' => 'btn btn-success']) ?>
-<!--        </div>-->
+        <!--        <div class="box-tools">-->
+        <!--            --><? //= Html::a('新增专栏', ['create'], ['class' => 'btn btn-success']) ?>
+        <!--        </div>-->
       </div>
       <div class="box-body table-responsive">
           <?= GridView::widget([
@@ -56,10 +56,10 @@ $this->params['breadcrumbs'][] = $this->title;
                       'attribute' => 'goods',
                       'filter' => false, //不显示搜索框
                       'value' => function ($model) {
-                          if ($model->relateSpecial){
-                            return '订阅：'.$model->relateSpecial->author.'-'.$model->relateSpecial->title;
-                          }else{
-                            return $model->goods;
+                          if ($model->relateSpecial) {
+                              return $model->relateSpecial->author . '-' . $model->relateSpecial->title;
+                          } else {
+                              return $model->goods;
                           }
                       }
                   ],
@@ -121,3 +121,4 @@ $this->params['breadcrumbs'][] = $this->title;
       </div>
     </div>
   </div>
+</div>
