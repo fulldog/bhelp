@@ -20,32 +20,32 @@ use yii\widgets\ActiveForm;
         ]); ?>
       <div class="box-body">
 
-    <?= $form->field($model, 'uid')->textInput() ?>
+          <?= $form->field($model, 'uid')->textInput() ?>
 
-    <?= $form->field($model, 'child_uid')->textInput() ?>
+          <?= $form->field($model, 'child_uid')->textInput() ?>
 
-    <?= $form->field($model, 'order_id')->textInput() ?>
+          <?= $form->field($model, 'order_id')->textInput() ?>
 
-    <?= $form->field($model, 'goods')->textInput(['maxlength' => true]) ?>
+          <?= $form->field($model, 'goods')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'desc')->textInput(['maxlength' => true]) ?>
+          <?= $form->field($model, 'desc')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'money')->textInput(['maxlength' => true]) ?>
+          <?= $form->field($model, 'money')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
+          <?= $form->field($model, 'status')->textInput() ?>
 
-    <?= $form->field($model, 'get_money')->textInput(['maxlength' => true]) ?>
+          <?= $form->field($model, 'get_money')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'created_at')->textInput() ?>
+          <?= $form->field($model, 'created_at')->textInput() ?>
 
-    <?= $form->field($model, 'updated_at')->textInput() ?>
+          <?= $form->field($model, 'updated_at')->textInput() ?>
 
-</div>
-<div class="box-footer text-center">
-  <button class="btn btn-primary" type="submit">保存</button>
-  <span class="btn btn-white" onclick="history.go(-1)">返回</span>
-</div>
-<?php ActiveForm::end(); ?>
-</div>
-</div>
+      </div>
+      <div class="box-footer text-center">
+        <button class="btn btn-primary" type="submit">保存</button>
+        <span class="btn btn-white" onclick="history.go(-1)">返回</span>
+      </div>
+        <?php ActiveForm::end(); ?>
+    </div>
+  </div>
 </div>

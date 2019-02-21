@@ -38,10 +38,10 @@ $this->params['breadcrumbs'][] = $this->title;
 //                'attribute'=>'out_trade_no',
 //                'label'=>'外部单号'
 //            ],
-                  [
-                      'attribute' => 'transaction_id',
-                      'label' => '微信单号'
-                  ],
+//                  [
+//                      'attribute' => 'transaction_id',
+//                      'label' => '微信单号'
+//                  ],
                   [
                       'attribute' => 'total_fee',
                       'label' => '总额',
@@ -66,7 +66,22 @@ $this->params['breadcrumbs'][] = $this->title;
                       },
                       'filter' => ['未支付', '已支付']
                   ],
-                  'pay_time:datetime',
+                  [
+                      'attribute' => 'pay_time',
+                      'format' => ['date', "php:Y-m-d H:i:s"],
+//                      'headerOptions' => ['width' => '12%'],
+                      'filter' => \kartik\daterange\DateRangePicker::widget([
+                          'name' => 'SearchModel[pay_time]',
+                          'value' => Yii::$app->request->get('SearchModel')['pay_time'],
+                          'convertFormat' => true,
+                          'pluginOptions' => [
+                              'locale' => [
+                                  'format' => 'Y-m-d',
+                                  'separator' => '/',
+                              ]
+                          ]
+                      ])
+                  ],
 //            'trade_type',
                   'refund_sn',
 //            'refund_fee',

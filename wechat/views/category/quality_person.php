@@ -7,6 +7,12 @@
  */
 $this->registerCssFile(Yii::getAlias('@bbb').'/css/quality_person.css',['depends'=>\wechat\assets\AppAsset::class]);
 ?>
+<!--顶部标题-->
+<div class="titleBar" id="titleBar">
+  精品培训-人
+  <span class="iconfont icon-close close"></span>
+  <span class="iconfont icon-more more"></span>
+</div>
 <?=\wechat\common\widgets\Catnav::widget()?>
 <!--列表-->
 <div class="personList">

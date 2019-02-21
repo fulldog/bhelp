@@ -28,15 +28,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             [
-                'attribute' => 'uid',
+                'attribute' => 'relateUser.username',
                 'filter'=>false
             ],
             [
-                'attribute' => 'child_uid',
+                'attribute' => 'relateChild.nickname',
                 'filter'=>false
             ],
             [
-                'attribute' => 'order_id',
+                'attribute' => 'relateOrder.order_sn',
                 'filter'=>false
             ],
             [
@@ -47,10 +47,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['width' => '6%'],
                 'filter' => ['待审核', '已确认', '已拒绝']
             ],
-            [
-                'attribute' => 'goods',
-                'filter'=>false
-            ],
+//            [
+//                'attribute' => 'goods',
+//                'filter'=>false
+//            ],
             'desc',
             [
                 'attribute' => 'money',
@@ -80,7 +80,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} ',//{delete}
+                'template' => '{update} ',//{delete}
                 'buttons' => [
                     // 下面代码来自于 yii\grid\ActionColumn 简单修改了下
                     'view' => function ($url, $model, $key) {

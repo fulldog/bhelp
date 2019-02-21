@@ -2,6 +2,7 @@
 
 namespace common\models\bbb;
 
+use common\models\member\MemberInfo;
 use common\models\wechat\Fans;
 use Yii;
 
@@ -76,6 +77,14 @@ class BbbParentsCash extends \common\models\common\BaseModel
 
     function getRelateChild(){
         return $this->hasOne(Fans::class,['member_id'=>'child_uid']);
+    }
+
+    function getRelateOrder(){
+        return $this->hasOne(Orders::class,['id'=>'order_id']);
+    }
+
+    function getRelateUser(){
+        return $this->hasOne(MemberInfo::class,['id'=>'uid']);
     }
 
     function getStatusText(){

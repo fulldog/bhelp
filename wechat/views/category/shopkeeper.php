@@ -7,6 +7,12 @@
  */
 $this->registerCssFile(Yii::getAlias('@bbb').'/css/shopkeeperTool.css',['depends'=>\wechat\assets\AppAsset::class]);
 ?>
+<!--顶部标题-->
+<div class="titleBar" id="titleBar">
+  店长工具
+  <span class="iconfont icon-close close"></span>
+  <span class="iconfont icon-more more"></span>
+</div>
 <?=\wechat\common\widgets\Catnav::widget()?>
 <div class="toolLists">
     <div class="listTitle">店长工具</div>
