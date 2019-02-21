@@ -5,6 +5,7 @@ namespace backend\controllers\bbb;
 use Yii;
 use common\models\bbb\BbbParentsCash;
 use yii\data\ActiveDataProvider;
+use common\models\common\SearchModel;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -12,7 +13,7 @@ use yii\filters\VerbFilter;
 /**
  * ParentsGetController implements the CRUD actions for BbbParentsCash model.
  */
-class ParentsGetController extends Controller
+class ParentsCashController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -35,11 +36,18 @@ class ParentsGetController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => BbbParentsCash::find(),
+        $searchModel = new SearchModel([
+            'model' => BbbParentsCash::className(),
+            'scenario' => 'default',
+            'defaultOrder' => [
+                'id' => SORT_DESC
+            ],
+            'pageSize' => 20
         ]);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }

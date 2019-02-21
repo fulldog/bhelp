@@ -9,12 +9,6 @@ $this->title = 'Create Bbb Docash';
 $this->params['breadcrumbs'][] = ['label' => 'Bbb Docashes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="bbb-docash-create">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
-
-</div>
+<?= $this->render('_form', [
+    'model' => $model,
+]) ?>

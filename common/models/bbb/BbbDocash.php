@@ -2,6 +2,8 @@
 
 namespace common\models\bbb;
 
+use common\models\member\MemberInfo;
+use common\models\wechat\Fans;
 use Yii;
 
 /**
@@ -44,10 +46,23 @@ class BbbDocash extends \common\models\common\BaseModel
         return [
             'id' => 'ID',
             'uid' => 'Uid',
-            'cash' => 'Cash',
-            'status' => 'Status',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'cash' => '金额',
+            'status' => '状态',
+            'created_at' => '申请时间',
+            'updated_at' => '修改时间',
         ];
+    }
+
+    function getStatusText(){
+        $map = ['待审核', '已提现', '已拒绝'];
+        return $map[$this->status];
+    }
+
+    function getRelateFans(){
+        return $this->hasOne(Fans::class,['member_id'=>'uid']);
+    }
+
+    function getRelateUser(){
+        return $this->hasOne(MemberInfo::class,['id'=>'uid']);
     }
 }

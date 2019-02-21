@@ -26,7 +26,7 @@ class BbbParentsCash extends \common\models\common\BaseModel
     private $_status = [
         '0'=>'待审核',
         '1'=>'已确认',
-        '2'=>'已提现'
+        '2'=>'已拒绝'
     ];
 
     /**

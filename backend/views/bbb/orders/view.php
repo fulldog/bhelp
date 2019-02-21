@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'status',
                 'value' => function ($model) {
-                    return $model->orderstatus;
+                    return $model->statusText;
                 },
                 'filter' => ['待支付', '已支付', '已退款']
             ],

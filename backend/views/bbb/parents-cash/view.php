@@ -11,21 +11,13 @@ $this->params['breadcrumbs'][] = ['label' => 'Bbb Parents Gets', 'url' => ['inde
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="bbb-parents-get-view">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
-
+<div class="row">
+  <div class="col-lg-12">
+    <div class="box">
+      <div class="box-header with-border">
+        <h3 class="box-title">基本信息</h3>
+      </div>
+      <div class="box-body">
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -38,9 +30,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'money',
             'status',
             'get_money',
-            'created_at',
-            'updated_at',
+            'created_at:datetime',
+            'updated_at:datetime',
         ],
     ]) ?>
 
+</div>
+</div>
+</div>
 </div>

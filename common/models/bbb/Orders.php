@@ -73,7 +73,7 @@ class Orders extends BaseModel
         return $this->hasOne(MemberInfo::class,['id'=>'member_id']);
     }
 
-    function getOrderStatus(){
+    function getStatusText(){
         $map = [
             '待支付','已支付','已退款'
         ];

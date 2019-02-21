@@ -195,4 +195,8 @@ class IndexController extends MyController
             'data'=>Article::findOne(['id'=>$id])
         ]);
     }
+
+    function actionSearch($key){
+
+    }
 }

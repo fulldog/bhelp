@@ -2,6 +2,7 @@
 
 namespace backend\controllers\bbb;
 
+use common\models\common\SearchModel;
 use Yii;
 use common\models\bbb\BbbDocash;
 use yii\data\ActiveDataProvider;
@@ -35,11 +36,18 @@ class DocashController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => BbbDocash::find(),
+        $searchModel = new SearchModel([
+            'model' => BbbDocash::className(),
+            'scenario' => 'default',
+            'defaultOrder' => [
+                'id' => SORT_DESC
+            ],
+            'pageSize' => 20
         ]);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -87,7 +95,7 @@ class DocashController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('update', [
