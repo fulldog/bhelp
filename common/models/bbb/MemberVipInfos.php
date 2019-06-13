@@ -7,7 +7,7 @@ use common\models\member\MemberInfo;
 use Yii;
 
 /**
- * This is the model class for table "{{%member_vip_infos}}".
+ * This is the model class for table "{{%bbb_vip_infos}}".
  *
  * @property int $id
  * @property int $member_id
@@ -38,7 +38,7 @@ class MemberVipInfos extends BaseModel
         return [
             [['member_id'], 'required'],
             [['member_id', 'parent_id', 'vipage', 'vipstart_at', 'vipend_at', 'created_at', 'updated_at'], 'integer'],
-            [['rec_code', 'openid','recommendCode'], 'string', 'max' => 255],
+            [['openid','recommendCode'], 'string', 'max' => 255],
         ];
     }
 
@@ -87,7 +87,7 @@ class MemberVipInfos extends BaseModel
         if (!empty($convert)) {
             $code = ($convert > 0) ? strtoupper($code) : strtolower($code);
         }
-        if (self::find()->where(['rec_code'=>$code])->exists()){
+        if (self::find()->where(['recommendCode'=>$code])->exists()){
             return self::getCode($length, $type, $convert);
         }
         return $code;

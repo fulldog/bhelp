@@ -171,7 +171,7 @@ class OrderController extends MyController
             $order->money = $special['price'];
             $order->goods = $special['id'];
             $order->desc =  '订阅：'.$special['author'].'-'.$special['title'];
-            $order->rec_code = $member['recommendCode'];
+            $order->recommendCode = $member['recommendCode'];
             if ($order->save()){
                 return [
                     'status'=>1,

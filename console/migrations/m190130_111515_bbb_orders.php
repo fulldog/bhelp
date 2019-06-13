@@ -19,7 +19,7 @@ class m190130_111515_bbb_orders extends Migration
             'trade_type' => 'varchar(255) NULL  COMMENT \'支付类型\'',
             'trade_no' => 'varchar(255) NULL  COMMENT \'流水号\'',
             'month_limit' => 'int(3) NULL DEFAULT \'0\' COMMENT \'购买时长\'',
-            'rec_code' => 'varchar(255) NULL  COMMENT \'推荐码\'',
+            'recommendCode' => 'varchar(255) NULL  COMMENT \'推荐码\'',
             'out_trade_no' => 'varchar(255) NULL  COMMENT \'外部单号\'',
             'money' => 'decimal(10,2) NOT NULL COMMENT \'金额\'',
             'status' => 'int(1) NOT NULL COMMENT \'状态\'',

@@ -30,10 +30,10 @@ $this->registerCssFile(Yii::getAlias('@bbb').'/css/registerRenew.css',['depends'
     <!--<input class="weui-flex__item ref-Code" type="text">-->
     <span class="weui-flex__item effective"><?=Yii::$app->formatter->asDate(time())?> 至 <?=Yii::$app->formatter->asDate(strtotime('+'.$orderInfo['month_limit'].' month'))?></span>
   </div>
-  <?if(!empty($orderInfo['rec_code'])):?>
+  <?if(!empty($orderInfo['recommendCode'])):?>
   <div class="weui-flex item">
     <label for="">推荐编码：</label>
-    <input class="weui-flex__item ref-Code" style="padding-left:0.5rem;"  type="text" readonly="readonly" value="<?=$orderInfo['rec_code']?>">
+    <input class="weui-flex__item ref-Code" style="padding-left:0.5rem;"  type="text" readonly="readonly" value="<?=$orderInfo['recommendCode']?>">
   </div>
   <?endif;?>
   <div class="weui-flex item">
