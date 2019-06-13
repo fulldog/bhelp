@@ -71,7 +71,7 @@ class IndexController extends MyController
             $vipMoney_2 = $data['vip_price'] ?? \Yii::$app->params['vip_price'];
             if ($vipMoney != $vipMoney_2) {
                 return [
-                    'msg' => '金额错误，购买VIP需要￥' . \Yii::$app->params['vipMoney'],
+                    'msg' => '金额错误，购买VIP需要￥' . $vipMoney_2,
                     'status' => 0
                 ];
             }
