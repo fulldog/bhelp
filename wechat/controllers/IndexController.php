@@ -52,6 +52,15 @@ class IndexController extends MyController
 
     function actionRegister()
     {
+        $sql = "select * from " . \Yii::$app->db->tablePrefix . "bbb_setting";
+        $res = \Yii::$app->db->createCommand($sql)->queryAll();
+        $data = [];
+        if (!empty($res)) {
+            foreach ($res as $v) {
+                $data[$v['key']] = $v['value'];
+            }
+        }
+
         if (\Yii::$app->request->isAjax) {
             \Yii::$app->response->format = Response::FORMAT_JSON;
             $vipMoney = \Yii::$app->request->post('vipMoney');
@@ -59,7 +68,8 @@ class IndexController extends MyController
             $phoneCode = \Yii::$app->request->post('phoneCode');
             $recommendCode = \Yii::$app->request->post('recommendCode');
             $vipLimit = \Yii::$app->request->post('vipLimit');
-            if ($vipMoney != \Yii::$app->params['vipMoney']) {
+            $vipMoney_2 = $data['vip_price'] ?? \Yii::$app->params['vip_price'];
+            if ($vipMoney != $vipMoney_2) {
                 return [
                     'msg' => '金额错误，购买VIP需要￥' . \Yii::$app->params['vipMoney'],
                     'status' => 0
@@ -143,14 +153,6 @@ class IndexController extends MyController
             $this->redirect(['order/recharge']);
         }
 
-        $sql = "select * from " . \Yii::$app->db->tablePrefix . "bbb_setting";
-        $res = \Yii::$app->db->createCommand($sql)->queryAll();
-        $data = [];
-        if (!empty($res)) {
-            foreach ($res as $v) {
-                $data[$v['key']] = $v['value'];
-            }
-        }
         return $this->render('register', ['data' => $data]);
     }
 

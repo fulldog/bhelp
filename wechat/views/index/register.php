@@ -24,7 +24,7 @@ $this->registerCssFile(Yii::getAlias('@bbb').'/css/registerRenew.css',['depends'
     </div>
   </div>
   <p class="introduce">
-      <?=Yii::$app->params['desc_register']['introduce']?>
+      <?=$data['vip_desc'] ?? Yii::$app->params['desc_register']['introduce']?>
   </p>
   <div class="payment">
     <div class="weui-flex item">
