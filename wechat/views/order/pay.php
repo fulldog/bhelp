@@ -18,11 +18,11 @@ $this->registerCssFile(Yii::getAlias('@bbb').'/css/registerRenew.css',['depends'
   <span class="iconfont icon-more more"></span>
 </div>
 <div class="banner">
-  <img src="<?=Yii::$app->params['bbb']?>/images/register_05.png" alt="">
+  <img src="<?=$data['vip_price_img'] ?? Yii::$app->params['bbb'].'/images/payment_05.png'?>" alt="">
 </div>
 <!--输入框-->
 <p class="introduce">
-    <?=Yii::$app->params['desc_register']['introduce']?>
+    <?=$data['vip_desc'] ?? Yii::$app->params['desc_register']['introduce']?>
 </p>
 <div class="payment">
   <div class="weui-flex item">
@@ -30,10 +30,10 @@ $this->registerCssFile(Yii::getAlias('@bbb').'/css/registerRenew.css',['depends'
     <!--<input class="weui-flex__item ref-Code" type="text">-->
     <span class="weui-flex__item effective"><?=Yii::$app->formatter->asDate(time())?> 至 <?=Yii::$app->formatter->asDate(strtotime('+'.$orderInfo['month_limit'].' month'))?></span>
   </div>
-  <?if(!empty($orderInfo['recommendCode'])):?>
+  <?if(!empty($orderInfo['rec_code'])):?>
   <div class="weui-flex item">
     <label for="">推荐编码：</label>
-    <input class="weui-flex__item ref-Code" style="padding-left:0.5rem;"  type="text" readonly="readonly" value="<?=$orderInfo['recommendCode']?>">
+    <input class="weui-flex__item ref-Code" style="padding-left:0.5rem;"  type="text" readonly="readonly" value="<?=$orderInfo['rec_code']?>">
   </div>
   <?endif;?>
   <div class="weui-flex item">

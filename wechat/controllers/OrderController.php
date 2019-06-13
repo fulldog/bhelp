@@ -36,7 +36,8 @@ class OrderController extends MyController
         ];
     }
 
-    function actionPay2(){
+    function actionPay2()
+    {
         $totalFee = 1;// 支付金额单位：分
         $orderSn = time() . StringHelper::randomNum();// 订单号
 
@@ -52,13 +53,11 @@ class OrderController extends MyController
 
         $payment = Yii::$app->wechat->payment;
         $result = $payment->order->unify($orderData);
-        if ($result['return_code'] == 'SUCCESS')
-        {
+        if ($result['return_code'] == 'SUCCESS') {
             $json = $payment->jssdk->bridgeConfig($result['prepay_id']);
-        }
-        else
-        {
-            p($result);die();
+        } else {
+            p($result);
+            die();
         }
 
         return $this->render('pay', [
@@ -68,45 +67,55 @@ class OrderController extends MyController
 
     public function actionPay($orderSn)
     {
+        $sql = "select * from " . \Yii::$app->db->tablePrefix . "bbb_setting";
+        $res = \Yii::$app->db->createCommand($sql)->queryAll();
+        $data = [];
+        if (!empty($res)) {
+            foreach ($res as $v) {
+                $data[$v['key']] = $v['value'];
+            }
+        }
+
         $view = 'pay';
 //        $orderSn = \Yii::$app->request->get('orderSn');
-        $orderInfo = Orders::findOne(['order_sn'=>$orderSn]);
+        $orderInfo = Orders::findOne(['order_sn' => $orderSn]);
         $special = '';
-        if (!$orderInfo){
+        if (!$orderInfo) {
             $this->redirect(UrlHelper::to(['site/error']))->send();
         }
-        if ($orderInfo->goods!='vip'){
+        if ($orderInfo->goods != 'vip') {
             $view = 'subscribePay';
-            $special = BbbSpecials::findOne(['id'=>$orderInfo['goods']])->toArray();
+            $special = BbbSpecials::findOne(['id' => $orderInfo['goods']])->toArray();
         }
         $orderData = [
             'trade_type' => 'JSAPI', // JSAPI，NATIVE，APP...
             'body' => $orderInfo['goods'],
             'detail' => $orderInfo['desc'],
             'notify_url' => $this->notify_url, // 支付结果通知网址，如果不设置则会使用配置里的默认地址
-            'out_trade_no' => PayHelper::getOutTradeNo($orderInfo['money']*100, $orderSn, PayLog::PAY_TYPE_WECHAT), // 支付
-            'total_fee' => $orderInfo['money']*100,
+            'out_trade_no' => PayHelper::getOutTradeNo($orderInfo['money'] * 100, $orderSn, PayLog::PAY_TYPE_WECHAT), // 支付
+            'total_fee' => $orderInfo['money'] * 100,
             'openid' => $this->openid, // trade_type=JSAPI，此参数必传，用户在商户appid下的唯一标识，
         ];
         $json = '';
         $payment = \Yii::$app->wechat->payment;
         $result = $payment->order->unify($orderData);
-        if ($result['return_code'] == 'SUCCESS')
-        {
+        if ($result['return_code'] == 'SUCCESS') {
             $json = $payment->jssdk->bridgeConfig($result['prepay_id']);
         }
-        return $this->render($view,[
-            'json'=>$json,
-            'orderInfo'=>$orderInfo->toArray(),
-            'special'=>$special
+        return $this->render($view, [
+            'json' => $json,
+            'orderInfo' => $orderInfo->toArray(),
+            'special' => $special,
+            'data' => $data,
         ]);
     }
 
-    function actionRecharge(){
-        if (Yii::$app->request->isAjax){
+    function actionRecharge()
+    {
+        if (Yii::$app->request->isAjax) {
 
             $post = Yii::$app->request->post();
-            $sn = 'BbB'.date('YmdHis').StringHelper::randomNum();
+            $sn = 'BbB' . date('YmdHis') . StringHelper::randomNum();
             $order = new Orders();
             $order->order_sn = $sn;
             $order->member_id = $this->memberId;
@@ -114,83 +123,85 @@ class OrderController extends MyController
             $order->month_limit = $post['vipLimit'];
             $order->goods = 'vip';
             $order->desc = '帮宝帮会员续费';
-            if ($order->save()){
+            if ($order->save()) {
                 return [
-                    'status'=>1,
-                    'msg'=>'下单成功',
-                    'data'=>[
-                        'order_sn'=>$sn
-                    ]
-                ];
-            }
-            return [
-                'status'=>0,
-                'msg'=>'下单失败',
-            ];
-        }
-        $orderInfo = Orders::find()->where(['member_id'=>$this->memberId])->orderBy(['id'=>SORT_DESC])->limit(1)->one();
-        if ($orderInfo && $orderInfo->status==0){
-            return $this->redirect(['order/pay','orderSn'=>$orderInfo->order_sn])->send();
-        }
-
-        return $this->render('recharge',[
-            'orderInfo'=>$orderInfo
-        ]);
-    }
-
-    function actionSucc(){
-
-        return $this->render('succ');
-    }
-
-    function actionSubscribe($sid){
-
-        if (Orders::findOne(['goods'=>$sid,'member_id'=>$this->memberId,'status'=>1])){
-            $this->redirect(UrlHelper::to(['special/detail','sid'=>$sid]))->send();
-        }
-
-        $special = BbbSpecials::findOne(['id'=>$sid])->toArray();
-        if (Yii::$app->request->isPost && Yii::$app->request->isAjax){
-
-            $orders = Orders::findOne(['member_id'=>$this->memberId,'goods'=>$sid,'status'=>0]);
-            if ($orders){
-                return [
-                    'status'=>1,
-                    'msg'=>'下单成功',
-                    'data'=>[
-                        'order_sn' => $orders->order_sn
-                    ]
-                ];
-            }
-            $member = MemberVipInfos::findOne(['member_id'=>$this->memberId])->toArray();
-            //创建订单
-            $sn = 'BbB'.date('YmdHis').StringHelper::randomNum();
-            $order = new Orders();
-            $order->order_sn = $sn;
-            $order->member_id = $this->memberId;
-            $order->money = $special['price'];
-            $order->goods = $special['id'];
-            $order->desc =  '订阅：'.$special['author'].'-'.$special['title'];
-            $order->recommendCode = $member['recommendCode'];
-            if ($order->save()){
-                return [
-                    'status'=>1,
-                    'msg'=>'下单成功',
-                    'data'=>[
+                    'status' => 1,
+                    'msg' => '下单成功',
+                    'data' => [
                         'order_sn' => $sn
                     ]
                 ];
             }
             return [
-                'status'=>0,
-                'msg'=>$order->getFirstErrorMessage(),
-                'data'=>[
+                'status' => 0,
+                'msg' => '下单失败',
+            ];
+        }
+        $orderInfo = Orders::find()->where(['member_id' => $this->memberId])->orderBy(['id' => SORT_DESC])->limit(1)->one();
+        if ($orderInfo && $orderInfo->status == 0) {
+            return $this->redirect(['order/pay', 'orderSn' => $orderInfo->order_sn])->send();
+        }
+
+        return $this->render('recharge', [
+            'orderInfo' => $orderInfo
+        ]);
+    }
+
+    function actionSucc()
+    {
+
+        return $this->render('succ');
+    }
+
+    function actionSubscribe($sid)
+    {
+
+        if (Orders::findOne(['goods' => $sid, 'member_id' => $this->memberId, 'status' => 1])) {
+            $this->redirect(UrlHelper::to(['special/detail', 'sid' => $sid]))->send();
+        }
+
+        $special = BbbSpecials::findOne(['id' => $sid])->toArray();
+        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
+
+            $orders = Orders::findOne(['member_id' => $this->memberId, 'goods' => $sid, 'status' => 0]);
+            if ($orders) {
+                return [
+                    'status' => 1,
+                    'msg' => '下单成功',
+                    'data' => [
+                        'order_sn' => $orders->order_sn
+                    ]
+                ];
+            }
+            $member = MemberVipInfos::findOne(['member_id' => $this->memberId])->toArray();
+            //创建订单
+            $sn = 'BbB' . date('YmdHis') . StringHelper::randomNum();
+            $order = new Orders();
+            $order->order_sn = $sn;
+            $order->member_id = $this->memberId;
+            $order->money = $special['price'];
+            $order->goods = $special['id'];
+            $order->desc = '订阅：' . $special['author'] . '-' . $special['title'];
+            $order->rec_code = $member['recommendCode'];
+            if ($order->save()) {
+                return [
+                    'status' => 1,
+                    'msg' => '下单成功',
+                    'data' => [
+                        'order_sn' => $sn
+                    ]
+                ];
+            }
+            return [
+                'status' => 0,
+                'msg' => $order->getFirstErrorMessage(),
+                'data' => [
                 ]
             ];
         }
 
-        return $this->render('subscribe',[
-            'info'=>$special
+        return $this->render('subscribe', [
+            'info' => $special
         ]);
     }
 }
