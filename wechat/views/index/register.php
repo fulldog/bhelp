@@ -8,7 +8,7 @@
 $this->registerCssFile(Yii::getAlias('@bbb').'/css/registerRenew.css',['depends'=>\wechat\assets\AppAsset::class]);
 ?>
 <div class="banner">
-    <img src="<?=Yii::$app->params['bbb']?>/images/register_05.png" alt="">
+    <img src="<?=$data['vip_price_img'] ?? Yii::$app->params['bbb'].'/images/payment_05.png'?>" alt="">
 </div>
 <form id="form" onsubmit="return false;">
   <!--输入框-->
@@ -38,10 +38,10 @@ $this->registerCssFile(Yii::getAlias('@bbb').'/css/registerRenew.css',['depends'
     </div>
     <div class="weui-flex item">
       <label for="">支付金额：</label>
-      <span class="weui-flex__item selectTrue"><img src="<?=Yii::$app->params['bbb']?>/images/payment_05.png" alt=""></span>
-      <input class="" type="hidden" name="vipMoney" value="<?=Yii::$app->params['vipMoney']?>">
-      <input class="" type="hidden" name="vipLimit" value="<?=Yii::$app->params['default_month']?>">
-      <span class="original_price">¥ <?=Yii::$app->params['vipMoney']?></span>
+      <span class="weui-flex__item selectTrue"><img src="<?=$data['vip_price_img'] ?? Yii::$app->params['bbb'].'/images/payment_05.png'?>" alt=""></span>
+      <input class="" type="hidden" name="vipMoney" value="<?=$data['vip_price'] ?? Yii::$app->params['vip_price']?>">
+      <input class="" type="hidden" name="vipLimit" value="<?=$data['vip_month'] ?? Yii::$app->params['vip_month']?>">
+      <span class="original_price">¥ <?=$data['vip_price'] ?? Yii::$app->params['vip_price']?></span>
       <input name="_csrf-wechat" type="hidden" id="_csrf-wechat" value="<?=Yii::$app->request->csrfToken?>">
     </div>
     <div class="submit">
@@ -66,7 +66,7 @@ $this->registerCssFile(Yii::getAlias('@bbb').'/css/registerRenew.css',['depends'
       }
     })
   })
-  
+
   function getSms() {
     let phone = $('input[name="phone"]').val();
     let pat = /^1(3|4|5|8|7)[0-9]{9}$/;
