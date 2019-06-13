@@ -25,14 +25,14 @@ class WController extends BaseController
 
         if (!Yii::$app->wechat->isWechat)
         {
-            // die('请用微信打开');
+             die('请用微信打开');
         }
 
         // 修改微信授权方式为静默授权
-        // Yii::$app->params['wechatConfig']['oauth']['scopes'] = ['snsapi_base'];
+         Yii::$app->params['wechatConfig']['oauth']['scopes'] = ['snsapi_base'];
 
         // 开启微信模拟数据
-//        Yii::$app->params['simulateUser']['switch'] = true;
+        Yii::$app->params['simulateUser']['switch'] = false;
 
         // 微信登录
         $this->login();

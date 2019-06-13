@@ -34,7 +34,7 @@ trait WechatLoginTrait
     protected function login()
     {
         /** 非微信网页打开时候开启模拟数据 **/
-        if (empty(Yii::$app->params['wechatMember']) && Yii::$app->params['simulateUser']['switch'] == true)
+        if (empty(Yii::$app->params['wechatMember']) && Yii::$app->params['simulateUser']['switch'])
         {
             Yii::$app->params['wechatMember'] = Yii::$app->params['simulateUser']['userInfo'];
         }else{
