@@ -53,7 +53,7 @@ trait WechatLoginTrait
         // 如果是静默登录则不写入数据库
         if (in_array('snsapi_base', Yii::$app->params['wechatConfig']['oauth']['scopes']))
         {
-            return false;
+//            return false;
         }
 
         // 插入微信关联表
