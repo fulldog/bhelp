@@ -45,86 +45,89 @@ class NotifyController extends Controller
             'key' => $this->config['wechat_api_key'], // API 密钥
         ], Yii::$app->params['wechatPaymentConfig']);
 
-        $response = Yii::$app->wechat->payment->handlePaidNotify(function($message, $fail)
-        {
+        $response = Yii::$app->wechat->payment->handlePaidNotify(function ($message, $fail) {
             $message = ArrayHelper::toArray($message);
-            if (empty($message)){
+            if (empty($message)) {
                 return $fail('通信失败，请稍后再通知我');
             }
-            $logPath = Yii::getAlias('@runtime') . "/pay_log/" . date('Y-m').'/'. date('Ymd') .'.log';
+            $logPath = Yii::getAlias('@runtime') . "/pay_log/" . date('Y-m') . '/' . date('Ymd') . '.log';
             FileHelper::writeLog($logPath, json_encode($message));
             // 如果订单不存在 或者 订单已经支付过了，如果成功返回订单的编号和类型
-            if (!($orderInfo = PayHelper::notify($message['out_trade_no'], $message)))
-            {
+            if (!($orderInfo = PayHelper::notify($message['out_trade_no'], $message))) {
                 // 告诉微信，我已经处理完了，订单没找到，别再通知我了
                 return true;
             }
             /////////////  建议在这里调用微信的【订单查询】接口查一下该笔订单的情况，确认是已经支付 /////////////
             //if ($info = \Yii::$app->wechat->payment->order->queryByOutTradeNumber($message['out_trade_no'])){
-                //todo
+            //todo
             //}
 
             // 判断订单组别来源 比如课程、购物或者其他
-            if ($orderInfo['order_group'] == PayLog::ORDER_GROUP)
-            {
+            if ($orderInfo['order_group'] == PayLog::ORDER_GROUP) {
                 /* @var $order \yii\db\ActiveRecord */
-                if (!($order = Orders::findOne(['order_sn' => $orderInfo['order_sn']])))
-                {
+                if (!($order = Orders::findOne(['order_sn' => $orderInfo['order_sn']]))) {
                     return true;
                 }
             }
 
             if ($message['result_code'] === 'SUCCESS') // 用户支付成功
             {
-                $order->status  = StatusEnum::WECHAT_SUCC;
-            }
-            elseif ($message['result_code'] === 'FAIL') // 用户支付失败
+                $order->status = StatusEnum::WECHAT_SUCC;
+            } elseif ($message['result_code'] === 'FAIL') // 用户支付失败
             {
-                $order->status  = StatusEnum::WECHAT_FAIL;
+                $order->status = StatusEnum::WECHAT_FAIL;
             }
-            $order->trade_type =   $orderInfo['trade_type'];
-            $order->out_trade_no =  $orderInfo['out_trade_no'];
+            $order->trade_type = $orderInfo['trade_type'];
+            $order->out_trade_no = $orderInfo['out_trade_no'];
 
-            $order->save(); // 保存订单
+            // 保存订单
+            if ($order->save()) {
+                $vip = MemberVipInfos::findOne(['openid' => $message['openid']]);
+                $vip->vipage += $order->month_limit;
+                $vip->vipend_at += strtotime("+ {$order->month_limit} month");
+                $vip->vipstart_at = time();
+                $vip->save();
+            }
 
-            if ($message['result_code'] === 'SUCCESS'){
-                $this->pay_success($order,$message['openid']);
+            if ($message['result_code'] === 'SUCCESS') {
+                $this->pay_success($order, $message['openid']);
             }
 
             return true; // 返回处理完成
         });
 
-        if ($response){
+        if ($response) {
             return PayHelper::notifyWechatSuccess();
         }
         return PayHelper::notifyWechatFail();
     }
 
-    function pay_success($order,$openid){
-        $vip = MemberVipInfos::findOne(['member_id'=>$order->member_id,'openid'=>$openid]);
-        if ($order->goods=='vips'){
+    function pay_success($order, $openid)
+    {
+        $vip = MemberVipInfos::findOne(['member_id' => $order->member_id, 'openid' => $openid]);
+        if ($order->goods == 'vips') {
             $vip->vipage += $order->month_limit;
             $vip->vipstart_at = time();
-            $vip->vipend_at = strtotime("+".$order->month_limit.' month');
+            $vip->vipend_at = strtotime("+" . $order->month_limit . ' month');
             $vip->save();
-            $setting = BbbSetting::findOne(['key'=>'vip_point']);
-        }else{
+            $setting = BbbSetting::findOne(['key' => 'vip_point']);
+        } else {
             $purchase = new BbbMypurchase();
             $purchase->sid = $order->goods;
             $purchase->uid = $order->member_id;
             $purchase->save();
-            $setting = BbbSetting::findOne(['key'=>'special_point']);
+            $setting = BbbSetting::findOne(['key' => 'special_point']);
         }
 
         //提成
-        if ($vip->parent_id && !empty($setting->value)){
+        if ($vip->parent_id && !empty($setting->value)) {
             $tc = new BbbParentsCash();
             $tc->uid = $vip->parent_id;
             $tc->child_uid = $vip->member_id;
             $tc->goods = $order->goods;
-            $tc->desc = $order->goods=='vips' ? 'vip充值' : $order->desc;
+            $tc->desc = $order->goods == 'vips' ? 'vip充值' : $order->desc;
             $tc->money = $order->money;
-            $tc->get_money = round($order->money*$setting->value/100,2);
+            $tc->get_money = round($order->money * $setting->value / 100, 2);
             $tc->save();
         }
 

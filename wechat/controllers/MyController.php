@@ -72,8 +72,9 @@ class MyController extends WController
             } elseif ($fan->member_id) {
                 $this->memberId = $fan->member_id;
                 $user = MemberInfo::findOne(['id' => $fan->member_id]);
-                \Yii::$app->session->set('user_info', $user->toArray());
-
+                if ($user) {
+                    \Yii::$app->session->set('user_info', $user->toArray());
+                }
                 $vips = MemberVipInfos::findOne(['member_id' => $fan->member_id]);
                 if ($vips) {
                     $time = time();
