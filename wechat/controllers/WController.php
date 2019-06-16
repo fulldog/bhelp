@@ -25,7 +25,12 @@ class WController extends BaseController
 
         if (!Yii::$app->wechat->isWechat)
         {
-             die('请用微信打开');
+             //die('请用微信打开');
+        }
+
+        if ($this->openGetWechatUser && !Yii::$app->wechat->isAuthorized())
+        {
+            return Yii::$app->wechat->authorizeRequired()->send();
         }
 
         // 修改微信授权方式为静默授权
