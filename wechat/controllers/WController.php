@@ -23,18 +23,8 @@ class WController extends BaseController
     {
         parent::init();
 
-        if (!Yii::$app->wechat->isWechat)
-        {
-             //die('请用微信打开');
-        }
-
-        if ($this->openGetWechatUser && !Yii::$app->wechat->isAuthorized())
-        {
-            return Yii::$app->wechat->authorizeRequired()->send();
-        }
-
         // 修改微信授权方式为静默授权
-         Yii::$app->params['wechatConfig']['oauth']['scopes'] = ['snsapi_base'];
+        Yii::$app->params['wechatConfig']['oauth']['scopes'] = ['snsapi_base'];
 
         // 开启微信模拟数据
         Yii::$app->params['simulateUser']['switch'] = false;
