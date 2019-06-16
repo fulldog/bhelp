@@ -39,7 +39,7 @@ trait WechatLoginTrait
             Yii::$app->params['wechatMember'] = Yii::$app->params['simulateUser']['userInfo'];
         }else{
             /** 检测到微信进入自动获取用户信息 **/
-            if ($this->openGetWechatUser && Yii::$app->wechat->isWechat && !Yii::$app->wechat->isAuthorized())
+            if ($this->openGetWechatUser && !Yii::$app->wechat->isAuthorized())
             {
                 return Yii::$app->wechat->authorizeRequired()->send();
             }
